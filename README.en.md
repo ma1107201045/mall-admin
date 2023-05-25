@@ -1,7 +1,7 @@
-# mall-background-pc
+# mall-admin
 
 #### Description
-电商前端后台PC端
+电商前端管理端
 
 #### Software Architecture
 Software architecture description
