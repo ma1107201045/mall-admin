@@ -1,7 +1,7 @@
-# mall-background-pc
+# mall-admin
 
 #### 介绍
-电商前端后台PC端
+电商前端后台端
 
 #### 软件架构
 软件架构说明
