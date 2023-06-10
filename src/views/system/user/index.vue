@@ -1,5 +1,7 @@
 <script setup lang="ts">
-
+import UserApi from "@/api/system/user";
+let userApi = UserApi.getInstance();
+console.log(userApi.getById(1))
 </script>
 
 <template>
