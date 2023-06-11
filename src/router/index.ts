@@ -1,19 +1,20 @@
 // index.ts
-import {createRouter, createWebHashHistory} from 'vue-router'
-import User from '../views/system/user/index.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import Login from '@/views/login/index.vue'
+import User from '@/views/system/user/index.vue'
 
 const routes = [
-    {
-        path: '/',
-        component: User
-    },
-    {
-        path: '/user',
-        component: User
-    }
+  {
+    path: '/',
+    component: Login
+  },
+  {
+    path: '/user',
+    component: User
+  }
 ]
 
 export default createRouter({
-    history: createWebHashHistory(),
-    routes
+  history: createWebHashHistory(),
+  routes
 })

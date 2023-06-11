@@ -27,7 +27,10 @@
       "@/*": [
         "src/*"
       ]
-    }
+    },
+    /*允许js*/
+    "noImplicitAny": false,
+    "allowJs": true
   },
   "include": [
     "src/**/*.ts",
