@@ -5,7 +5,8 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 const httpClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL as string,
   timeout: 50000,
-  headers: { 'Content-Type': 'application/json' }
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true
 })
 // 添加请求拦截器
 httpClient.interceptors.request.use(
