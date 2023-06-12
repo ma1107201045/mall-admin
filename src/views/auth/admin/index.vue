@@ -14,10 +14,10 @@
     captcha: '',
     isRememberMe: ''
   })
-  let getCaptcha: object = () => {
+  let getCaptcha: any = (): any => {
     captchaUrl.value = getCaptchaUrl + `?random=${Math.random()}`
   }
-  let login: object = () => {
+  let login: any = (): any => {
     adminApi.login(loginInfo).then(axiosResponse => {
       console.log(axiosResponse.data)
       router.push('/home')
