@@ -2,6 +2,7 @@
   import { reactive, ref, Ref, UnwrapRef } from 'vue'
   import AdminApi from '@/api/auth/admin'
   import { UnwrapNestedRefs } from '@vue/reactivity'
+  import router from '@/router'
 
   let adminApi: AdminApi = AdminApi.getInstance()
   let viewApiBaseUrl: string = import.meta.env.VITE_API_BASE_URL
@@ -13,12 +14,17 @@
     captcha: '',
     isRememberMe: ''
   })
+
   function a() {}
+
   let getCaptcha: object = () => {
     captchaUrl.value = getCaptchaUrl + `?random=${Math.random()}`
   }
   let login: object = () => {
-    adminApi.login(loginInfo).then(() => {})
+    adminApi.login(loginInfo).then(axiosResponse => {
+      console.log(axiosResponse.data)
+      router.push('/home')
+    })
   }
 </script>
 

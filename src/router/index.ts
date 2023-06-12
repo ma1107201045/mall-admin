@@ -1,6 +1,7 @@
 // index.ts
 import { createRouter, createWebHashHistory } from 'vue-router'
 import AuthAdmin from '@/views/auth/admin/index.vue'
+import Home from '@/views/home.vue'
 import Auth401 from '@/views/auth/401.vue'
 import Auth403 from '@/views/auth/401.vue'
 import Auth404 from '@/views/auth/401.vue'
@@ -14,6 +15,10 @@ const routes = [
   {
     path: '/auth/admin',
     component: AuthAdmin
+  },
+  {
+    path: '/home',
+    component: Home
   },
   {
     path: '/auth/401',
