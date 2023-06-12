@@ -1,16 +1,35 @@
 // index.ts
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Admin from '@/views/auth/admin/index.vue'
-import User from '@/views/system/user/index.vue'
+import AuthAdmin from '@/views/auth/admin/index.vue'
+import Auth401 from '@/views/auth/401.vue'
+import Auth403 from '@/views/auth/401.vue'
+import Auth404 from '@/views/auth/401.vue'
+import AdminSystemUser from '@/views/system/user/index.vue'
 
 const routes = [
   {
     path: '/',
-    component: Admin
+    component: AuthAdmin
   },
   {
-    path: '/user',
-    component: User
+    path: '/auth/admin',
+    component: AuthAdmin
+  },
+  {
+    path: '/auth/401',
+    component: Auth401
+  },
+  {
+    path: '/auth/403',
+    component: Auth403
+  },
+  {
+    path: '/auth/404',
+    component: Auth404
+  },
+  {
+    path: '/admin/system/user',
+    component: AdminSystemUser
   }
 ]
 

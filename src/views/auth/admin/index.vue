@@ -1,21 +1,23 @@
 <script setup lang="ts">
-  import { reactive } from 'vue'
+  import { reactive, ref, Ref, UnwrapRef } from 'vue'
   import AdminApi from '@/api/auth/admin'
+  import { UnwrapNestedRefs } from '@vue/reactivity'
 
-  let viewApiBaseUrl = import.meta.env.VITE_API_BASE_URL
-  let captchaUrl = viewApiBaseUrl + AdminApi.URL_PREFIX + `/get-captcha`
-  let loginInfo = reactive({
+  let adminApi: AdminApi = AdminApi.getInstance()
+  let viewApiBaseUrl: string = import.meta.env.VITE_API_BASE_URL
+  let getCaptchaUrl: string = viewApiBaseUrl + AdminApi.URL_PREFIX + '/get-captcha'
+  let captchaUrl: Ref<UnwrapRef<string>> = ref(getCaptchaUrl)
+  let loginInfo: UnwrapNestedRefs<object> = reactive({
     userName: '',
     password: '',
     captcha: '',
-    captchaUrl: captchaUrl,
     isRememberMe: ''
   })
-  let getCaptcha = () => {
-    loginInfo.captchaUrl = captchaUrl + `?random=${Math.random()}`
+  function a() {}
+  let getCaptcha: object = () => {
+    captchaUrl.value = getCaptchaUrl + `?random=${Math.random()}`
   }
-  let adminApi = AdminApi.getInstance()
-  let login = () => {
+  let login: object = () => {
     adminApi.login(loginInfo).then(() => {})
   }
 </script>
@@ -45,7 +47,7 @@
           <el-input v-model="loginInfo.captcha" placeholder="验证码" autocomplete="off"></el-input>
         </el-col>
         <el-col :span="7">
-          <el-image :src="loginInfo.captchaUrl" @click="getCaptcha" />
+          <el-image :src="captchaUrl" @click="getCaptcha" />
         </el-col>
       </el-form-item>
       <el-form-item>
