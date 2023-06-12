@@ -14,9 +14,6 @@
     captcha: '',
     isRememberMe: ''
   })
-
-  function a() {}
-
   let getCaptcha: object = () => {
     captchaUrl.value = getCaptchaUrl + `?random=${Math.random()}`
   }
