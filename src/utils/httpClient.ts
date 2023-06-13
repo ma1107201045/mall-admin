@@ -12,13 +12,7 @@ const HttpClient: AxiosInstance = Axios.create({
 
 // 添加请求拦截器
 HttpClient.interceptors.request.use(
-  config => {
-    // 在发送请求之前做些什么 token
-    //if (Session.get('token')) {
-    //	(<any>config.headers).common['Authorization'] = `${Session.get('token')}`;
-    //}
-    return config
-  },
+  config => config,
   error => {
     // 对请求错误做些什么
     return Promise.reject(error)
