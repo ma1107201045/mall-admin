@@ -1,8 +1,8 @@
 import Axios from 'axios'
+import { AxiosInstance } from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
-import { AxiosInstance } from 'axios'
-// 配置新建一个 axios 实例
+
 const HttpClient: AxiosInstance = Axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL as string,
   timeout: 5000,
@@ -44,10 +44,10 @@ HttpClient.interceptors.response.use(
       } else {
         ElMessage.error('未知异常')
       }
+      return Promise.reject(error)
     } catch (error) {
       console.log(error)
       ElMessage.error('未知异常')
-    } finally {
       return Promise.reject(error)
     }
   }
