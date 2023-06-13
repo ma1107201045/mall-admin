@@ -9,6 +9,7 @@ import 'element-plus/dist/index.css'
 //avue
 import avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
-import axios from 'axios'
+//axios
+import { Axios } from 'axios'
 
-createApp(App).use(router).use(elementPlus).use(avue, { axios }).mount('#app')
+createApp(App).use(router).use(elementPlus).use(avue, { Axios }).mount('#app')

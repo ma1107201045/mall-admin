@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import httpClient from '@/utils/httpClient.ts'
+import HttpClient from '@/utils/httpClient.ts'
 import { HttpMethod } from '@/utils/httpMethod.ts'
 
 export default class AdminApi {
@@ -10,7 +10,7 @@ export default class AdminApi {
   }
 
   login(form: object): Promise<AxiosResponse<any, any>> {
-    return httpClient({
+    return HttpClient({
       url: AdminApi.URL_PREFIX + '/login',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       method: HttpMethod.POST,
@@ -19,7 +19,7 @@ export default class AdminApi {
   }
 
   logout(): Promise<AxiosResponse<any, any>> {
-    return httpClient({
+    return HttpClient({
       url: AdminApi.URL_PREFIX + '/logout',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       method: HttpMethod.POST

@@ -1,4 +1,4 @@
-import httpClient from '@/utils/httpClient.ts'
+import HttpClient from '@/utils/httpClient.ts'
 import { HttpMethod } from '@/utils/httpMethod.ts'
 import { AxiosResponse } from 'axios'
 import BaseApi from '@/api'
@@ -11,7 +11,7 @@ export default class UserApi implements BaseApi {
   }
 
   save(body: object): Promise<AxiosResponse<any, any>> {
-    return httpClient({
+    return HttpClient({
       url: UserApi.URL_PREFIX,
       method: HttpMethod.POST,
       data: body
@@ -19,14 +19,14 @@ export default class UserApi implements BaseApi {
   }
 
   deleteByIds(ids: number[]): Promise<AxiosResponse<any, any>> {
-    return httpClient({
+    return HttpClient({
       url: UserApi.URL_PREFIX + `/${ids.join(',')}`,
       method: HttpMethod.DELETE
     })
   }
 
   updateById(id: number, body: object): Promise<AxiosResponse<any, any>> {
-    return httpClient({
+    return HttpClient({
       url: UserApi.URL_PREFIX + +`/${id}`,
       method: HttpMethod.PUT,
       data: body
@@ -34,14 +34,14 @@ export default class UserApi implements BaseApi {
   }
 
   getById(id: number): Promise<AxiosResponse<any, any>> {
-    return httpClient({
+    return HttpClient({
       url: UserApi.URL_PREFIX + `/${id}`,
       method: HttpMethod.GET
     })
   }
 
   getListByPageAndQuery(query: object): Promise<AxiosResponse<any, any>> {
-    return httpClient({
+    return HttpClient({
       url: UserApi.URL_PREFIX,
       method: HttpMethod.GET,
       data: query

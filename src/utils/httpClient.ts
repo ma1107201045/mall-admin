@@ -1,15 +1,16 @@
-import axios from 'axios'
+import Axios from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 // 配置新建一个 axios 实例
-const httpClient = axios.create({
+const HttpClient = Axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL as string,
   timeout: 50000,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true
 })
+
 // 添加请求拦截器
-httpClient.interceptors.request.use(
+HttpClient.interceptors.request.use(
   config => {
     // 在发送请求之前做些什么 token
     //if (Session.get('token')) {
@@ -24,7 +25,7 @@ httpClient.interceptors.request.use(
 )
 
 // 添加响应拦截器
-httpClient.interceptors.response.use(
+HttpClient.interceptors.response.use(
   response => {
     return response.data
   },
@@ -55,4 +56,4 @@ httpClient.interceptors.response.use(
 )
 
 // 导出 axios 实例
-export default httpClient
+export default HttpClient
