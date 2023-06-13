@@ -41,11 +41,13 @@ HttpClient.interceptors.response.use(
         let bizCode = data.bizCode
         ElMessage.error(`业务码${data.bizCode}，${data.message}`)
         if (bizCode === 401) {
-          router.push('/auth/401').then(r => console.log(r))
+          router.push('/auth401').then(r => console.log(r))
         } else if (bizCode === 403) {
-          router.push('/auth/403').then(r => console.log(r))
+          router.push('/auth403').then(r => console.log(r))
         } else if (bizCode === 404) {
-          router.push('/auth/404').then(r => console.log(r))
+          router.push('/error404').then(r => console.log(r))
+        } else if (bizCode === 500) {
+          router.push('/error500').then(r => console.log(r))
         }
       } else {
         ElMessage.error('未知异常')

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import UserApi from '@/api/system/user'
+  import UserApi from '@/api/admin/system/user'
+
   let userApi: UserApi = UserApi.getInstance()
 </script>
 
