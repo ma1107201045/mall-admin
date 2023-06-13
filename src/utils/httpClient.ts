@@ -13,10 +13,7 @@ const HttpClient: AxiosInstance = Axios.create({
 // 添加请求拦截器
 HttpClient.interceptors.request.use(
   config => config,
-  error => {
-    // 对请求错误做些什么
-    return Promise.reject(error)
-  }
+  error => Promise.reject(error)
 )
 
 // 添加响应拦截器
@@ -41,13 +38,9 @@ HttpClient.interceptors.response.use(
           router.push('/error404').then(value => console.log(value))
         } else if (bizCode === 500) {
           router.push('/error500').then(value => console.log(value))
-        } else {
-          ElMessage.error('未知异常')
         }
-      } else {
-        ElMessage.error('未知异常')
       }
-    } catch (error) {
+    } finally {
       ElMessage.error('未知异常')
     }
     return Promise.reject(error)
