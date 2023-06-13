@@ -1,25 +1,25 @@
 // index.ts
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeIndex from '@/views/home/index.vue'
-import AuthAdminIndex from '@/views/auth/admin/index.vue'
+import Home from '@/views/home/index.vue'
+import AuthAdmin from '@/views/auth/admin/index.vue'
 import Auth401 from '@/views/auth/401.vue'
 import Auth403 from '@/views/auth/401.vue'
 import Error404 from '@/views/error/404.vue'
 import Error500 from '@/views/error/500.vue'
-import AdminSystemUserIndex from '@/views/admin/system/user/index.vue'
+import AdminSystemUser from '@/views/admin/system/user/index.vue'
 
 const routes = [
   {
     path: '/',
-    component: HomeIndex
+    component: Home
   },
   {
     path: '/home',
-    component: HomeIndex
+    component: Home
   },
   {
     path: '/auth/admin',
-    component: AuthAdminIndex
+    component: AuthAdmin
   },
   {
     path: '/auth401',
@@ -39,7 +39,7 @@ const routes = [
   },
   {
     path: '/admin/system/user',
-    component: AdminSystemUserIndex
+    component: AdminSystemUser
   }
 ]
 

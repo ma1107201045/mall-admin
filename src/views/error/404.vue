@@ -8,7 +8,7 @@
       <el-text size="large">页面找不到了</el-text>
     </el-row>
     <el-row>
-      <el-button @click="router.back()" type="primary">点击返回</el-button>
+      <el-button @click="router.go(-1)" type="primary">返回上一页</el-button>
     </el-row>
   </div>
 </template>

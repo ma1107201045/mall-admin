@@ -1,9 +1,9 @@
 import HttpClient from '@/utils/httpClient.ts'
 import { HttpMethod } from '@/utils/httpMethod.ts'
-import BaseApi from '@/api'
+import BaseApiInterface from '@/api'
 import { AxiosResponse } from 'axios'
 
-export class LogApi implements BaseApi {
+export class LogApi implements BaseApiInterface {
   static URL_PREFIX: string = '/admin/system/logs'
 
   static getInstance(): LogApi {

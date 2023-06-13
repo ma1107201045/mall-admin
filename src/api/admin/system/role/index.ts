@@ -1,9 +1,9 @@
 import HttpClient from '@/utils/httpClient.ts'
 import { HttpMethod } from '@/utils/httpMethod.ts'
-import BaseApi from '@/api'
+import BaseApiInterface from '@/api'
 import { AxiosResponse } from 'axios'
 
-export class RoleApi implements BaseApi {
+export class RoleApi implements BaseApiInterface {
   static URL_PREFIX: string = '/admin/system/roles'
 
   static getInstance(): RoleApi {

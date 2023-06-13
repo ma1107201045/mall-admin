@@ -1,9 +1,9 @@
 import HttpClient from '@/utils/httpClient.ts'
 import { HttpMethod } from '@/utils/httpMethod.ts'
 import { AxiosResponse } from 'axios'
-import BaseApi from '@/api'
+import BaseApiInterface from '@/api'
 
-export default class UserApi implements BaseApi {
+export default class UserApi implements BaseApiInterface {
   static URL_PREFIX: string = '/admin/system/users'
 
   static getInstance(): UserApi {
