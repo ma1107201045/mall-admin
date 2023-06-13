@@ -18,8 +18,8 @@
     captchaUrl.value = getCaptchaUrl + `?random=${Math.random()}`
   }
   let login: any = (): any => {
-    adminApi.login(loginInfo).then(axiosResponse => {
-      console.log(axiosResponse.data)
+    adminApi.login(loginInfo).then(res => {
+      console.log(res.data)
       router.push('/home')
     })
   }

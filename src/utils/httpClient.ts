@@ -1,8 +1,9 @@
 import Axios from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
+import { AxiosInstance } from 'axios'
 // 配置新建一个 axios 实例
-const HttpClient = Axios.create({
+const HttpClient: AxiosInstance = Axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL as string,
   timeout: 50000,
   headers: { 'Content-Type': 'application/json' },
@@ -26,9 +27,7 @@ HttpClient.interceptors.request.use(
 
 // 添加响应拦截器
 HttpClient.interceptors.response.use(
-  response => {
-    return response.data
-  },
+  response => response,
   error => {
     // 对响应错误做点什么
     if (error.message.indexOf('timeout') != -1) {
