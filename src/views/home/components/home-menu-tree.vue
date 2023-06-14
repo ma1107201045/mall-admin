@@ -16,7 +16,7 @@
         <el-icon>
           <component :is="menu.icon"></component>
         </el-icon>
-        <span>{{ menu.name }}</span>
+        <span v-text="menu.name"></span>
       </template>
       <home-menu-tree :menuTreeData="menu.menus" />
     </el-sub-menu>
@@ -24,7 +24,7 @@
       <el-icon>
         <component :is="menu.icon"></component>
       </el-icon>
-      <el-span>{{ menu.name }}</el-span>
+      <span v-text="menu.name"></span>
     </el-menu-item>
   </div>
 </template>
