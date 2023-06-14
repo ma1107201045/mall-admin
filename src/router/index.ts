@@ -40,6 +40,10 @@ const routes = [
   {
     path: '/admin/system/user',
     component: AdminSystemUser
+  },
+  {
+    path: "/:pathMatch(.*)", // 此处需特别注意置于最底部
+    redirect: "/error404"
   }
 ]
 
