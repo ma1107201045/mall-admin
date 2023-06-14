@@ -21,7 +21,7 @@
       <el-radio-button :label="false">展开</el-radio-button>
       <el-radio-button :label="true">收起</el-radio-button>
     </el-radio-group>
-    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse" default-active="12">
+    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse">
       <home-menu-tree :menuTreeData="menus" />
     </el-menu>
   </div>
