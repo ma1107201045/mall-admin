@@ -7,6 +7,7 @@
   let menuBarDynamicStyle = ref({
     position: 'absolute',
     top: '50px',
+    left: 0,
     height: ''
   })
   let isCollapse: Ref<UnwrapRef<boolean>> = ref(true)
@@ -32,7 +33,13 @@
       <el-radio-button :label="false">展开</el-radio-button>
       <el-radio-button :label="true">收起</el-radio-button>
     </el-radio-group>
-    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse" :style="menuBarDynamicStyle">
+    <el-menu
+      background-color="#304156"
+      text-color="#ffffff"
+      class="el-menu-vertical-demo"
+      :collapse="isCollapse"
+      :style="menuBarDynamicStyle"
+    >
       <home-menu-bar-tree :menuTreeData="menus" />
     </el-menu>
   </div>
