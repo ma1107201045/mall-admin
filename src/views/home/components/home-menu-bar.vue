@@ -4,7 +4,7 @@
   import HomeApi from '@/api/home'
   import homeMenuTree from '@/views/home/components/home-menu-tree.vue'
 
-  let isCollapse: Ref<UnwrapRef<boolean>> = ref(false)
+  let isCollapse: Ref<UnwrapRef<boolean>> = ref(true)
   let menus: Ref<UnwrapRef<object>> = ref([])
   let homeApi: HomeApi = HomeApi.getInstance()
   let getMenu: any = (): any => {
@@ -28,8 +28,8 @@
 </template>
 
 <style scoped>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-  }
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
 </style>

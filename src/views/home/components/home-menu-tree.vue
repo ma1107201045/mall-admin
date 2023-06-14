@@ -6,10 +6,9 @@
     }
   })
 </script>
-
 <template>
-  <div v-for="menu in menuTreeData">
-    <el-sub-menu :index="String(menu.id)" v-if="menu.menus.length">
+  <template v-for="menu in menuTreeData">
+    <el-sub-menu v-if="menu.menus.length" :key="menu.id" :index="String(menu.id)">
       <template #title>
         <el-icon>
           <component :is="menu.icon"></component>
@@ -18,13 +17,15 @@
       </template>
       <home-menu-tree :menuTreeData="menu.menus" />
     </el-sub-menu>
-    <el-menu-item :index="String(menu.id)" v-else>
+    <el-menu-item v-else :key="menu.id" :index="String(menu.id)">
       <el-icon>
         <component :is="menu.icon"></component>
       </el-icon>
-      <span v-text="menu.name"></span>
+      <template #title>
+        <span v-text="menu.name"></span>
+      </template>
     </el-menu-item>
-  </div>
+  </template>
 </template>
 
 <style scoped></style>
