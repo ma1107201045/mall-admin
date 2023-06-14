@@ -8,8 +8,8 @@
   <div class="common-layout">
     <el-container>
       <!--侧边栏容器-->
-      <el-aside  width="200px">
-         <home-menu-bar />
+      <el-aside width="200px">
+        <home-menu-bar />
       </el-aside>
       <el-container>
         <!--顶栏容器-->
@@ -18,12 +18,10 @@
         </el-header>
         <!--主要区域容器-->
         <el-main>
-           <home-content />
+          <home-content />
         </el-main>
         <!--底栏容器-->
-        <el-footer>
-          Footer
-        </el-footer>
+        <el-footer>Footer</el-footer>
       </el-container>
     </el-container>
   </div>

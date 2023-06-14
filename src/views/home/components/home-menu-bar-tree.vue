@@ -15,7 +15,7 @@
         </el-icon>
         <span v-text="menu.name"></span>
       </template>
-      <home-menu-tree :menuTreeData="menu.menus" />
+      <home-menu-bar-tree :menuTreeData="menu.menus" />
     </el-sub-menu>
     <el-menu-item v-else :key="menu.id" :index="String(menu.id)">
       <el-icon>
@@ -27,5 +27,6 @@
     </el-menu-item>
   </template>
 </template>
+
 
 <style scoped></style>
