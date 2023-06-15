@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { MenuType } from '@/utils/menuType.ts'
+
   defineProps({
     menuTreeData: {
       type: Array,
@@ -17,7 +19,12 @@
       </template>
       <home-menu-bar-tree :menuTreeData="menu.children" />
     </el-sub-menu>
-    <el-menu-item v-else :key="menu.id" :index="menu.path" :disabled="menu.type === 1">
+    <el-menu-item
+      v-else
+      :key="menu.id"
+      :index="menu.path"
+      :disabled="menu.type === MenuType.DIRECTORY"
+    >
       <el-icon>
         <component :is="menu.icon"></component>
       </el-icon>
