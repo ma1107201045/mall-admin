@@ -8,14 +8,14 @@
 </script>
 <template>
   <template v-for="menu in menuTreeData">
-    <el-sub-menu v-if="menu.menus.length" :key="menu.id" :index="String(menu.id)">
+    <el-sub-menu v-if="menu.children.length" :key="menu.id" :index="String(menu.id)">
       <template #title>
         <el-icon>
           <component :is="menu.icon"></component>
         </el-icon>
         <span v-text="menu.name"></span>
       </template>
-      <home-menu-bar-tree :menuTreeData="menu.menus" />
+      <home-menu-bar-tree :menuTreeData="menu.children" />
     </el-sub-menu>
     <el-menu-item v-else :key="menu.id" :index="String(menu.id)">
       <el-icon>
@@ -27,6 +27,5 @@
     </el-menu-item>
   </template>
 </template>
-
 
 <style scoped></style>
