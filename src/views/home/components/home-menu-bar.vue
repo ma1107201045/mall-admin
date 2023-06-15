@@ -25,7 +25,10 @@
       let data = res.data.data
       menus.value = data
       if (data.length) {
-        defaultActive.value = String(data[0].id)
+        //默认选中第一个菜单
+        defaultActive.value = String(data[0].path)
+        //路由
+        //router.push(defaultActive.value).then(value => console.log(value))
       }
     })
   }
