@@ -3,7 +3,7 @@
   import { Ref, UnwrapRef } from 'vue'
   import HomeApi from '@/api/home'
   import homeMenuBarTree from '@/views/home/components/home-menu-bar-tree.vue'
-
+  import router from '@/router'
   let menuBarDynamicStyle = ref({
     position: 'absolute',
     top: '50px',
@@ -11,7 +11,8 @@
     height: ''
   })
   let isCollapse: Ref<UnwrapRef<boolean>> = ref(false)
-  let menus: Ref<UnwrapRef<object>> = ref([])
+  let defaultActive: Ref<UnwrapRef<string>> = ref('')
+  let menus: Ref<UnwrapRef<[]>> = ref([])
   let homeApi: HomeApi = HomeApi.getInstance()
   let onCreated = () => {
     //动态调整左侧菜单栏高度
@@ -21,7 +22,11 @@
   onCreated()
   let getMenu: any = (): any => {
     homeApi.getMenu().then(res => {
-      menus.value = res.data.data
+      let data = res.data.data
+      menus.value = data
+      if (data.length) {
+        defaultActive.value = String(data[0].id)
+      }
     })
   }
   getMenu()
@@ -34,10 +39,13 @@
       <el-radio-button :label="true">收起</el-radio-button>
     </el-radio-group>
     <el-menu
+      :collapse="isCollapse"
       background-color="#304156"
       text-color="#ffffff"
+      :default-active="defaultActive"
+      :unique-opened="true"
+      :router="true"
       class="el-menu-vertical-demo"
-      :collapse="isCollapse"
       :style="menuBarDynamicStyle"
     >
       <home-menu-bar-tree :menuTreeData="menus" />

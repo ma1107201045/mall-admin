@@ -5,6 +5,7 @@ import AuthAdmin from '@/views/auth/admin/index.vue'
 import Auth401 from '@/views/auth/401.vue'
 import Auth403 from '@/views/auth/401.vue'
 import Error404 from '@/views/error/404.vue'
+import Index from '@/views/index/index.vue'
 import AdminSystemUser from '@/views/admin/system/user/index.vue'
 
 const routes = [
@@ -31,6 +32,10 @@ const routes = [
   {
     path: '/error404',
     component: Error404
+  },
+  {
+    path: '/index',
+    component: Index
   },
   {
     path: '/admin/system/user',
