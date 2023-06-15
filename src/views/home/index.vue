@@ -8,7 +8,7 @@
   <div class="common-layout">
     <el-container>
       <!--侧边栏容器-->
-      <el-aside width="200px">
+      <el-aside>
         <home-menu-bar />
       </el-aside>
       <el-container>
