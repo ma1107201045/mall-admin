@@ -1,6 +1,7 @@
 <script setup lang="ts">
-  import homeNavigationBar from '@/views/home/components/home-navigation-bar.vue'
+  import HomeLogo from "@/views/home/components/home-logo.vue";
   import homeMenuBar from '@/views/home/components/home-menu-bar.vue'
+  import homeNavigationBar from '@/views/home/components/home-navigation-bar.vue'
   import homeContent from '@/views/home/components/home-content.vue'
 </script>
 
@@ -9,6 +10,7 @@
     <el-container>
       <!--侧边栏容器-->
       <el-aside>
+        <home-logo/>
         <home-menu-bar />
       </el-aside>
       <el-container>

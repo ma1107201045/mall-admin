@@ -4,10 +4,8 @@
   import HomeApi from '@/api/home'
   import homeMenuBarTree from '@/views/home/components/home-menu-bar-tree.vue'
   import router from '@/router'
+
   let menuBarDynamicStyle = ref({
-    position: 'absolute',
-    top: '50px',
-    left: 0,
     height: ''
   })
   let isCollapse: Ref<UnwrapRef<boolean>> = ref(false)
@@ -17,7 +15,7 @@
   let onCreated = () => {
     //动态调整左侧菜单栏高度
     let docHeight = document.documentElement.clientHeight
-    menuBarDynamicStyle.value.height = docHeight - 50 + 'px'
+    menuBarDynamicStyle.value.height = docHeight + 'px'
   }
   onCreated()
   let getMenu: any = (): any => {
@@ -57,6 +55,11 @@
 </template>
 
 <style scoped>
+  .el-menu-vertical-demo {
+    position: absolute;
+    top: 60px;
+    left: 0;
+  }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
