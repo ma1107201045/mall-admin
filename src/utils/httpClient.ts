@@ -36,10 +36,6 @@ HttpClient.interceptors.response.use(
           router.push('/auth403').then(value => console.log(value))
         } else if (bizCode === 404) {
           router.push('/error404').then(value => console.log(value))
-        } else if (bizCode === 500) {
-          router.push('/error500').then(value => console.log(value))
-        } else {
-          ElMessage.error('未知异常')
         }
       } else {
         ElMessage.error('未知异常')

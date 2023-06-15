@@ -6,12 +6,12 @@
 
   let adminApi: AdminApi = AdminApi.getInstance()
   let viewApiBaseUrl: string = import.meta.env.VITE_API_BASE_URL
-  let getCaptchaUrl: string = viewApiBaseUrl + AdminApi.URL_PREFIX + '/get-captcha'
+  let getCaptchaUrl: string = viewApiBaseUrl + AdminApi.URL_PREFIX + '/get-image-captcha'
   let captchaUrl: Ref<UnwrapRef<string>> = ref(getCaptchaUrl)
   let loginInfo: UnwrapNestedRefs<object> = reactive({
     userName: '',
     password: '',
-    captcha: '',
+    imageCaptcha: '',
     isRememberMe: ''
   })
   let getCaptcha: any = (): any => {
@@ -47,7 +47,11 @@
       </el-form-item>
       <el-form-item>
         <el-col :span="17">
-          <el-input v-model="loginInfo.captcha" placeholder="验证码" autocomplete="off"></el-input>
+          <el-input
+            v-model="loginInfo.imageCaptcha"
+            placeholder="验证码"
+            autocomplete="off"
+          ></el-input>
         </el-col>
         <el-col :span="7">
           <el-image :src="captchaUrl" @click="getCaptcha" />

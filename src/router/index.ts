@@ -5,7 +5,6 @@ import AuthAdmin from '@/views/auth/admin/index.vue'
 import Auth401 from '@/views/auth/401.vue'
 import Auth403 from '@/views/auth/401.vue'
 import Error404 from '@/views/error/404.vue'
-import Error500 from '@/views/error/500.vue'
 import AdminSystemUser from '@/views/admin/system/user/index.vue'
 
 const routes = [
@@ -34,16 +33,12 @@ const routes = [
     component: Error404
   },
   {
-    path: '/error500',
-    component: Error500
-  },
-  {
     path: '/admin/system/user',
     component: AdminSystemUser
   },
   {
-    path: "/:pathMatch(.*)", // 此处需特别注意置于最底部
-    redirect: "/error404"
+    path: '/:pathMatch(.*)', // 此处需特别注意置于最底部
+    redirect: '/error404'
   }
 ]
 

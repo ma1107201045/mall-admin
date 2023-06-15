@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { Ref, UnwrapRef } from 'vue/dist/vue'
+  import { Ref, UnwrapRef } from 'vue'
   import HomeApi from '@/api/home'
   import homeMenuBarTree from '@/views/home/components/home-menu-bar-tree.vue'
 
@@ -10,7 +10,7 @@
     left: 0,
     height: ''
   })
-  let isCollapse: Ref<UnwrapRef<boolean>> = ref(true)
+  let isCollapse: Ref<UnwrapRef<boolean>> = ref(false)
   let menus: Ref<UnwrapRef<object>> = ref([])
   let homeApi: HomeApi = HomeApi.getInstance()
   let onCreated = () => {
