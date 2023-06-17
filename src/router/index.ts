@@ -20,10 +20,6 @@ const routes = [
     component: Index,
     children: [
       {
-        path: 'error',
-        component: Error
-      },
-      {
         path: 'admin/home',
         component: AdminHome
       },
@@ -42,6 +38,10 @@ const routes = [
       {
         path: 'admin/system/log',
         component: AdminSystemLog
+      },
+      {
+        path: 'error',
+        component: Error
       }
     ]
   },

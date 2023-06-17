@@ -1,5 +1,10 @@
 <script setup lang="ts">
+  import { ElMessage } from 'element-plus'
   import router from '@/router'
+  ElMessage.info('3秒后自定跳转登录页面')
+  setTimeout(() => {
+    router.push('/auth/admin')
+  }, 3000)
 </script>
 
 <template>
