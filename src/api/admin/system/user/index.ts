@@ -37,10 +37,11 @@ export default class UserApi implements BaseApiInterface {
     return HttpClient({
       url: UserApi.URL_PREFIX + `/${id}`,
       method: HttpMethod.GET
+
     })
   }
 
-  getListByPageAndQuery(query: object): Promise<AxiosResponse<any, any>> {
+  getListByPageAndParam(query: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: UserApi.URL_PREFIX,
       method: HttpMethod.GET,

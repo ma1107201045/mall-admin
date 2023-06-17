@@ -1,17 +1,18 @@
-import {defineConfig} from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import {resolve} from 'path';
+import { resolve } from 'path'
 
 const pathResolve = (dir: string): any => {
-    return resolve(__dirname, '.', dir);
-};
+  return resolve(__dirname, '.', dir)
+}
 
 const alias: Record<string, string> = {
-    '@': pathResolve('src'),
-};
+  '@': pathResolve('src')
+}
 export default defineConfig({
-    plugins: [vue()],
-    resolve: {
-        alias
-    },
+  plugins: [vue()],
+  resolve: {
+    alias
+  },
+
 })

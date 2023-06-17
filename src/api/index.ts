@@ -30,5 +30,5 @@ export default interface BaseApiInterface {
    * 获取数据集
    * @param query 查询参数
    */
-  getListByPageAndQuery(query: object): Promise<AxiosResponse<any, any>>
+  getListByPageAndParam(query: object): Promise<AxiosResponse<any, any>>
 }

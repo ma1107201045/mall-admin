@@ -3,6 +3,7 @@ import { Path } from '@/enums/path.ts'
 import { AxiosInstance } from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
+import { HttpMethod } from '@/enums/httpMethod.ts'
 
 const HttpClient: AxiosInstance = Axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL as string,
@@ -13,7 +14,13 @@ const HttpClient: AxiosInstance = Axios.create({
 
 // 添加请求拦截器
 HttpClient.interceptors.request.use(
-  config => config,
+  config => {
+    //服务器要求GET请求Content-Type=application/x-www-form-urlencoded
+    if (config.method === HttpMethod.GET.toLowerCase()) {
+      config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+    }
+    return config
+  },
   error => Promise.reject(error)
 )
 
@@ -62,4 +69,4 @@ HttpClient.interceptors.response.use(
 )
 
 // 导出 axios 实例
-export default HttpClient;
+export default HttpClient

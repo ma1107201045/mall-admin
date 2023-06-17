@@ -6,27 +6,18 @@
   let form = reactive({})
   let page = reactive({})
   let option = reactive(Option())
-  let data = reactive([
-    {
-      name: 'zs',
-      value: '1',
-      code: '1001',
-      node: 'remark'
-    },
-    {
-      name: 'ls',
-      value: '1',
-      code: '1',
-      node: 'remark'
-    }
-  ])
+  let data = ref([])
   let loading = ref(false)
-  let userApi: UserApi = UserApi.getInstance()
+
   let param = reactive({})
+  let userApi: UserApi = UserApi.getInstance()
   let save = (row, done, loading) => {}
   let deleteByIds = row => {}
   let updateById = (row, index, done, loading) => {}
-  let getListByPageAndQuery = (params, done) => {
+  let getListByPageAndParam = (params, done) => {
+    userApi.getListByPageAndParam(params).then(res => {
+      data.value = res.data.data
+    })
     if (done) {
       done()
     }
@@ -43,10 +34,10 @@
     @row-save="save"
     @row-del="deleteByIds"
     @row-update="updateById"
-    @on-load="getListByPageAndQuery"
-    @search-change="getListByPageAndQuery"
-    @search-reset="getListByPageAndQuery"
-    @refresh-change="getListByPageAndQuery"
+    @on-load="getListByPageAndParam"
+    @search-change="getListByPageAndParam"
+    @search-reset="getListByPageAndParam"
+    @refresh-change="getListByPageAndParam"
   />
 </template>
 

@@ -7,13 +7,13 @@ export default () => {
     stripe: true,
     column: [
       {
-        label: '名称(name)111111111',
-        prop: 'name',
-        search: true,
+        label: '用户名称',
+        prop: 'userName',
+        search: false,
         rules: [
           {
             required: true,
-            message: '请输入名称(name)1111',
+            message: '请输入用户名称',
             trigger: 'blur'
           }
         ]

@@ -12,7 +12,7 @@ export default class AdminApi {
   login(form: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: AdminApi.URL_PREFIX + '/login',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       method: HttpMethod.POST,
       data: form
     })
@@ -21,7 +21,7 @@ export default class AdminApi {
   logout(): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: AdminApi.URL_PREFIX + '/logout',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       method: HttpMethod.POST
     })
   }
