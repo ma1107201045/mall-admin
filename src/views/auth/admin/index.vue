@@ -1,15 +1,14 @@
 <script setup lang="ts">
-  import { reactive, ref, Ref, UnwrapRef } from 'vue'
+  import { reactive, ref } from 'vue'
   import AdminApi from '@/api/auth/admin'
-  import { UnwrapNestedRefs } from '@vue/reactivity'
   import router from '@/router'
   import { Path } from '@/enums/path.ts'
 
-  let adminApi: AdminApi = AdminApi.getInstance()
-  let viewApiBaseUrl: string = import.meta.env.VITE_API_BASE_URL
-  let getCaptchaUrl: string = viewApiBaseUrl + AdminApi.URL_PREFIX + '/get-image-captcha'
-  let captchaUrl: Ref<UnwrapRef<string>> = ref(getCaptchaUrl)
-  let loginInfo: UnwrapNestedRefs<object> = reactive({
+  let adminApi = AdminApi.getInstance()
+  let viewApiBaseUrl = import.meta.env.VITE_API_BASE_URL
+  let getCaptchaUrl = viewApiBaseUrl + AdminApi.URL_PREFIX + '/get-image-captcha'
+  let captchaUrl = ref(getCaptchaUrl)
+  let loginInfo = reactive({
     userName: '',
     password: '',
     imageCaptcha: '',
