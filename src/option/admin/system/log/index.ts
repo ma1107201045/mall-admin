@@ -15,7 +15,7 @@ export default () => {
         prop: 'title',
         overHidden: true,
         width: 200,
-        search: true
+        search: true,
       },
       {
         label: '操作类型',
@@ -43,7 +43,8 @@ export default () => {
           }
         ],
         search: true,
-        searchType: 'select'
+        searchType: 'select',
+        searchLabelWidth: 100
       },
       {
         label: '执行时长',
@@ -64,7 +65,10 @@ export default () => {
             label: '失败',
             value: 0
           }
-        ]
+        ],
+        search: true,
+        searchType: 'radio',
+        searchLabelWidth: 100
       },
       {
         label: '客户端IP',

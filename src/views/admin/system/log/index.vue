@@ -9,7 +9,7 @@
     currentPage: 1,
     pageSize: 10,
     sortField: 'id',
-    sortDirection: '',
+    sortDirection: 'DESC',
     total: ''
   })
   let params = reactive({})
