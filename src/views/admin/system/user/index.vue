@@ -3,9 +3,7 @@
   import UserApi from '@/api/admin/system/user'
   import Option from '@/option/admin/system/user'
 
-  let form = reactive({
-
-  })
+  let form = reactive({})
   let page = reactive({})
   let option = reactive(Option())
   let data = reactive([
