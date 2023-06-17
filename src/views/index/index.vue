@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import HomeLogo from "@/views/home/components/home-logo.vue";
-  import homeMenuBar from '@/views/home/components/home-menu-bar.vue'
-  import homeNavigationBar from '@/views/home/components/home-navigation-bar.vue'
-  import homeContent from '@/views/home/components/home-content.vue'
+  import AsideLogo from '@/views/index/components/aside-logo.vue'
+  import AsideMenuBar from '@/views/index/components/aside-menu-bar.vue'
+  import HeaderNavigationBar from '@/views/index/components/header-navigation-bar.vue'
+  import MainContent from '@/views/index/components/main-content.vue'
 </script>
 
 <template>
@@ -10,17 +10,17 @@
     <el-container>
       <!--侧边栏容器-->
       <el-aside>
-        <home-logo/>
-        <home-menu-bar />
+        <aside-logo />
+        <aside-menu-bar />
       </el-aside>
       <el-container>
         <!--顶栏容器-->
         <el-header>
-          <home-navigation-bar />
+          <header-navigation-bar />
         </el-header>
         <!--主要区域容器-->
         <el-main>
-          <home-content />
+          <main-content />
         </el-main>
         <!--底栏容器-->
         <el-footer>Footer</el-footer>

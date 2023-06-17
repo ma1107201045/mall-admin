@@ -20,7 +20,7 @@
   let login: any = (): any => {
     adminApi.login(loginInfo).then(res => {
       console.log(res.data)
-      router.push('/home')
+      router.push('/index')
     })
   }
 </script>

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import HttpClient from '@/utils/httpClient.ts'
-import { HttpMethod } from '@/utils/httpMethod.ts'
+import { HttpMethod } from '@/enums/httpMethod.ts'
 
 export default class BaseApi {
   static URL_PREFIX: string = '/admin/base/bases'

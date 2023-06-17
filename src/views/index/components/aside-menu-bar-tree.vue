@@ -1,15 +1,16 @@
 <script setup lang="ts">
-  import { MenuType } from '@/utils/menuType.ts'
+  import { MenuType } from '@/enums/menuType.ts'
+  import { Path } from '@/enums/path.ts'
 
   defineProps({
-    menuTreeData: {
+    menuBarTreeData: {
       type: Array,
       default: []
     }
   })
 </script>
 <template>
-  <template v-for="menu in menuTreeData">
+  <template v-for="menu in menuBarTreeData">
     <el-sub-menu v-if="menu.children.length" :key="menu.id">
       <template #title>
         <el-icon>
@@ -17,12 +18,12 @@
         </el-icon>
         <span v-text="menu.name"></span>
       </template>
-      <home-menu-bar-tree :menuTreeData="menu.children" />
+      <aside-menu-bar-tree :menuBarTreeData="menu.children" />
     </el-sub-menu>
     <el-menu-item
       v-else
       :key="menu.id"
-      :index="menu.path"
+      :index="menu.type === MenuType.MENU ? Path.INDEX + menu.path : ''"
       :disabled="menu.type === MenuType.DIRECTORY"
     >
       <el-icon>

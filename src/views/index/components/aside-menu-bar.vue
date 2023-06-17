@@ -2,8 +2,7 @@
   import { ref } from 'vue'
   import { Ref, UnwrapRef } from 'vue'
   import HomeApi from '@/api/home'
-  import homeMenuBarTree from '@/views/home/components/home-menu-bar-tree.vue'
-  import router from '@/router'
+  import homeMenuBarTree from '@/views/index/components/aside-menu-bar-tree.vue'
 
   let menuBarDynamicStyle = ref({
     height: ''
