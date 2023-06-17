@@ -3,6 +3,9 @@
   import { Ref, UnwrapRef } from 'vue'
   import IndexApi from '@/api/index/index.ts'
   import asideMenuBarTree from '@/views/index/components/aside-menu-bar-tree.vue'
+  import router from '@/router'
+  import { MenuType } from '@/enums/menuType.ts'
+  import { Path } from '@/enums/path.ts'
 
   let menuBarDynamicStyle = ref({
     height: ''
@@ -21,11 +24,11 @@
     indexApi.getMenu().then(res => {
       let data = res.data.data
       menus.value = data
-      if (data.length) {
+      if (data.length && data[0].type === MenuType.MENU) {
         //默认选中第一个菜单
-        defaultActive.value = String(data[0].path)
-        //路由
-        //router.push(defaultActive.value).then(value => console.log(value))
+        defaultActive.value = Path.INDEX + data[0].path
+        //路由跳转
+        router.push(defaultActive.value).then(value => console.log(value))
       }
     })
   }
