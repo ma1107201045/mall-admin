@@ -37,11 +37,11 @@ export class LogApi implements BaseApiInterface {
     })
   }
 
-  getListByPageAndQuery(query: object): Promise<AxiosResponse<any, any>> {
+  getListByPageAndParam(param: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: LogApi.URL_PREFIX,
       method: HttpMethod.GET,
-      data: query
+      params: param
     })
   }
 }

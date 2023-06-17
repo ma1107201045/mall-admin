@@ -2,14 +2,14 @@
   import { reactive, ref } from 'vue'
   import UserApi from '@/api/admin/system/user'
   import Option from '@/option/admin/system/user'
-
+  let option = reactive(Option())
   let form = reactive({})
   let page = reactive({})
-  let option = reactive(Option())
+  let param = reactive({})
   let data = ref([])
   let loading = ref(false)
 
-  let param = reactive({})
+
   let userApi: UserApi = UserApi.getInstance()
   let save = (row, done, loading) => {}
   let deleteByIds = row => {}

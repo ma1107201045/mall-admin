@@ -38,7 +38,7 @@ HttpClient.interceptors.response.use(
         let data = error.response.data
         let code = data.code
         let message = data.message
-        ElMessage.error(`业务码${code}，${message}`)
+        ElMessage.error(`状态码【${code}】，${message}`)
         if (code === 401) {
           router
             .push({ path: Path.INDEX + '/error', query: { id: 401 } })
