@@ -10,7 +10,7 @@ import AdminSystemMenu from '@/views/admin/system/menu/index.vue'
 import AdminSystemLog from '@/views/admin/system/log/index.vue'
 import Error from '@/views/error/index.vue'
 
-const routes = [
+let routes = [
   {
     path: '/auth/admin',
     component: AuthAdmin
