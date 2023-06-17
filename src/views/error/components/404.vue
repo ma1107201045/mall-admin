@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useRouter } from 'vue-router'
+  import router from '@/router'
 </script>
 
 <template>
@@ -8,7 +8,7 @@
       <el-text size="large">页面找不到了</el-text>
     </el-row>
     <el-row>
-      <el-button @click="useRouter().go(-1)" type="primary">返回上一页</el-button>
+      <el-button @click="router.go(-1)" type="primary">返回上一页</el-button>
     </el-row>
   </div>
 </template>

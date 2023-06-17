@@ -3,6 +3,7 @@
   import AdminApi from '@/api/auth/admin'
   import { UnwrapNestedRefs } from '@vue/reactivity'
   import router from '@/router'
+  import { Path } from '@/enums/path.ts'
 
   let adminApi: AdminApi = AdminApi.getInstance()
   let viewApiBaseUrl: string = import.meta.env.VITE_API_BASE_URL
@@ -19,8 +20,7 @@
   }
   let login: any = (): any => {
     adminApi.login(loginInfo).then(res => {
-      console.log(res.data)
-      router.push('/index')
+      router.push(Path.INDEX)
     })
   }
 </script>

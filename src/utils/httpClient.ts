@@ -2,7 +2,7 @@ import Axios from 'axios'
 import { Path } from '@/enums/path.ts'
 import { AxiosInstance } from 'axios'
 import { ElMessage } from 'element-plus'
-import { useRouter } from 'vue-router'
+import router from '@/router'
 
 const HttpClient: AxiosInstance = Axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL as string,
@@ -22,7 +22,6 @@ HttpClient.interceptors.response.use(
   response => response,
   error => {
     try {
-      let router = useRouter()
       let code = error.code
       if (code === 'ECONNABORTED') {
         ElMessage.error('网络连接超时')
@@ -31,7 +30,8 @@ HttpClient.interceptors.response.use(
       } else if (error.response) {
         let data = error.response.data
         let bizCode = data.bizCode
-        ElMessage.error(`业务码${data.bizCode}，${data.message}`)
+        let message = data.message
+        ElMessage.error(`业务码${bizCode}，${message}`)
         if (bizCode === 401) {
           router
             .push({ path: Path.INDEX + '/error', query: { id: 401 } })
@@ -44,9 +44,9 @@ HttpClient.interceptors.response.use(
           router
             .push({ path: Path.INDEX + '/error', query: { id: 404 } })
             .then(value => console.log(value))
-        } else if (bizCode === 500) {
+        } else if (bizCode === 500 && message === 'Internal Server Error') {
           router
-            .push({ path: Path.INDEX + '/error', query: { id: 500 } })
+            .push({ path: Path.INDEX + '/error', query: { id: 404 } })
             .then(value => console.log(value))
         }
       } else {

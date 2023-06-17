@@ -1,11 +1,17 @@
 <script setup lang="ts">
+  import AdminApi from '@/api/auth/admin'
+  import router from '@/router'
 
+  let adminApi: AdminApi = AdminApi.getInstance()
+  let logout: any = (): any => {
+    adminApi.logout().then(res => {
+      router.push('/auth/admin')
+    })
+  }
 </script>
 
 <template>
-<h1>导航栏</h1>
+  <el-button type="primary" @click="logout">退出登录</el-button>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
