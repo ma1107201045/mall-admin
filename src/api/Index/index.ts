@@ -1,11 +1,11 @@
 import BaseApi from '@/api/admin/base/base'
 import { AxiosResponse } from 'axios'
 
-export default class HomeApi {
+export default class IndexApi {
   baseApi: BaseApi = BaseApi.getInstance()
 
-  static getInstance(): HomeApi {
-    return new HomeApi()
+  static getInstance(): IndexApi {
+    return new IndexApi()
   }
 
   getMenu(): Promise<AxiosResponse<any, any>> {

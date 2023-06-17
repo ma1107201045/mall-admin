@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { Ref, UnwrapRef } from 'vue'
-  import HomeApi from '@/api/home'
-  import homeMenuBarTree from '@/views/index/components/aside-menu-bar-tree.vue'
+  import IndexApi from '@/api/index/index.ts'
+  import asideMenuBarTree from '@/views/index/components/aside-menu-bar-tree.vue'
 
   let menuBarDynamicStyle = ref({
     height: ''
@@ -10,7 +10,7 @@
   let isCollapse: Ref<UnwrapRef<boolean>> = ref(false)
   let defaultActive: Ref<UnwrapRef<string>> = ref('')
   let menus: Ref<UnwrapRef<[]>> = ref([])
-  let homeApi: HomeApi = HomeApi.getInstance()
+  let indexApi: IndexApi = IndexApi.getInstance()
   let onCreated = () => {
     //动态调整左侧菜单栏高度
     let docHeight = document.documentElement.clientHeight
@@ -18,7 +18,7 @@
   }
   onCreated()
   let getMenu: any = (): any => {
-    homeApi.getMenu().then(res => {
+    indexApi.getMenu().then(res => {
       let data = res.data.data
       menus.value = data
       if (data.length) {
@@ -48,7 +48,7 @@
       class="el-menu-vertical-demo"
       :style="menuBarDynamicStyle"
     >
-      <home-menu-bar-tree :menuTreeData="menus" />
+      <aside-menu-bar-tree :menuBarTreeData="menus" />
     </el-menu>
   </div>
 </template>
@@ -59,6 +59,7 @@
     top: 60px;
     left: 0;
   }
+
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;

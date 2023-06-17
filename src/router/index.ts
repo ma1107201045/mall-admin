@@ -20,7 +20,7 @@ const routes = [
     component: Index,
     children: [
       {
-        path: '/error',
+        path: 'error',
         component: Error
       },
       {
@@ -46,8 +46,12 @@ const routes = [
     ]
   },
   {
+    path: '/error',
+    component: Error
+  },
+  {
     path: '/:pathMatch(.*)', // 此处需特别注意置于最底部
-    redirect: '/index/error?id=404'
+    redirect: '/error'
   }
 ]
 
