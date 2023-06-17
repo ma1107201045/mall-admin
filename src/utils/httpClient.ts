@@ -29,24 +29,24 @@ HttpClient.interceptors.response.use(
         ElMessage.error('网关连接错误')
       } else if (error.response) {
         let data = error.response.data
-        let bizCode = data.bizCode
+        let code = data.code
         let message = data.message
-        ElMessage.error(`业务码${bizCode}，${message}`)
-        if (bizCode === 401) {
+        ElMessage.error(`业务码${code}，${message}`)
+        if (code === 401) {
           router
             .push({ path: Path.INDEX + '/error', query: { id: 401 } })
             .then(value => console.log(value))
-        } else if (bizCode === 403) {
+        } else if (code === 403) {
           router
             .push({ path: Path.INDEX + '/error', query: { id: 403 } })
             .then(value => console.log(value))
-        } else if (bizCode === 404) {
+        } else if (code === 404) {
           router
             .push({ path: Path.INDEX + '/error', query: { id: 404 } })
             .then(value => console.log(value))
-        } else if (bizCode === 500 && message === 'Internal Server Error') {
+        } else if (code === 500 && message === 'Internal Server Error') {
           router
-            .push({ path: Path.INDEX + '/error', query: { id: 404 } })
+            .push({ path: Path.INDEX + '/error', query: { id: 500 } })
             .then(value => console.log(value))
         }
       } else {
@@ -62,4 +62,4 @@ HttpClient.interceptors.response.use(
 )
 
 // 导出 axios 实例
-export default HttpClient
+export default HttpClient;
