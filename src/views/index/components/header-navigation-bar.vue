@@ -5,6 +5,7 @@
   let adminApi: AdminApi = AdminApi.getInstance()
   let logout: any = (): any => {
     adminApi.logout().then(res => {
+      console.log(res)
       router.push('/auth/admin')
     })
   }
