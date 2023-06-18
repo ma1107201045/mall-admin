@@ -18,7 +18,7 @@ export class LogApi implements BaseApiInterface {
   deleteByIds(ids: number[]): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: LogApi.URL_PREFIX + `/${ids.join(',')}`,
-      method: HttpMethod.DELETE
+      method: HttpMethod.DELETE,
     })
   }
 
