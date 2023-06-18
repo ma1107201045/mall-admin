@@ -1,5 +1,4 @@
 import Axios from 'axios'
-import { Path } from '@/enums/path.ts'
 import { AxiosInstance } from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
@@ -33,21 +32,13 @@ HttpClient.interceptors.response.use(
         let message = data.message
         ElMessage.error(`状态码【${code}】，${message}`)
         if (code === 401) {
-          router
-            .push({ path: Path.INDEX + '/error', query: { id: 401 } })
-            .then(value => console.log(value))
+          router.push({ name: 'Error', query: { id: 401 } }).then(value => console.log(value))
         } else if (code === 403) {
-          router
-            .push({ path: Path.INDEX + '/error', query: { id: 403 } })
-            .then(value => console.log(value))
+          router.push({ name: 'Error', query: { id: 403 } }).then(value => console.log(value))
         } else if (code === 404) {
-          router
-            .push({ path: Path.INDEX + '/error', query: { id: 404 } })
-            .then(value => console.log(value))
+          router.push({ name: 'Error', query: { id: 404 } }).then(value => console.log(value))
         } else if (code === 500 && message === 'Internal Server Error') {
-          router
-            .push({ path: Path.INDEX + '/error', query: { id: 500 } })
-            .then(value => console.log(value))
+          router.push({ name: 'Error', query: { id: 500 } }).then(value => console.log(value))
         }
       } else {
         ElMessage.error('未知异常')

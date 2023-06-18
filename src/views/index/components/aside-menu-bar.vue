@@ -26,7 +26,7 @@
       menus.value = data
       if (data.length && data[0].type === MenuType.MENU) {
         //默认选中第一个菜单
-        defaultActive.value = Path.INDEX + data[0].path
+        defaultActive.value = Path.INDEX + data[0].routePath
         //路由跳转
         router.push(defaultActive.value).then(value => console.log(value))
       }

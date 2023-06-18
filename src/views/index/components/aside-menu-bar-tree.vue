@@ -11,7 +11,7 @@
 </script>
 <template>
   <template v-for="menu in menuBarTreeData">
-    <el-sub-menu v-if="menu.children.length" :key="menu.id" :index="menu.path">
+    <el-sub-menu v-if="menu.children.length" :key="menu.id" :index="''">
       <template #title>
         <el-icon>
           <component :is="menu.icon"></component>
@@ -23,7 +23,7 @@
     <el-menu-item
       v-else
       :key="menu.id"
-      :index="menu.type === MenuType.MENU ? Path.INDEX + menu.path : ''"
+      :index="menu.type === MenuType.MENU ? Path.INDEX + menu.routePath : ''"
       :disabled="menu.type === MenuType.DIRECTORY"
     >
       <el-icon>
