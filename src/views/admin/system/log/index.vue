@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { LogApi } from '@/api/admin/system/log'
   import { reactive, ref } from 'vue'
-  import Option from '@/option/admin/system/log'
+  import crudOption from '@/option/admin/system/log'
   import { ElMessageBox, ElMessage } from 'element-plus'
 
   let form = reactive({})
@@ -13,7 +13,7 @@
     total: ''
   })
   let params = reactive({})
-  let option = reactive(Option())
+  let option = reactive(crudOption)
   let data = ref([])
   let loading = ref(false)
   let selectionData = ref([])
@@ -82,7 +82,8 @@
         :disabled="!selectionData.length > 0"
         type="danger"
         icon="el-icon-delete"
-        @click="simpleOrBatchDelete(null)">
+        @click="simpleOrBatchDelete(null)"
+      >
         批量删除
       </el-button>
     </template>
