@@ -3,8 +3,6 @@
   import { reactive, ref } from 'vue'
   import crudOption from '@/option/admin/system/log'
   import { ElMessageBox, ElMessage } from 'element-plus'
-
-  let form = reactive({})
   let page = reactive({
     currentPage: 1,
     pageSize: 10,
@@ -64,7 +62,6 @@
 <template>
   <avue-crud
     ref="crud"
-    v-model="form"
     v-model:page="page"
     v-model:search="params"
     :option="option"

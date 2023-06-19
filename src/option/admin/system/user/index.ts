@@ -1,51 +1,105 @@
-export default () => {
-  return {
-    index: true,
-    align: 'center',
-    headerAlign: 'center',
-    border: true,
-    stripe: true,
-    column: [
-      {
-        label: '用户名称',
-        prop: 'userName',
-        search: false,
-        rules: [
-          {
-            required: true,
-            message: '请输入用户名称',
-            trigger: 'blur'
-          }
-        ]
-      },
-      {
-        label: '值(value11111)',
-        prop: 'value',
-        search: true,
-        rules: [
-          {
-            required: true,
-            message: '请输入值(value)',
-            trigger: 'blur'
-          }
-        ]
-      },
-      {
-        label: '参数(code)',
-        prop: 'code',
-        search: true,
-        rules: [
-          {
-            required: true,
-            message: '请输入参数(code)',
-            trigger: 'blur'
-          }
-        ]
-      },
-      {
-        label: '备注',
-        prop: 'note'
-      }
-    ]
-  }
+export default {
+  index: true,
+  selection: true,
+  border: true,
+  stripe: true,
+  addBtn: false,
+  editBtn: false,
+  viewBtn: true,
+  excelBtn: true,
+  sortable: true,
+  align: 'center',
+  headerAlign: 'center',
+  rowKey: 'id',
+  column: [
+    {
+      label: '主键id',
+      prop: 'id',
+      hide: true
+    },
+    {
+      label: '用户名称',
+      prop: 'userName',
+      overHidden: true,
+      search: true
+    },
+    {
+      label: '真实姓名',
+      prop: 'realName'
+    },
+    {
+      label: '性别',
+      prop: 'sex',
+      dicData: [
+        {
+          label: '男',
+          value: 1
+        },
+        {
+          label: '女',
+          value: 2
+        }
+      ]
+    },
+    {
+      label: '头像',
+      prop: 'headPortrait'
+    },
+    {
+      label: '邮箱',
+      prop: 'email'
+    },
+    {
+      label: '手机号',
+      prop: 'phoneNumber'
+    },
+    {
+      label: '手机号',
+      prop: 'phoneNumber'
+    },
+    {
+      label: '最后一次登录IP',
+      prop: 'lastLoginIp'
+    },
+    {
+      label: '是否启用',
+      prop: 'lastLoginIp',
+      dicData: [
+        {
+          label: '是',
+          value: 1
+        },
+        {
+          label: '否',
+          value: 0
+        }
+      ]
+    },
+    {
+      label: '备注',
+      prop: 'remark'
+    },
+    {
+      label: '创建人',
+      prop: 'createBy'
+    },
+    {
+      label: '创建时间',
+      prop: 'createDateTime',
+      width: 180
+    },
+    {
+      label: '最后修改人',
+      prop: 'lastModifyBy',
+      hide: true,
+      labelWidth: '100'
+    },
+    {
+      label: '最后修改时间',
+      prop: 'lastModifyDateTime',
+      hide: true,
+      labelWidth: '110',
+      row: true
+    }
+  ]
 }
