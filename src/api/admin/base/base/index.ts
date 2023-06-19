@@ -4,14 +4,25 @@ import { HttpMethod } from '@/enums/httpMethod.ts'
 
 export default class BaseApi {
   static URL_PREFIX: string = '/admin/base/bases'
+  static baseApi = null
 
   static getInstance(): BaseApi {
-    return new BaseApi()
+    if (this.baseApi === null) {
+      return new BaseApi()
+    }
+    return this.baseApi
   }
 
-  getMenu(): Promise<AxiosResponse<any, any>> {
+  getMenuTree(): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: BaseApi.URL_PREFIX + '/menu',
+      url: BaseApi.URL_PREFIX + '/menu-tree',
+      method: HttpMethod.GET
+    })
+  }
+
+  getMenuPermissions(): Promise<AxiosResponse<any, any>> {
+    return HttpClient({
+      url: BaseApi.URL_PREFIX + '/menu-permissions',
       method: HttpMethod.GET
     })
   }

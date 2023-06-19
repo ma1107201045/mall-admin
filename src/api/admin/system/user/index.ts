@@ -5,9 +5,13 @@ import BaseApiInterface from '@/api'
 
 export default class UserApi implements BaseApiInterface {
   static URL_PREFIX: string = '/admin/system/users'
+  static userApi = null
 
   static getInstance(): UserApi {
-    return new UserApi()
+    if (this.userApi === null) {
+      return new UserApi()
+    }
+    return this.userApi
   }
 
   save(body: object): Promise<AxiosResponse<any, any>> {
@@ -37,7 +41,6 @@ export default class UserApi implements BaseApiInterface {
     return HttpClient({
       url: UserApi.URL_PREFIX + `/${id}`,
       method: HttpMethod.GET
-
     })
   }
 

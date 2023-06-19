@@ -5,9 +5,13 @@ import { AxiosResponse } from 'axios'
 
 export class MenuApi implements BaseApiInterface {
   static URL_PREFIX: string = '/admin/system/menus'
+  static menuApi = null
 
   static getInstance(): MenuApi {
-    return new MenuApi()
+    if (this.menuApi === null) {
+      return new MenuApi()
+    }
+    return this.menuApi
   }
 
   save(body: object): Promise<AxiosResponse<any, any>> {
@@ -40,7 +44,7 @@ export class MenuApi implements BaseApiInterface {
     })
   }
 
-  getListByPageAndQuery(query: object): Promise<AxiosResponse<any, any>> {
+  getListByPageAndParam(query: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: MenuApi.URL_PREFIX,
       method: HttpMethod.GET,

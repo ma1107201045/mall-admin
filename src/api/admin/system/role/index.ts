@@ -5,9 +5,13 @@ import { AxiosResponse } from 'axios'
 
 export class RoleApi implements BaseApiInterface {
   static URL_PREFIX: string = '/admin/system/roles'
+  static roleApi = null
 
   static getInstance(): RoleApi {
-    return new RoleApi()
+    if (this.roleApi === null) {
+      return new RoleApi()
+    }
+    return this.roleApi
   }
 
   save(body: object): Promise<AxiosResponse<any, any>> {
@@ -40,7 +44,7 @@ export class RoleApi implements BaseApiInterface {
     })
   }
 
-  getListByPageAndQuery(query: object): Promise<AxiosResponse<any, any>> {
+  getListByPageAndParam(query: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: RoleApi.URL_PREFIX,
       method: HttpMethod.GET,

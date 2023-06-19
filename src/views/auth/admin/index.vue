@@ -18,6 +18,8 @@
   }
   let login: any = (): any => {
     adminApi.login(loginInfo).then(res => {
+      // 删除菜单权限标识集合本地缓存
+      localStorage.removeItem('menuPermissions')
       router.push({ name: 'Index' })
     })
   }

@@ -20,8 +20,21 @@
     menuBarDynamicStyle.value.height = docHeight + 'px'
   }
   onCreated()
-  let getMenu: any = (): any => {
-    indexApi.getMenu().then(res => {
+
+  let getMenuPermissions: any = (): any => {
+    let menuPermissions = localStorage.getItem('menuPermissions')
+    if (!menuPermissions) {
+      indexApi.getMenuPermissions().then(res => {
+        // 将菜单权限标识集合存入本地缓存
+        localStorage.setItem('menuPermissions', res.data.data)
+        getMenuTree()
+      })
+    } else {
+      getMenuTree()
+    }
+  }
+  let getMenuTree: any = (): any => {
+    indexApi.getMenuTree().then(res => {
       let data = res.data.data
       menus.value = data
       if (data.length && data[0].type === MenuType.MENU) {
@@ -32,7 +45,7 @@
       }
     })
   }
-  getMenu()
+  getMenuPermissions()
 </script>
 
 <template>
