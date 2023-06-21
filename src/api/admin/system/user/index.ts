@@ -51,4 +51,11 @@ export default class UserApi implements BaseApiInterface {
       data: query
     })
   }
+
+  getRoleList(): Promise<AxiosResponse<any, any>> {
+    return HttpClient({
+      url: UserApi.URL_PREFIX + '/roles',
+      method: HttpMethod.GET
+    })
+  }
 }

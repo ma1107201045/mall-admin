@@ -3,8 +3,6 @@ export default {
   selection: true,
   border: true,
   stripe: true,
-  addBtn: false,
-  editBtn: false,
   viewBtn: true,
   excelBtn: true,
   sortable: true,
@@ -20,12 +18,17 @@ export default {
     {
       label: '用户名称',
       prop: 'userName',
-      overHidden: true,
-      search: true
+      overHidden: true
     },
     {
       label: '真实姓名',
-      prop: 'realName'
+      prop: 'realName',
+      overHidden: true
+    },
+    {
+      label: '昵称',
+      prop: 'nickname',
+      overHidden: true
     },
     {
       label: '性别',
@@ -47,23 +50,22 @@ export default {
     },
     {
       label: '邮箱',
-      prop: 'email'
+      prop: 'email',
+      width: 180
     },
     {
       label: '手机号',
-      prop: 'phoneNumber'
-    },
-    {
-      label: '手机号',
-      prop: 'phoneNumber'
+      prop: 'phoneNumber',
+      width: 120
     },
     {
       label: '最后一次登录IP',
-      prop: 'lastLoginIp'
+      prop: 'lastLoginIp',
+      hide: true
     },
     {
       label: '是否启用',
-      prop: 'lastLoginIp',
+      prop: 'isEnable',
       dicData: [
         {
           label: '是',
@@ -73,11 +75,20 @@ export default {
           label: '否',
           value: 0
         }
-      ]
+      ],
+      hide: true
     },
     {
-      label: '备注',
-      prop: 'remark'
+      label: '角色',
+      prop: 'roleIds',
+      props: {
+        label: 'name',
+        value: 'id'
+      },
+      dicData: [],
+      hide: true,
+      type: 'select',
+      multiple: true
     },
     {
       label: '创建人',
@@ -98,8 +109,7 @@ export default {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
       hide: true,
-      labelWidth: '110',
-      row: true
+      labelWidth: '110'
     }
   ]
 }

@@ -1,21 +1,23 @@
 <script setup lang="ts">
   import { LogApi } from '@/api/admin/system/log'
-  import { reactive, ref } from 'vue'
+  import { reactive } from 'vue'
   import crudOption from '@/option/admin/system/log'
   import { ElMessageBox, ElMessage } from 'element-plus'
-  let page = reactive({
-    currentPage: 1,
-    pageSize: 10,
-    sortField: 'id',
-    sortDirection: 'DESC',
-    total: ''
+
+  let data = reactive({
+    page: {
+      currentPage: 1,
+      pageSize: 10,
+      sortField: 'id',
+      sortDirection: 'DESC',
+      total: ''
+    },
+    search: {},
+    data: [],
+    loading: false,
+    selectionData: []
   })
-  let params = reactive({})
-  let option = reactive(crudOption)
-  let data = ref([])
-  let loading = ref(false)
-  let selectionData = ref([])
-  let logApi = LogApi.getInstance()
+  const logApi = LogApi.getInstance()
 
   function simpleOrBatchDelete(data) {
     ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
@@ -24,7 +26,7 @@
       type: 'warning'
     })
       .then(() => {
-        let body = data ? [data.id] : selectionData.value.map(item => item.id)
+        let body = data ? [data.id] : data.selectionData.map(item => item.id)
         logApi.deleteByIds(body).then(() => {
           getList(null, null)
           ElMessage({
@@ -42,17 +44,17 @@
   }
 
   function getList(pageOrParams, done) {
-    loading.value = true
+    data.loading = true
     let newPage = {
-      currentPage: page.currentPage,
-      pageSize: page.pageSize,
-      sortField: page.sortField,
-      sortDirection: page.sortDirection
+      currentPage: data.page.currentPage,
+      pageSize: data.page.pageSize,
+      sortField: data.page.sortField,
+      sortDirection: data.page.sortDirection
     }
-    logApi.getListByPageAndParam(Object.assign(newPage, params)).then(res => {
-      page.total = res.data.total
-      data.value = res.data.data
-      loading.value = false
+    logApi.getListByPageAndParam(Object.assign(newPage, data.search)).then(res => {
+      data.page.total = res.data.total
+      data.data = res.data.data
+      data.loading = false
       if (done) {
         done()
       }
@@ -62,21 +64,21 @@
 <template>
   <avue-crud
     ref="crud"
-    v-model:page="page"
-    v-model:search="params"
-    :option="option"
-    :data="data"
-    :table-loading="loading"
+    v-model:page="data.page"
+    v-model:search="data.search"
+    :data="data.data"
+    :table-loading="data.loading"
+    :option="crudOption"
     @row-del="simpleOrBatchDelete"
     @on-load="getList"
     @refresh-change="getList"
     @search-change="getList"
     @search-reset="getList"
-    @selection-change="selection => (selectionData = selection)"
+    @selection-change="selection => (data.selectionData = selection)"
   >
     <template #menu-left="{}">
       <el-button
-        :disabled="!selectionData.length > 0"
+        :disabled="!data.selectionData.length > 0"
         type="danger"
         icon="el-icon-delete"
         @click="simpleOrBatchDelete(null)"

@@ -1,23 +1,41 @@
 <script setup lang="ts">
-  import { reactive, ref } from 'vue'
+  import { reactive } from 'vue'
   import UserApi from '@/api/admin/system/user'
   import crudOption from '@/option/admin/system/user'
   import { ElMessage, ElMessageBox } from 'element-plus'
 
-  let form = reactive({})
-  let page = reactive({
-    currentPage: 1,
-    pageSize: 10,
-    sortField: 'id',
-    sortDirection: 'DESC',
-    total: ''
+  let data = reactive({
+    page: {
+      currentPage: 1,
+      pageSize: 10,
+      sortField: 'id',
+      sortDirection: 'DESC',
+      total: ''
+    },
+    search: {},
+    form: {},
+    data: [],
+    loading: false,
+    selectionData: [],
+    roles: []
   })
-  let params = reactive({})
-  let option = reactive(crudOption)
-  let data = ref([])
-  let loading = ref(false)
-  let selectionData = ref([])
-  let userApi = UserApi.getInstance()
+  const userApi = UserApi.getInstance()
+  //获取角色列表
+  userApi
+    .getRoleList()
+    .then(res => {
+      crudOption.column[10].dicData = res.data.data
+    })
+    .catch(() => {})
+
+  function beforeOpen(done, type) {
+    if (type === 'edit' && data.form === undefined) {
+      userApi.getById(data.selectionData[0].id).then(res => {
+        data.form = res.data.data
+      })
+    }
+    done()
+  }
 
   function save() {}
 
@@ -28,7 +46,7 @@
       type: 'warning'
     })
       .then(() => {
-        let body = data ? [data.id] : selectionData.value.map(item => item.id)
+        let body = data ? [data.id] : data.selectionData.value.map(item => item.id)
         userApi.deleteByIds(body).then(() => {
           getList(null, null)
           ElMessage({
@@ -37,28 +55,23 @@
           })
         })
       })
-      .catch(() => {
-        ElMessage({
-          type: 'info',
-          message: '删除/批量删除取消'
-        })
-      })
+      .catch(() => {})
   }
 
-  function updateById() {}
+  function updateById(id: number) {}
 
   function getList(pageOrParams, done) {
-    loading.value = true
+    data.loading = true
     let newPage = {
-      currentPage: page.currentPage,
-      pageSize: page.pageSize,
-      sortField: page.sortField,
-      sortDirection: page.sortDirection
+      currentPage: data.page.currentPage,
+      pageSize: data.page.pageSize,
+      sortField: data.page.sortField,
+      sortDirection: data.page.sortDirection
     }
-    userApi.getListByPageAndParam(Object.assign(newPage, params)).then(res => {
-      page.total = res.data.total
-      data.value = res.data.data
-      loading.value = false
+    userApi.getListByPageAndParam(Object.assign(newPage, data.search)).then(res => {
+      data.page.total = res.data.total
+      data.data = res.data.data
+      data.loading = false
       if (done) {
         done()
       }
@@ -68,11 +81,13 @@
 <template>
   <avue-crud
     ref="crud"
-    v-model="form"
-    v-model:page="page"
-    :option="option"
-    :data="data"
-    :table-loading="loading"
+    v-model:page="data.page"
+    v-model:search="data.search"
+    v-model="data.form"
+    :data="data.data"
+    :table-loading="data.loading"
+    :option="crudOption"
+    :before-open="beforeOpen"
     @row-save="save"
     @row-del="simpleOrBatchDelete"
     @row-update="updateById"
@@ -80,7 +95,27 @@
     @search-change="getList"
     @search-reset="getList"
     @refresh-change="getList"
-  />
+    @selection-change="selection => (data.selectionData = selection)"
+  >
+    <template #menu-left="{ row, index, size }">
+      <el-button
+        :disabled="data.selectionData.length !== 1"
+        type="warning"
+        icon="el-icon-edit"
+        @click="$refs.crud.rowEdit(row, index)"
+      >
+        编辑
+      </el-button>
+      <el-button
+        :disabled="!data.selectionData.length > 0"
+        type="danger"
+        icon="el-icon-delete"
+        @click="$refs.crud.rowDel(null)"
+      >
+        批量删除
+      </el-button>
+    </template>
+  </avue-crud>
 </template>
 
 <style scoped></style>
