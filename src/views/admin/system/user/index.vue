@@ -20,13 +20,18 @@
     roles: []
   })
   const userApi = UserApi.getInstance()
+
+  function getRoles() {
+    userApi
+      .getRoleList()
+      .then(res => {
+        crudOption.column[10].dicData = res.data.data
+      })
+      .catch(() => {})
+  }
+
   //获取角色列表
-  userApi
-    .getRoleList()
-    .then(res => {
-      crudOption.column[10].dicData = res.data.data
-    })
-    .catch(() => {})
+  getRoles()
 
   function beforeOpen(done, type) {
     if (type === 'edit' && data.form === undefined) {
@@ -37,7 +42,27 @@
     done()
   }
 
-  function save() {}
+  function save(row, done, loading) {
+    loading()
+    userApi
+      .save(row)
+      .then(() => {
+        done()
+        ElMessage({
+          message: '操作成功',
+          type: 'success',
+          duration: 1500,
+          onClose: () => {
+            getList(null, null)
+          }
+        })
+      })
+      .catch(() => {
+        done()
+        ElMessage.info('保存失败')
+      })
+    loading()
+  }
 
   function simpleOrBatchDelete(data) {
     ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
@@ -48,10 +73,13 @@
       .then(() => {
         let body = data ? [data.id] : data.selectionData.value.map(item => item.id)
         userApi.deleteByIds(body).then(() => {
-          getList(null, null)
           ElMessage({
+            message: '删除/批量删除成功',
             type: 'success',
-            message: '删除/批量删除成功'
+            duration: 1500,
+            onClose: () => {
+              getList(null, null)
+            }
           })
         })
       })
@@ -113,6 +141,16 @@
         @click="$refs.crud.rowDel(null)"
       >
         批量删除
+      </el-button>
+    </template>
+    <template #menu="{ row, index, size }">
+      <el-button
+        :disabled="row.userName === 'admin'"
+        type="text"
+        icon="el-icon-delete"
+        @click="$refs.crud.rowDel(row, index)"
+      >
+        删除
       </el-button>
     </template>
   </avue-crud>

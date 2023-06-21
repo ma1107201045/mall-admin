@@ -3,23 +3,36 @@ export default {
   selection: true,
   border: true,
   stripe: true,
+  delBtn: false,
   viewBtn: true,
   excelBtn: true,
   sortable: true,
   align: 'center',
   headerAlign: 'center',
   rowKey: 'id',
+  labelWidth: 150,
+  labelPosition: 'right',
+  selectable: row => {
+    return row.userName !== 'admin'
+  },
   column: [
     {
       label: '主键id',
       prop: 'id',
       hide: true,
-      display: false
+      disabled: true
     },
     {
       label: '用户名称',
       prop: 'userName',
-      overHidden: true
+      overHidden: true,
+      search: true
+    },
+    {
+      label: '密码',
+      prop: 'password',
+      hide: true,
+      type: 'password'
     },
     {
       label: '真实姓名',
@@ -29,7 +42,8 @@ export default {
     {
       label: '昵称',
       prop: 'nickname',
-      overHidden: true
+      overHidden: true,
+      hide: true
     },
     {
       label: '性别',
@@ -43,7 +57,10 @@ export default {
           label: '女',
           value: 2
         }
-      ]
+      ],
+      search: true,
+      searchType: 'radio',
+      type: 'radio'
     },
     {
       label: '头像',
@@ -62,7 +79,8 @@ export default {
     {
       label: '最后一次登录IP',
       prop: 'lastLoginIp',
-      hide: true
+      hide: true,
+      disabled: true
     },
     {
       label: '是否启用',
@@ -77,7 +95,8 @@ export default {
           value: 0
         }
       ],
-      hide: true
+      hide: true,
+      type: 'radio'
     },
     {
       label: '角色',
@@ -89,28 +108,33 @@ export default {
       dicData: [],
       hide: true,
       type: 'select',
-      multiple: true
+      multiple: true,
+      labelTip: '当前角色，可多选'
     },
     {
       label: '创建人',
-      prop: 'createBy'
+      prop: 'createBy',
+      disabled: true
     },
     {
       label: '创建时间',
       prop: 'createDateTime',
-      width: 180
+      width: 180,
+      disabled: true
     },
     {
       label: '最后修改人',
       prop: 'lastModifyBy',
       hide: true,
-      labelWidth: '100'
+      labelWidth: '100',
+      disabled: true
     },
     {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
       hide: true,
-      labelWidth: '110'
+      labelWidth: '110',
+      disabled: true
     }
   ]
 }
