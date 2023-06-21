@@ -25,7 +25,7 @@
     userApi
       .getRoleList()
       .then(res => {
-        crudOption.column[10].dicData = res.data.data
+        crudOption.column[11].dicData = res.data.data
       })
       .catch(() => {})
   }
