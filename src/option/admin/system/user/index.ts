@@ -95,7 +95,8 @@ export default {
         }
       ],
       hide: true,
-      type: 'radio'
+      type: 'radio',
+      value: 1
     },
     {
       label: '角色',

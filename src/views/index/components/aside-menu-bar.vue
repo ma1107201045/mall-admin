@@ -17,7 +17,7 @@
   let onCreated = () => {
     //动态调整左侧菜单栏高度
     let docHeight = document.documentElement.clientHeight
-    menuBarDynamicStyle.value.height = docHeight + 'px'
+    menuBarDynamicStyle.value.height = docHeight - 60 + 'px'
   }
   onCreated()
 
