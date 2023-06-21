@@ -13,7 +13,8 @@ export default {
     {
       label: '主键id',
       prop: 'id',
-      hide: true
+      hide: true,
+      display: false
     },
     {
       label: '用户名称',
