@@ -36,13 +36,11 @@ export default {
     },
     {
       label: '真实姓名',
-      prop: 'realName',
-      overHidden: true
+      prop: 'realName'
     },
     {
       label: '昵称',
       prop: 'nickname',
-      overHidden: true,
       hide: true
     },
     {
@@ -64,7 +62,8 @@ export default {
     },
     {
       label: '头像',
-      prop: 'headPortrait'
+      prop: 'headPortrait',
+      hide: true
     },
     {
       label: '邮箱',
@@ -101,12 +100,12 @@ export default {
     {
       label: '角色',
       prop: 'roleIds',
+      hide: true,
       props: {
         label: 'name',
         value: 'id'
       },
       dicData: [],
-      hide: true,
       type: 'select',
       multiple: true,
       labelTip: '当前角色，可多选'

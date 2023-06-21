@@ -27,13 +27,15 @@
       .then(res => {
         crudOption.column[11].dicData = res.data.data
       })
-      .catch(() => {})
+      .catch(() => {
+      })
   }
 
   //获取角色列表
   getRoles()
 
   function beforeOpen(done, type) {
+    console.log(data.form)
     if (type === 'edit' && data.form === undefined) {
       userApi.getById(data.selectionData[0].id).then(res => {
         data.form = res.data.data
@@ -83,10 +85,12 @@
           })
         })
       })
-      .catch(() => {})
+      .catch(() => {
+      })
   }
 
-  function updateById(id: number) {}
+  function updateById(id: number) {
+  }
 
   function getList(pageOrParams, done) {
     data.loading = true
