@@ -12,7 +12,9 @@
 </script>
 
 <template>
-  <el-button type="primary" @click="logout">退出登录</el-button>
+  <el-button type="primary" @click="logout" style="position: absolute; left: 1400px">
+    退出登录
+  </el-button>
 </template>
 
 <style scoped></style>

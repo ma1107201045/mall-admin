@@ -3,7 +3,6 @@
 </script>
 
 <template>
-  <h1>欢迎进入系统</h1>
   <router-view></router-view>
 </template>
 
