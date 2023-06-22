@@ -12,11 +12,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
     "@smallwei/avue": "^3.2.16",
     "@types/node": "^20.2.6",
     "axios": "^1.4.0",
     "element-plus": "^2.3.6",
-    "@element-plus/icons-vue": "^2.1.0",
     "path": "^0.12.7",
     "prettier": "^2.8.8",
     "vue": "^3.2.47",

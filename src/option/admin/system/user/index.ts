@@ -109,8 +109,7 @@ export default {
           value: 0
         }
       ],
-      search: true,
-      searchType: 'radio',
+      hide: true,
       type: 'radio',
       value: 1
     },

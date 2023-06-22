@@ -37,11 +37,11 @@
   }
   let getMenuTree: any = (): any => {
     indexApi.getMenuTree().then(res => {
-      let data = res.data.data
-      data.menus = data
-      if (data.length && data[0].type === MenuType.MENU) {
+      let menuTree = res.data.data
+      data.menus = menuTree
+      if (menuTree.length && menuTree[0].type === MenuType.MENU) {
         //默认选中第一个菜单
-        data.defaultActive = Path.INDEX + data[0].routePath
+        data.defaultActive = Path.INDEX + menuTree[0].routePath
         //路由跳转
         router.push(data.defaultActive).then(value => console.log(value))
       }
