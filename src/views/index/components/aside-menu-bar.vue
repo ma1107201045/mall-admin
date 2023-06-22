@@ -1,23 +1,25 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
-  import { Ref, UnwrapRef } from 'vue'
+  import { reactive } from 'vue'
+  import { UnwrapNestedRefs } from '@vue/reactivity'
+  import router from '@/router'
   import IndexApi from '@/api/index/index.ts'
   import asideMenuBarTree from '@/views/index/components/aside-menu-bar-tree.vue'
-  import router from '@/router'
   import { MenuType } from '@/enums/menuType.ts'
   import { Path } from '@/enums/path.ts'
 
-  let menuBarDynamicStyle = ref({
-    height: ''
+  let data: UnwrapNestedRefs<object> = reactive({
+    menuBarDynamicStyle: {
+      height: ''
+    },
+    isCollapse: false,
+    defaultActive: '',
+    menus: []
   })
-  let isCollapse: Ref<UnwrapRef<boolean>> = ref(false)
-  let defaultActive: Ref<UnwrapRef<string>> = ref('')
-  let menus: Ref<UnwrapRef<[]>> = ref([])
   let indexApi: IndexApi = IndexApi.getInstance()
   let onCreated = () => {
     //动态调整左侧菜单栏高度
     let docHeight = document.documentElement.clientHeight
-    menuBarDynamicStyle.value.height = docHeight - 60 + 'px'
+    data.menuBarDynamicStyle.height = docHeight - 60 + 'px'
   }
   onCreated()
 
@@ -36,12 +38,12 @@
   let getMenuTree: any = (): any => {
     indexApi.getMenuTree().then(res => {
       let data = res.data.data
-      menus.value = data
+      data.menus = data
       if (data.length && data[0].type === MenuType.MENU) {
         //默认选中第一个菜单
-        defaultActive.value = Path.INDEX + data[0].routePath
+        data.defaultActive = Path.INDEX + data[0].routePath
         //路由跳转
-        router.push(defaultActive.value).then(value => console.log(value))
+        router.push(data.defaultActive).then(value => console.log(value))
       }
     })
   }
@@ -50,21 +52,21 @@
 
 <template>
   <div>
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
+    <el-radio-group v-model="data.isCollapse" style="margin-bottom: 20px">
       <el-radio-button :label="false">展开</el-radio-button>
       <el-radio-button :label="true">收起</el-radio-button>
     </el-radio-group>
     <el-menu
-      :collapse="isCollapse"
+      :collapse="data.isCollapse"
       background-color="#304156"
       text-color="#ffffff"
-      :default-active="defaultActive"
+      :default-active="data.defaultActive"
       :unique-opened="true"
       :router="true"
       class="el-menu-vertical-demo"
-      :style="menuBarDynamicStyle"
+      :style="data.menuBarDynamicStyle"
     >
-      <aside-menu-bar-tree :menuBarTreeData="menus" />
+      <aside-menu-bar-tree :menuBarTreeData="data.menus" />
     </el-menu>
   </div>
 </template>
