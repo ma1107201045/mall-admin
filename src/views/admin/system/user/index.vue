@@ -27,8 +27,7 @@
       .then(res => {
         crudOption.column[11].dicData = res.data.data
       })
-      .catch(() => {
-      })
+      .catch(() => {})
   }
 
   //获取角色列表
@@ -63,18 +62,17 @@
         done()
         ElMessage.info('保存失败')
       })
-    loading()
   }
 
-  function simpleOrBatchDelete(data) {
+  function deleteByIds(row, index) {
     ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
       confirmButtonText: '确认',
       cancelButtonText: '取消',
       type: 'warning'
     })
       .then(() => {
-        let body = data ? [data.id] : data.selectionData.value.map(item => item.id)
-        userApi.deleteByIds(body).then(() => {
+        let ids = row ? [row.id] : data.selectionData.map(item => item.id)
+        userApi.deleteByIds(ids).then(() => {
           ElMessage({
             message: '删除/批量删除成功',
             type: 'success',
@@ -85,11 +83,29 @@
           })
         })
       })
-      .catch(() => {
-      })
+      .catch(() => {})
   }
 
-  function updateById(id: number) {
+  function updateById(row, index, done, loading) {
+    console.log('111111111111111', row.id)
+    loading()
+    userApi
+      .updateById(row.id, row)
+      .then(() => {
+        done()
+        ElMessage({
+          message: '修改成功',
+          type: 'success',
+          duration: 1500,
+          onClose: () => {
+            getList(null, null)
+          }
+        })
+      })
+      .catch(() => {
+        done()
+        ElMessage.info('修改失败')
+      })
   }
 
   function getList(pageOrParams, done) {
@@ -121,7 +137,7 @@
     :option="crudOption"
     :before-open="beforeOpen"
     @row-save="save"
-    @row-del="simpleOrBatchDelete"
+    @row-del="deleteByIds"
     @row-update="updateById"
     @on-load="getList"
     @search-change="getList"
@@ -142,7 +158,7 @@
         :disabled="!data.selectionData.length > 0"
         type="danger"
         icon="el-icon-delete"
-        @click="$refs.crud.rowDel(null)"
+        @click="$refs.crud.rowDel(null, null)"
       >
         批量删除
       </el-button>

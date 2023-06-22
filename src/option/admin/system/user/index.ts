@@ -26,13 +26,27 @@ export default {
       label: '用户名称',
       prop: 'userName',
       overHidden: true,
-      search: true
+      search: true,
+      rules: [
+        {
+          required: true,
+          message: '请输入用户名称',
+          trigger: 'blur'
+        }
+      ]
     },
     {
       label: '密码',
       prop: 'password',
       hide: true,
-      type: 'password'
+      type: 'password',
+      rules: [
+        {
+          required: true,
+          message: '请输入密码',
+          trigger: 'blur'
+        }
+      ]
     },
     {
       label: '真实姓名',
@@ -73,7 +87,8 @@ export default {
     {
       label: '手机号',
       prop: 'phoneNumber',
-      width: 120
+      width: 120,
+      search: true
     },
     {
       label: '最后一次登录IP',
@@ -94,7 +109,8 @@ export default {
           value: 0
         }
       ],
-      hide: true,
+      search: true,
+      searchType: 'radio',
       type: 'radio',
       value: 1
     },
@@ -107,9 +123,17 @@ export default {
         value: 'id'
       },
       dicData: [],
+      rules: [
+        {
+          required: true,
+          message: '请选择角色',
+          trigger: 'blur'
+        }
+      ],
       type: 'select',
-      multiple: true,
-      labelTip: '当前角色，可多选'
+      filterable: true,
+      drag: true,
+      multiple: true
     },
     {
       label: '创建人',

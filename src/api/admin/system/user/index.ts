@@ -31,7 +31,7 @@ export default class UserApi implements BaseApiInterface {
 
   updateById(id: number, body: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: UserApi.URL_PREFIX + +`/${id}`,
+      url: UserApi.URL_PREFIX + `/${id}`,
       method: HttpMethod.PUT,
       data: body
     })

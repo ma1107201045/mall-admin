@@ -51,7 +51,6 @@ export default {
       ],
       search: true,
       searchType: 'select',
-      searchLabelWidth: 100
     },
     {
       label: '调用类名',
@@ -97,7 +96,6 @@ export default {
       ],
       search: true,
       searchType: 'radio',
-      searchLabelWidth: 100
     },
     {
       label: '失败原因',
