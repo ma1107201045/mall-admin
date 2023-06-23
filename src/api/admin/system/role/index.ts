@@ -3,7 +3,7 @@ import { HttpMethod } from '@/enums/httpMethod.ts'
 import BaseApiInterface from '@/api'
 import { AxiosResponse } from 'axios'
 
-export class RoleApi implements BaseApiInterface {
+export default class RoleApi implements BaseApiInterface {
   static URL_PREFIX: string = '/admin/system/roles'
   static roleApi = null
 
@@ -31,7 +31,7 @@ export class RoleApi implements BaseApiInterface {
 
   updateById(id: number, body: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: RoleApi.URL_PREFIX + +`/${id}`,
+      url: RoleApi.URL_PREFIX + `/${id}`,
       method: HttpMethod.PUT,
       data: body
     })
@@ -44,11 +44,18 @@ export class RoleApi implements BaseApiInterface {
     })
   }
 
-  getListByPageAndParam(query: object): Promise<AxiosResponse<any, any>> {
+  getListByPageAndParam(params: any): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: RoleApi.URL_PREFIX,
       method: HttpMethod.GET,
-      data: query
+      params: params
+    })
+  }
+
+  getMenuTree(): Promise<AxiosResponse<any, any>> {
+    return HttpClient({
+      url: RoleApi.URL_PREFIX + '/menu-tree',
+      method: HttpMethod.GET
     })
   }
 }

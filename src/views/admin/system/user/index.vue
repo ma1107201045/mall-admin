@@ -16,22 +16,26 @@
     form: {},
     data: [],
     loading: false,
-    selectionData: [],
-    roles: []
+    selectionData: []
   })
+  //获取api实例
   const userApi = UserApi.getInstance()
+  //初始化option
+  initCrudOption()
+
+  function initCrudOption() {
+    //获取角色列表
+    getRoles()
+  }
 
   function getRoles() {
     userApi
       .getRoleList()
       .then(res => {
-        crudOption.column[11].dicData = res.data.data
+        crudOption.column[12].dicData = res.data.data
       })
       .catch(() => {})
   }
-
-  //获取角色列表
-  getRoles()
 
   function beforeOpen(done, type) {
     console.log(data.form)
@@ -46,7 +50,7 @@
   function save(row, done, loading) {
     loading()
     userApi
-      .save(row)
+      .save(data.form)
       .then(() => {
         done()
         ElMessage({
@@ -87,10 +91,9 @@
   }
 
   function updateById(row, index, done, loading) {
-    console.log('111111111111111', row.id)
     loading()
     userApi
-      .updateById(row.id, row)
+      .updateById(data.form.id, data.form)
       .then(() => {
         done()
         ElMessage({

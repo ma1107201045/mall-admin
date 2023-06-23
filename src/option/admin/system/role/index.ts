@@ -12,9 +12,6 @@ export default {
   labelWidth: 150,
   labelPosition: 'right',
   selection: true,
-  selectable: row => {
-    return row.userName !== 'admin'
-  },
   column: [
     {
       label: '主键id',
@@ -23,78 +20,32 @@ export default {
       disabled: true
     },
     {
-      label: '用户名称',
-      prop: 'userName',
+      label: '角色名称',
+      prop: 'name',
       overHidden: true,
       search: true,
       rules: [
         {
           required: true,
-          message: '请输入用户名称',
+          message: '请输入角色名称',
           trigger: 'blur'
         }
       ]
     },
     {
-      label: '密码',
-      prop: 'password',
-      hide: true,
-      type: 'password',
+      label: '角色顺序',
+      prop: 'sort',
       rules: [
         {
           required: true,
-          message: '请输入密码',
+          message: '请选择角色顺序',
           trigger: 'blur'
         }
-      ]
-    },
-    {
-      label: '真实姓名',
-      prop: 'realName'
-    },
-    {
-      label: '昵称',
-      prop: 'nickname',
-      hide: true
-    },
-    {
-      label: '性别',
-      prop: 'sex',
-      dicData: [
-        {
-          label: '男',
-          value: 1
-        },
-        {
-          label: '女',
-          value: 2
-        }
       ],
-      search: true,
-      searchType: 'radio',
-      type: 'radio'
-    },
-    {
-      label: '头像',
-      prop: 'headPortrait',
-      hide: true
-    },
-    {
-      label: '邮箱',
-      prop: 'email',
-      width: 180
-    },
-    {
-      label: '手机号',
-      prop: 'phoneNumber',
-      width: 120,
-      search: true
-    },
-    {
-      label: '最后一次登录IP',
-      prop: 'lastLoginIp',
-      hide: true,
-      disabled: true
+      type: 'number',
+      min: 0,
+      max: 2147483647,
+      controlsPosition: 'left'
     },
     {
       label: '是否启用',
@@ -123,28 +74,30 @@ export default {
     {
       label: '备注',
       prop: 'remark',
-      hide: true
+      disabled: true
     },
     {
-      label: '角色',
-      prop: 'roleIds',
+      label: '菜单',
+      prop: 'menuIds',
       hide: true,
       props: {
         label: 'name',
-        value: 'id'
+        value: 'id',
+        children: 'children'
       },
       dicData: [],
       rules: [
         {
           required: true,
-          message: '请选择角色',
+          message: '请选择菜单',
           trigger: 'blur'
         }
       ],
-      type: 'select',
+      type: 'tree',
       filterable: true,
       drag: true,
-      multiple: true
+      multiple: true,
+      checked: null
     },
     {
       label: '创建人',

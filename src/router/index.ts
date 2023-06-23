@@ -54,7 +54,6 @@ let routes = [
     ]
   },
   {
-    name: 'Error',
     path: '/error',
     component: () => import('@/views/error/index.vue')
   },

@@ -44,11 +44,11 @@ export default class UserApi implements BaseApiInterface {
     })
   }
 
-  getListByPageAndParam(query: object): Promise<AxiosResponse<any, any>> {
+  getListByPageAndParam(params: any): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: UserApi.URL_PREFIX,
       method: HttpMethod.GET,
-      data: query
+      params: params
     })
   }
 
