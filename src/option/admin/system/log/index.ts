@@ -1,11 +1,14 @@
 export default {
   index: true,
+  indexLabel: '序号',
+  indexWidth: 55,
   selection: true,
   border: true,
   stripe: true,
   addBtn: false,
   editBtn: false,
   viewBtn: true,
+  printBtn: true,
   excelBtn: true,
   sortable: true,
   align: 'center',
@@ -50,7 +53,7 @@ export default {
         }
       ],
       search: true,
-      searchType: 'select',
+      searchType: 'select'
     },
     {
       label: '调用类名',
@@ -95,7 +98,7 @@ export default {
         }
       ],
       search: true,
-      searchType: 'radio',
+      searchType: 'radio'
     },
     {
       label: '失败原因',

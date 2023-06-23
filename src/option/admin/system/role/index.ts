@@ -1,9 +1,12 @@
 export default {
   index: true,
+  indexLabel: '序号',
+  indexWidth: 55,
   border: true,
   stripe: true,
   delBtn: false,
   viewBtn: true,
+  printBtn: true,
   excelBtn: true,
   sortable: true,
   align: 'center',
@@ -73,8 +76,7 @@ export default {
     },
     {
       label: '备注',
-      prop: 'remark',
-      disabled: true
+      prop: 'remark'
     },
     {
       label: '菜单',
