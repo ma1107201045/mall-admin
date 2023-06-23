@@ -20,7 +20,9 @@ export default {
       label: '主键id',
       prop: 'id',
       hide: true,
-      disabled: true
+      disabled: true,
+      addDisplay: false,
+      editDisplay: false
     },
     {
       label: '角色名称',
@@ -97,34 +99,37 @@ export default {
       ],
       type: 'tree',
       filterable: true,
-      drag: true,
       multiple: true,
       checked: null
     },
     {
       label: '创建人',
       prop: 'createBy',
-      disabled: true
+      addDisplay: false,
+      editDisplay: false
     },
     {
       label: '创建时间',
       prop: 'createDateTime',
       width: 180,
-      disabled: true
+      addDisplay: false,
+      editDisplay: false
     },
     {
       label: '最后修改人',
       prop: 'lastModifyBy',
       hide: true,
       labelWidth: '100',
-      disabled: true
+      addDisplay: false,
+      editDisplay: false
     },
     {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
       hide: true,
       labelWidth: '110',
-      disabled: true
+      addDisplay: false,
+      editDisplay: false
     }
   ]
 }

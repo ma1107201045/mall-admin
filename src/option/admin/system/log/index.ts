@@ -116,25 +116,24 @@ export default {
     },
     {
       label: '创建人',
-      prop: 'createBy'
+      prop: 'createBy',
     },
     {
       label: '创建时间',
       prop: 'createDateTime',
-      width: 180
+      width: 180,
     },
     {
       label: '最后修改人',
       prop: 'lastModifyBy',
       hide: true,
-      labelWidth: '100'
+      labelWidth: '100',
     },
     {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
       hide: true,
       labelWidth: '110',
-      row: true
     }
   ]
 }

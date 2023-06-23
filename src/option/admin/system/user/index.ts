@@ -23,7 +23,9 @@ export default {
       label: '主键id',
       prop: 'id',
       hide: true,
-      disabled: true
+      disabled: true,
+      addDisplay: false,
+      editDisplay: false
     },
     {
       label: '用户名称',
@@ -97,7 +99,8 @@ export default {
       label: '最后一次登录IP',
       prop: 'lastLoginIp',
       hide: true,
-      disabled: true
+      addDisplay: false,
+      editDisplay: false
     },
     {
       label: '是否启用',
@@ -145,6 +148,7 @@ export default {
         }
       ],
       type: 'select',
+      row: true,
       filterable: true,
       drag: true,
       multiple: true
@@ -152,27 +156,31 @@ export default {
     {
       label: '创建人',
       prop: 'createBy',
-      disabled: true
+      addDisplay: false,
+      editDisplay: false
     },
     {
       label: '创建时间',
       prop: 'createDateTime',
       width: 180,
-      disabled: true
+      addDisplay: false,
+      editDisplay: false
     },
     {
       label: '最后修改人',
       prop: 'lastModifyBy',
       hide: true,
       labelWidth: '100',
-      disabled: true
+      addDisplay: false,
+      editDisplay: false
     },
     {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
       hide: true,
       labelWidth: '110',
-      disabled: true
+      addDisplay: false,
+      editDisplay: false
     }
   ]
 }
