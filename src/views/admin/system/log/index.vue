@@ -13,21 +13,27 @@
       total: ''
     },
     search: {},
+    form: {},
     data: [],
     loading: false,
     selectionData: []
   })
+  //获取api实例
   const logApi = LogApi.getInstance()
+  //初始化option
+  initCrudOption()
 
-  function simpleOrBatchDelete(data) {
+  function initCrudOption() {}
+
+  function deleteByIds(row, index) {
     ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
       confirmButtonText: '确认',
       cancelButtonText: '取消',
       type: 'warning'
     })
       .then(() => {
-        let body = data ? [data.id] : data.selectionData.map(item => item.id)
-        logApi.deleteByIds(body).then(() => {
+        let ids = row ? [row.id] : data.selectionData.map(item => item.id)
+        logApi.deleteByIds(ids).then(() => {
           getList(null, null)
           ElMessage({
             type: 'success',
@@ -66,10 +72,11 @@
     ref="crud"
     v-model:page="data.page"
     v-model:search="data.search"
+    v-model="data.form"
     :data="data.data"
     :table-loading="data.loading"
     :option="crudOption"
-    @row-del="simpleOrBatchDelete"
+    @row-del="deleteByIds"
     @on-load="getList"
     @refresh-change="getList"
     @search-change="getList"
@@ -81,7 +88,7 @@
         :disabled="!data.selectionData.length > 0"
         type="danger"
         icon="el-icon-delete"
-        @click="simpleOrBatchDelete(null)"
+        @click="$refs.crud.rowDel(null, null)"
       >
         批量删除
       </el-button>
