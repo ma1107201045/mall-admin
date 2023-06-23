@@ -43,7 +43,7 @@ export default {
       rules: [
         {
           required: true,
-          message: '请选择角色顺序',
+          message: '请输入角色顺序',
           trigger: 'blur'
         }
       ],
