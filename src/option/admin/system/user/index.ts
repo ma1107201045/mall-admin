@@ -1,23 +1,23 @@
 export default {
   index: true,
-  indexLabel: '序号',
-  indexWidth: 55,
   border: true,
   stripe: true,
   delBtn: false,
   viewBtn: true,
+  copyBtn: true,
   printBtn: true,
   excelBtn: true,
   sortable: true,
-  align: 'center',
-  headerAlign: 'center',
-  rowKey: 'id',
-  labelWidth: 150,
-  labelPosition: 'right',
   selection: true,
+  indexWidth: 55,
+  menuWidth: 290,
   selectable: row => {
     return row.userName !== 'admin'
   },
+  align: 'center',
+  headerAlign: 'center',
+  indexLabel: '序号',
+  rowKey: 'id',
   column: [
     {
       label: '主键id',
@@ -55,11 +55,14 @@ export default {
     },
     {
       label: '真实姓名',
-      prop: 'realName'
+      prop: 'realName',
+      overHidden: true,
+      hide: true
     },
     {
       label: '昵称',
       prop: 'nickname',
+      overHidden: true,
       hide: true
     },
     {
@@ -87,12 +90,11 @@ export default {
     {
       label: '邮箱',
       prop: 'email',
-      width: 180
+      width: 160
     },
     {
       label: '手机号',
       prop: 'phoneNumber',
-      width: 120,
       search: true
     },
     {
@@ -156,13 +158,14 @@ export default {
     {
       label: '创建人',
       prop: 'createBy',
+      overHidden: true,
       addDisplay: false,
       editDisplay: false
     },
     {
       label: '创建时间',
       prop: 'createDateTime',
-      width: 180,
+      width: 155,
       addDisplay: false,
       editDisplay: false
     },
@@ -170,7 +173,6 @@ export default {
       label: '最后修改人',
       prop: 'lastModifyBy',
       hide: true,
-      labelWidth: '100',
       addDisplay: false,
       editDisplay: false
     },
@@ -178,7 +180,6 @@ export default {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
       hide: true,
-      labelWidth: '110',
       addDisplay: false,
       editDisplay: false
     }

@@ -2,10 +2,12 @@ export default {
   index: true,
   indexLabel: '序号',
   indexWidth: 55,
+  menuWidth: 290,
   border: true,
   stripe: true,
   delBtn: false,
   viewBtn: true,
+  copyBtn: true,
   printBtn: true,
   excelBtn: true,
   sortable: true,
@@ -48,6 +50,7 @@ export default {
         }
       ],
       type: 'number',
+      value: 0,
       min: 0,
       max: 2147483647,
       controlsPosition: 'left'
@@ -111,7 +114,7 @@ export default {
     {
       label: '创建时间',
       prop: 'createDateTime',
-      width: 180,
+      width: 155,
       addDisplay: false,
       editDisplay: false
     },
