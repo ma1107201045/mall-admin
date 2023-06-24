@@ -160,12 +160,12 @@
       <el-tag v-else-if='scope.row.isEnable === Whether.N' type='info' effect='dark'>否</el-tag>
       <el-tag v-else type='danger' effect='dark'>未知</el-tag>
     </template>
-    <template #menu-left='{ row, index, size }'>
+    <template #menu-left='{  }'>
       <el-button
         :disabled='data.selectionData.length !== 1'
         type='primary'
         icon='el-icon-copy-document'
-        @click='$refs.crud.rowAdd(row, index)'
+        @click='$refs.crud.rowAdd()'
       >
         复制
       </el-button>
@@ -173,7 +173,7 @@
         :disabled='data.selectionData.length !== 1'
         type='warning'
         icon='el-icon-edit'
-        @click='$refs.crud.rowEdit(row, index)'
+        @click='$refs.crud.rowEdit()'
       >
         编辑
       </el-button>
@@ -181,7 +181,7 @@
         :disabled='!data.selectionData.length > 0'
         type='danger'
         icon='el-icon-delete'
-        @click='$refs.crud.rowDel(null, null)'
+        @click='$refs.crud.rowDel()'
       >
         批量删除
       </el-button>
