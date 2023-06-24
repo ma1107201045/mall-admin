@@ -13,6 +13,7 @@ export default {
   sortable: true,
   align: 'center',
   headerAlign: 'center',
+  labelWidth: 130,
   rowKey: 'id',
   column: [
     {
@@ -64,7 +65,6 @@ export default {
       label: '调用类方法',
       prop: 'callClassMethod',
       hide: true,
-      labelWidth: '100'
     },
     {
       label: '请求参数',
@@ -75,7 +75,6 @@ export default {
       label: '返回参数',
       prop: 'responseParam',
       hide: true,
-      labelWidth: 100
     },
     {
       label: '执行时长',
@@ -121,19 +120,17 @@ export default {
     {
       label: '创建时间',
       prop: 'createDateTime',
-      width: 180,
+      width: 155,
     },
     {
       label: '最后修改人',
       prop: 'lastModifyBy',
       hide: true,
-      labelWidth: '100',
     },
     {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
       hide: true,
-      labelWidth: '110',
     }
   ]
 }
