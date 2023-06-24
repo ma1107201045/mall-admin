@@ -3,6 +3,8 @@
   import UserApi from '@/api/admin/system/user'
   import crudOption from '@/option/admin/system/user'
   import { ElMessage, ElMessageBox } from 'element-plus'
+  import { Sex } from '@/enums/sex.ts'
+  import { Whether } from '@/enums/whether.ts'
 
   let data = reactive({
     page: {
@@ -148,6 +150,16 @@
     @refresh-change='getList'
     @selection-change='selection => (data.selectionData = selection)'
   >
+    <template #sex='scope'>
+      <el-tag v-if='scope.row.sex === Sex.MALE' type='success' effect='dark'>男</el-tag>
+      <el-tag v-else-if='scope.row.sex === Sex.FEMALE' type='info' effect='dark'>女</el-tag>
+      <el-tag v-else type='danger' effect='dark'>未知</el-tag>
+    </template>
+    <template #isEnable='scope'>
+      <el-tag v-if='scope.row.isEnable === Whether.Y' type='success' effect='dark'>是</el-tag>
+      <el-tag v-else-if='scope.row.isEnable === Whether.N' type='info' effect='dark'>否</el-tag>
+      <el-tag v-else type='danger' effect='dark'>未知</el-tag>
+    </template>
     <template #menu-left='{ row, index, size }'>
       <el-button
         :disabled='data.selectionData.length !== 1'

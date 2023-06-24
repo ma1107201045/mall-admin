@@ -3,7 +3,7 @@ import { HttpMethod } from '@/enums/httpMethod.ts'
 import BaseApiInterface from '@/api'
 import { AxiosResponse } from 'axios'
 
-export class MenuApi implements BaseApiInterface {
+export default class MenuApi implements BaseApiInterface {
   static URL_PREFIX: string = '/admin/system/menus'
   static menuApi = null
 
@@ -49,6 +49,13 @@ export class MenuApi implements BaseApiInterface {
       url: MenuApi.URL_PREFIX,
       method: HttpMethod.GET,
       params: params
+    })
+  }
+
+  getTree(): Promise<AxiosResponse<any, any>> {
+    return HttpClient({
+      url: MenuApi.URL_PREFIX,
+      method: HttpMethod.GET
     })
   }
 }

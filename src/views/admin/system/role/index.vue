@@ -3,6 +3,7 @@
   import RoleApi from '@/api/admin/system/role'
   import crudOption from '@/option/admin/system/role'
   import { ElMessage, ElMessageBox } from 'element-plus'
+  import { Whether } from '@/enums/whether.ts'
 
   let data = reactive({
     page: {
@@ -161,6 +162,11 @@
     @refresh-change='getList'
     @selection-change='selection => (data.selectionData = selection)'
   >
+    <template #isEnable='scope'>
+      <el-tag v-if='scope.row.isEnable === Whether.Y' type='success' effect='dark'>是</el-tag>
+      <el-tag v-else-if='scope.row.isEnable === Whether.N' type='info' effect='dark'>否</el-tag>
+      <el-tag v-else type='danger' effect='dark'>未知</el-tag>
+    </template>
     <template #menu-left='{ row, index, size }'>
       <el-button
         :disabled='data.selectionData.length !== 1'

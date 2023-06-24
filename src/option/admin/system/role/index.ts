@@ -13,10 +13,10 @@ export default {
   sortable: true,
   align: 'center',
   headerAlign: 'center',
-  rowKey: 'id',
   labelWidth: 150,
   labelPosition: 'right',
   selection: true,
+  rowKey: 'id',
   column: [
     {
       label: '主键id',
@@ -68,7 +68,7 @@ export default {
           value: 0
         }
       ],
-      hide: true,
+      slot: true,
       rules: [
         {
           required: true,

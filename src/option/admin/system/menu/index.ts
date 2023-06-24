@@ -12,13 +12,11 @@ export default {
   indexWidth: 55,
   menuWidth: 280,
   labelWidth: 130,
-  selectable: row => {
-    return row.userName !== 'admin'
-  },
   align: 'center',
   headerAlign: 'center',
   indexLabel: '序号',
   rowKey: 'id',
+  rowParentKey: 'parentId',
   column: [
     {
       label: '主键id',
@@ -29,10 +27,9 @@ export default {
       editDisplay: false
     },
     {
-      label: '用户名称',
-      prop: 'userName',
-      overHidden: true,
-      search: true,
+      label: '菜单名称',
+      prop: 'name',
+      width: 200,
       rules: [
         {
           required: true,
@@ -42,67 +39,52 @@ export default {
       ]
     },
     {
-      label: '密码',
-      prop: 'password',
-      hide: true,
-      type: 'password',
+      label: '类型',
+      prop: 'type',
+      dicData: [
+        {
+          label: '目录',
+          value: 1
+        },
+        {
+          label: '菜单',
+          value: 2
+        },
+        {
+          label: '按钮',
+          value: 3
+        }
+      ],
+      slot: true,
+      type: 'select',
       rules: [
         {
           required: true,
-          message: '请输入密码',
+          message: '请输入类型',
           trigger: 'blur'
         }
       ]
     },
     {
-      label: '真实姓名',
-      prop: 'realName',
-      overHidden: true,
-      hide: true
+      label: '图标',
+      prop: 'icon',
+      slot: true
     },
     {
-      label: '昵称',
-      prop: 'nickname',
-      overHidden: true,
-      hide: true
-    },
-    {
-      label: '性别',
-      prop: 'sex',
-      dicData: [
+      label: '角色顺序',
+      prop: 'sort',
+      rules: [
         {
-          label: '男',
-          value: 1
-        },
-        {
-          label: '女',
-          value: 2
+          required: true,
+          message: '请输入菜单顺序',
+          trigger: 'blur'
         }
       ],
-      slot: true,
-      type: 'radio'
-    },
-    {
-      label: '头像',
-      prop: 'headPortrait',
-      hide: true
-    },
-    {
-      label: '邮箱',
-      prop: 'email',
-      hide: true
-    },
-    {
-      label: '手机号',
-      prop: 'phoneNumber',
-      search: true
-    },
-    {
-      label: '最后一次登录IP',
-      prop: 'lastLoginIp',
-      hide: true,
-      addDisplay: false,
-      editDisplay: false
+      type: 'number',
+      value: 0,
+      min: 0,
+      max: 2147483647,
+      controlsPosition: 'left'
     },
     {
       label: '是否启用',
@@ -127,33 +109,6 @@ export default {
       ],
       type: 'radio',
       value: 1
-    },
-    {
-      label: '备注',
-      prop: 'remark',
-      hide: true
-    },
-    {
-      label: '角色',
-      prop: 'roleIds',
-      hide: true,
-      props: {
-        label: 'name',
-        value: 'id'
-      },
-      dicData: [],
-      rules: [
-        {
-          required: true,
-          message: '请选择角色',
-          trigger: 'blur'
-        }
-      ],
-      type: 'select',
-      row: true,
-      filterable: true,
-      drag: true,
-      multiple: true
     },
     {
       label: '创建人',
