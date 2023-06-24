@@ -71,7 +71,7 @@ export default {
       slot: true
     },
     {
-      label: '角色顺序',
+      label: '菜单顺序',
       prop: 'sort',
       rules: [
         {
