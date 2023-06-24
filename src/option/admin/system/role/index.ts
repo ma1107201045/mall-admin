@@ -2,7 +2,7 @@ export default {
   index: true,
   indexLabel: '序号',
   indexWidth: 55,
-  menuWidth: 290,
+  menuWidth: 280,
   border: true,
   stripe: true,
   delBtn: false,

@@ -10,7 +10,8 @@ export default {
   sortable: true,
   selection: true,
   indexWidth: 55,
-  menuWidth: 290,
+  menuWidth: 280,
+  labelWidth: 130,
   selectable: row => {
     return row.userName !== 'admin'
   },
@@ -78,8 +79,6 @@ export default {
           value: 2
         }
       ],
-      search: true,
-      searchType: 'radio',
       type: 'radio'
     },
     {
