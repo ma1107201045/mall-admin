@@ -51,10 +51,11 @@
   function beforeOpen(done, type) {
     if ((type === 'add' || type === 'edit') && data.selectionData.length === 1) {
       data.form = data.data.filter(item => data.selectionData[0].id === item.id)[0]
+      if (type === 'add') {
+        data.form.id = ''
+      }
     }
-    if (type === 'add') {
-      data.form.id = ''
-    }
+
     done()
   }
   function permission(key) {

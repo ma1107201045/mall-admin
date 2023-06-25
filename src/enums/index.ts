@@ -5,7 +5,6 @@ export enum HttpMethod {
   PATCH = 'PATCH',
   GET = 'GET'
 }
-
 export enum MenuType {
   DIRECTORY = 1,
   MENU = 2,

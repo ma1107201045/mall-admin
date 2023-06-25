@@ -4,6 +4,7 @@
   import crudOption from '@/option/admin/system/log'
   import { ElMessageBox, ElMessage } from 'element-plus'
   import { Whether } from '@/enums'
+  import { hasAnyAuthority, notHasAnyAuthority } from '@/utils'
 
   let data = reactive({
     page: {
@@ -25,6 +26,29 @@
   initCrudOption()
 
   function initCrudOption() {}
+
+  function beforeOpen(done, type) {
+    if (type === 'view' && data.selectionData.length === 1) {
+      data.form = data.data.filter(item => data.selectionData[0].id === item.id)[0]
+    }
+    done()
+  }
+
+  function permission(key) {
+    if (
+      (key === 'viewBtn' || key === 'refreshBtn') &&
+      notHasAnyAuthority('admin:system:users:getList')
+    ) {
+      return false
+    }
+    if (key === 'excelBtn' && notHasAnyAuthority('admin:system:users:excel')) {
+      return false
+    }
+    if (key === 'printBtn' && notHasAnyAuthority('admin:system:users:print')) {
+      return false
+    }
+    return true
+  }
 
   function deleteByIds(row, index) {
     ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
@@ -77,6 +101,8 @@
     :data="data.data"
     :table-loading="data.loading"
     :option="crudOption"
+    :before-open="beforeOpen"
+    :permission="permission"
     @row-del="deleteByIds"
     @on-load="getList"
     @refresh-change="getList"
@@ -102,6 +128,15 @@
       <el-tag v-else type="danger" effect="dark">未知</el-tag>
     </template>
     <template #menu-left="{}">
+      <el-button
+        v-if="hasAnyAuthority('admin:system:logs:getList')"
+        :disabled="data.selectionData.length !== 1"
+        type="primary"
+        icon="el-icon-view"
+        @click="$refs.crud.rowView()"
+      >
+        查看
+      </el-button>
       <el-button
         :disabled="!data.selectionData.length > 0"
         type="danger"

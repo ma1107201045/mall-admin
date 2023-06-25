@@ -32,9 +32,9 @@
   function beforeOpen(done, type) {
     if ((type === 'add' || type === 'edit') && data.selectionData.length === 1) {
       data.form = data.data.filter(item => data.selectionData[0].id === item.id)[0]
-    }
-    if (type === 'add') {
-      data.form.id = ''
+      if (type === 'add') {
+        data.form.id = ''
+      }
     }
     done()
   }
@@ -177,7 +177,7 @@
     </template>
     <template #menu-left="{}">
       <el-button
-        v-if="hasAnyAuthority('admin:system:menus:getList')"
+        v-if="hasAnyAuthority('admin:system:menus:getTree')"
         :disabled="data.selectionData.length !== 1"
         type="primary"
         icon="el-icon-view"
