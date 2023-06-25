@@ -3,25 +3,33 @@
   import AdminApi from '@/api/auth/admin'
   import router from '@/router'
 
-  let adminApi = AdminApi.getInstance()
-  let viewApiBaseUrl = import.meta.env.VITE_API_BASE_URL
-  let getCaptchaUrl = viewApiBaseUrl + AdminApi.URL_PREFIX + '/get-image-captcha'
+  let getCaptchaUrl = import.meta.env.VITE_API_BASE_URL + AdminApi.URL_PREFIX + '/get-image-captcha'
   let captchaUrl = ref(getCaptchaUrl)
-  let loginInfo = reactive({
+  let data = reactive({
     userName: '',
     password: '',
     imageCaptcha: '',
-    isRememberMe: ''
+    isRememberMe: '',
+    icon: 'ElementPlus',
+    loading: false
   })
+  let adminApi = AdminApi.getInstance()
   let getCaptcha: any = (): any => {
     captchaUrl.value = getCaptchaUrl + `?random=${Math.random()}`
   }
   let login: any = (): any => {
-    adminApi.login(loginInfo).then(res => {
-      // 删除菜单权限标识集合本地缓存
-      localStorage.removeItem('menuPermissions')
-      router.push({ name: 'Index' })
-    })
+    data.loading = true
+    adminApi
+      .login(data)
+      .then(res => {
+        data.loading = false
+        // 删除菜单权限标识集合本地缓存
+        localStorage.removeItem('menuPermissions')
+        router.push({ name: 'Index' })
+      })
+      .catch(() => {
+        data.loading = false
+      })
   }
 </script>
 
@@ -32,14 +40,14 @@
       <el-form-item>
         <el-input
           type="text"
-          v-model="loginInfo.userName"
+          v-model="data.userName"
           placeholder="用户账号"
           autocomplete="off"
         ></el-input>
       </el-form-item>
       <el-form-item>
         <el-input
-          v-model="loginInfo.password"
+          v-model="data.password"
           placeholder="用户密码"
           autocomplete="off"
           show-password
@@ -47,21 +55,25 @@
       </el-form-item>
       <el-form-item>
         <el-col :span="17">
-          <el-input
-            v-model="loginInfo.imageCaptcha"
-            placeholder="验证码"
-            autocomplete="off"
-          ></el-input>
+          <el-input v-model="data.imageCaptcha" placeholder="验证码" autocomplete="off"></el-input>
         </el-col>
         <el-col :span="7">
           <el-image :src="captchaUrl" @click="getCaptcha" />
         </el-col>
       </el-form-item>
       <el-form-item>
-        <el-checkbox v-model="loginInfo.isRememberMe">记住密码</el-checkbox>
+        <el-checkbox v-model="data.isRememberMe">记住密码</el-checkbox>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="login" style="width: 100%">登陆</el-button>
+        <el-button
+          type="primary"
+          :loading-icon="data.icon"
+          :loading="data.loading"
+          style="width: 100%"
+          @click="login"
+        >
+          登陆
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
