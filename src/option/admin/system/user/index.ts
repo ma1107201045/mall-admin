@@ -13,10 +13,11 @@ export default {
   menuWidth: 290,
   indexWidth: 60,
   labelWidth: 130,
+  rowKey: 'id',
   align: 'center',
   headerAlign: 'center',
   indexLabel: '序号',
-  rowKey: 'id',
+  updateBtnText: '更新',
   selectable: row => {
     return row.userName !== 'admin'
   },

@@ -210,7 +210,7 @@
         icon="el-icon-edit"
         @click="$refs.crud.rowEdit()"
       >
-        编辑
+        修改
       </el-button>
       <el-button
         v-if="hasAnyAuthority('admin:system:users:delete')"
@@ -230,7 +230,7 @@
         icon="el-icon-edit"
         @click="$refs.crud.rowEdit(row, index)"
       >
-        编辑
+        修改
       </el-button>
       <el-button
         v-if="hasAnyAuthority('admin:system:users:delete')"

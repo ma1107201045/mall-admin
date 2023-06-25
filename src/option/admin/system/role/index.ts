@@ -11,10 +11,12 @@ export default {
   menuWidth: 290,
   indexWidth: 60,
   labelWidth: 130,
+  rowKey: 'id',
   align: 'center',
   headerAlign: 'center',
   indexLabel: '序号',
-  rowKey: 'id',
+  editBtnText: '修改',
+  updateBtnText: '更新',
   column: [
     {
       label: '主键id',
