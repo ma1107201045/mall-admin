@@ -89,17 +89,19 @@ export default {
       prop: 'executeResult',
       dicData: [
         {
-          label: '成功',
-          value: 1
-        },
-        {
           label: '失败',
           value: 0
+        },
+        {
+          label: '成功',
+          value: 1
         }
+
       ],
       slot: true,
       search: true,
-      searchType: 'radio'
+      searchType: 'radio',
+      type: 'switch'
     },
     {
       label: '失败原因',

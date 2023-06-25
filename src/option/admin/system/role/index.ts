@@ -60,12 +60,12 @@ export default {
       prop: 'isEnable',
       dicData: [
         {
-          label: '是',
-          value: 1
-        },
-        {
           label: '否',
           value: 0
+        },
+        {
+          label: '是',
+          value: 1
         }
       ],
       slot: true,
@@ -76,7 +76,7 @@ export default {
           trigger: 'blur'
         }
       ],
-      type: 'radio',
+      type: 'switch',
       value: 1
     },
     {
@@ -101,9 +101,9 @@ export default {
         }
       ],
       type: 'tree',
+      row: true,
       filterable: true,
-      multiple: true,
-      checked: null
+      multiple: true
     },
     {
       label: '创建人',
@@ -122,7 +122,6 @@ export default {
       label: '最后修改人',
       prop: 'lastModifyBy',
       hide: true,
-      labelWidth: '100',
       addDisplay: false,
       editDisplay: false
     },
@@ -130,7 +129,6 @@ export default {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
       hide: true,
-      labelWidth: '110',
       addDisplay: false,
       editDisplay: false
     }

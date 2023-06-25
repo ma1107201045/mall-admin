@@ -111,12 +111,12 @@ export default {
       prop: 'isEnable',
       dicData: [
         {
-          label: '是',
-          value: 1
-        },
-        {
           label: '否',
           value: 0
+        },
+        {
+          label: '是',
+          value: 1
         }
       ],
       slot: true,
@@ -127,7 +127,7 @@ export default {
           trigger: 'blur'
         }
       ],
-      type: 'radio',
+      type: 'switch',
       value: 1
     },
     {
