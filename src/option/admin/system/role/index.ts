@@ -1,8 +1,5 @@
 export default {
   index: true,
-  indexLabel: '序号',
-  indexWidth: 55,
-  menuWidth: 280,
   border: true,
   stripe: true,
   delBtn: false,
@@ -11,11 +8,13 @@ export default {
   printBtn: true,
   excelBtn: true,
   sortable: true,
+  selection: true,
+  menuWidth: 280,
+  indexWidth: 55,
+  labelWidth: 130,
   align: 'center',
   headerAlign: 'center',
-  labelWidth: 150,
-  labelPosition: 'right',
-  selection: true,
+  indexLabel: '序号',
   rowKey: 'id',
   column: [
     {

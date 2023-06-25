@@ -9,16 +9,16 @@ export default {
   excelBtn: true,
   sortable: true,
   selection: true,
-  indexWidth: 55,
   menuWidth: 280,
+  indexWidth: 55,
   labelWidth: 130,
-  selectable: row => {
-    return row.userName !== 'admin'
-  },
   align: 'center',
   headerAlign: 'center',
   indexLabel: '序号',
   rowKey: 'id',
+  selectable: row => {
+    return row.userName !== 'admin'
+  },
   column: [
     {
       label: '主键id',
