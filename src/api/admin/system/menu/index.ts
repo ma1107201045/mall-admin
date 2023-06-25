@@ -1,5 +1,5 @@
 import HttpClient from '@/utils/httpClient.ts'
-import { HttpMethod } from '@/enums/httpMethod.ts'
+import { HttpMethod } from '@/enums'
 import BaseApiInterface from '@/api'
 import { AxiosResponse } from 'axios'
 

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-  import { MenuType } from '@/enums/menuType.ts'
-  import { Path } from '@/enums/path.ts'
+  import { Path, MenuType } from '@/enums'
 
   defineProps({
     menuBarTreeData: {

@@ -4,8 +4,7 @@
   import router from '@/router'
   import IndexApi from '@/api/index/index.ts'
   import asideMenuBarTree from '@/views/index/components/aside-menu-bar-tree.vue'
-  import { MenuType } from '@/enums/menuType.ts'
-  import { Path } from '@/enums/path.ts'
+  import { Path, MenuType } from '@/enums'
 
   let data: UnwrapNestedRefs<object> = reactive({
     menuBarDynamicStyle: {

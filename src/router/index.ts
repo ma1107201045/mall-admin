@@ -1,6 +1,6 @@
 // index.ts
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { Path } from '@/enums/path.ts'
+import { Path } from '@/enums'
 //import AuthAdmin from "@/views/auth/admin/index.vue";
 // import Index from "@/views/index/index.vue";
 // import AdminHome from "@/views/admin/home/index.vue";

@@ -10,7 +10,7 @@ export default {
   excelBtn: true,
   sortable: true,
   selection: true,
-  menuWidth: 280,
+  menuWidth: 290,
   indexWidth: 60,
   labelWidth: 130,
   align: 'center',

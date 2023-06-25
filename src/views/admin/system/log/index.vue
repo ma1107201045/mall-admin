@@ -3,8 +3,7 @@
   import { reactive } from 'vue'
   import crudOption from '@/option/admin/system/log'
   import { ElMessageBox, ElMessage } from 'element-plus'
-  import { Sex } from '@/enums/sex.ts'
-  import { Whether } from '@/enums/whether.ts'
+  import { Whether } from '@/enums'
 
   let data = reactive({
     page: {

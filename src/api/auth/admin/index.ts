@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import HttpClient from '@/utils/httpClient.ts'
-import { HttpMethod } from '@/enums/httpMethod.ts'
+import { HttpMethod } from '@/enums'
 
 export default class AdminApi {
   static URL_PREFIX: string = '/auth/admin'

@@ -1,6 +1,6 @@
 import HttpClient from '@/utils/httpClient.ts'
-import { HttpMethod } from '@/enums/httpMethod.ts'
 import { AxiosResponse } from 'axios'
+import { HttpMethod } from '@/enums'
 
 export class LogApi {
   static URL_PREFIX: string = '/admin/system/logs'
