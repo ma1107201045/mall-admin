@@ -1,7 +1,5 @@
 export default {
   index: true,
-  indexLabel: '序号',
-  indexWidth: 55,
   selection: true,
   border: true,
   stripe: true,
@@ -11,9 +9,11 @@ export default {
   printBtn: true,
   excelBtn: true,
   sortable: true,
+  labelWidth: 130,
+  indexWidth: 60,
+  indexLabel: '序号',
   align: 'center',
   headerAlign: 'center',
-  labelWidth: 130,
   rowKey: 'id',
   column: [
     {
@@ -53,6 +53,7 @@ export default {
           value: 5
         }
       ],
+      slot: true,
       search: true,
       searchType: 'select'
     },
@@ -64,7 +65,7 @@ export default {
     {
       label: '调用类方法',
       prop: 'callClassMethod',
-      hide: true,
+      hide: true
     },
     {
       label: '请求参数',
@@ -74,7 +75,7 @@ export default {
     {
       label: '返回参数',
       prop: 'responseParam',
-      hide: true,
+      hide: true
     },
     {
       label: '执行时长',
@@ -96,6 +97,7 @@ export default {
           value: 0
         }
       ],
+      slot: true,
       search: true,
       searchType: 'radio'
     },
@@ -115,22 +117,22 @@ export default {
     },
     {
       label: '创建人',
-      prop: 'createBy',
+      prop: 'createBy'
     },
     {
       label: '创建时间',
       prop: 'createDateTime',
-      width: 155,
+      width: 155
     },
     {
       label: '最后修改人',
       prop: 'lastModifyBy',
-      hide: true,
+      hide: true
     },
     {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
-      hide: true,
+      hide: true
     }
   ]
 }

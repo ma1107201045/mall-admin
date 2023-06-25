@@ -3,6 +3,8 @@
   import { reactive } from 'vue'
   import crudOption from '@/option/admin/system/log'
   import { ElMessageBox, ElMessage } from 'element-plus'
+  import { Sex } from '@/enums/sex.ts'
+  import { Whether } from '@/enums/whether.ts'
 
   let data = reactive({
     page: {
@@ -83,6 +85,23 @@
     @search-reset="getList"
     @selection-change="selection => (data.selectionData = selection)"
   >
+    <template #operationType="scope">
+      <el-tag v-if="scope.row.operationType === 1" type="success" effect="dark">创建</el-tag>
+      <el-tag v-else-if="scope.row.operationType === 2" type="success" effect="dark">删除</el-tag>
+      <el-tag v-else-if="scope.row.operationType === 3" type="success" effect="dark">更新</el-tag>
+      <el-tag v-else-if="scope.row.operationType === 4" type="success" effect="dark">读取</el-tag>
+      <el-tag v-else-if="scope.row.operationType === 5" type="success" effect="dark">其他</el-tag>
+      <el-tag v-else type="danger" effect="dark">未知</el-tag>
+    </template>
+    <template #executeResult="scope">
+      <el-tag v-if="scope.row.executeResult === Whether.Y" type="success" effect="dark">
+        成功
+      </el-tag>
+      <el-tag v-else-if="scope.row.operationType === Whether.N" type="danger" effect="dark">
+        失败
+      </el-tag>
+      <el-tag v-else type="danger" effect="dark">未知</el-tag>
+    </template>
     <template #menu-left="{}">
       <el-button
         :disabled="!data.selectionData.length > 0"

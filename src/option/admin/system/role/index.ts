@@ -10,7 +10,7 @@ export default {
   sortable: true,
   selection: true,
   menuWidth: 280,
-  indexWidth: 55,
+  indexWidth: 60,
   labelWidth: 130,
   align: 'center',
   headerAlign: 'center',
