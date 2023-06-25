@@ -58,7 +58,7 @@
         ElMessage({
           message: '操作成功',
           type: 'success',
-          duration: 1500,
+          duration: 1000,
           onClose: () => {
             getList(null, null)
           }
@@ -81,7 +81,7 @@
           ElMessage({
             message: '删除/批量删除成功',
             type: 'success',
-            duration: 1500,
+            duration: 1000,
             onClose: () => {
               getList(null, null)
             }
@@ -100,7 +100,7 @@
         ElMessage({
           message: '修改成功',
           type: 'success',
-          duration: 1500,
+          duration: 1000,
           onClose: () => {
             getList(null, null)
           }
