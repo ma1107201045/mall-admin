@@ -54,7 +54,7 @@ export default class MenuApi implements BaseApiInterface {
 
   getTree(): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: MenuApi.URL_PREFIX,
+      url: MenuApi.URL_PREFIX + '/get-tree',
       method: HttpMethod.GET
     })
   }
