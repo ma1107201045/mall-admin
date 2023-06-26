@@ -82,7 +82,8 @@ export default {
         }
       ],
       slot: true,
-      type: 'select'
+      type: 'select',
+      filterable: true
     },
     {
       label: '头像',
