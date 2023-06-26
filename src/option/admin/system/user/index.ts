@@ -82,7 +82,7 @@ export default {
         }
       ],
       slot: true,
-      type: 'radio'
+      type: 'select'
     },
     {
       label: '头像',
