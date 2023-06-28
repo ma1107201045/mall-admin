@@ -1,3 +1,5 @@
+import FileApi from '@/api/admin/file/file'
+
 export default {
   index: true,
   border: true,
@@ -88,7 +90,21 @@ export default {
     {
       label: '头像',
       prop: 'headPortrait',
-      hide: true
+      type: 'upload',
+      propsHttp: {
+        res: 'data',
+        url: 'url'
+      },
+      canvasOption: {
+        text: 'mall',
+        ratio: 1
+      },
+      action: import.meta.env.VITE_API_BASE_URL + FileApi.URL_PREFIX + '/image',
+      accept: 'image/jpeg,image/png',
+      fileType: 'img',
+      listType: 'picture-img',
+      fileSize: 10240,
+      tip: '只能上传jpeg/png用户头像，且不超过10M'
     },
     {
       label: '邮箱',
