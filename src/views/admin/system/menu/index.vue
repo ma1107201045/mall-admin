@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { reactive } from 'vue'
+  import { reactive, watch } from 'vue'
   import MenuApi from '@/api/admin/system/menu'
   import crudOption from '@/option/admin/system/menu'
   import { ElMessage, ElMessageBox } from 'element-plus'
@@ -7,6 +7,7 @@
   import { hasAnyAuthority, notHasAnyAuthority } from '@/utils'
 
   let data = reactive({
+    option: crudOption,
     page: {
       currentPage: 1,
       pageSize: 10,
@@ -20,14 +21,18 @@
     loading: false,
     selectionData: []
   })
+  watch(
+    () => data.data,
+    (newVal, oldVal) => {
+      crudOption.column[2].dicData = newVal
+    }
+  )
   //获取api实例
   const menuApi = MenuApi.getInstance()
   //初始化option
   initCrudOption()
 
-  function initCrudOption() {
-    //获取角色列表
-  }
+  function initCrudOption() {}
 
   function beforeOpen(done, type) {
     if ((type === 'add' || type === 'edit') && data.selectionData.length === 1) {
@@ -38,6 +43,7 @@
     }
     done()
   }
+
   function permission(key) {
     if ((key === 'addBtn' || key === 'copyBtn') && notHasAnyAuthority('admin:system:menus:save')) {
       return false
@@ -62,6 +68,7 @@
     }
     return true
   }
+
   function save(row, done, loading) {
     loading()
     menuApi
@@ -143,7 +150,7 @@
     v-model="data.form"
     :data="data.data"
     :table-loading="data.loading"
-    :option="crudOption"
+    :option="data.option"
     :before-open="beforeOpen"
     :permission="permission"
     @row-save="save"

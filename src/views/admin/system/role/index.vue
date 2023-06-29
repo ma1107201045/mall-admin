@@ -7,6 +7,7 @@
   import { hasAnyAuthority, notHasAnyAuthority } from '@/utils'
 
   let data = reactive({
+    option: crudOption,
     page: {
       currentPage: 1,
       pageSize: 10,
@@ -27,13 +28,13 @@
   initCrudOption()
 
   function initCrudOption() {
-    //获取角色列表
-    getMenus()
+    //获取菜单树
+    getMenuTree()
     //设置权限树选中回调函数
     setChecked()
   }
 
-  function getMenus() {
+  function getMenuTree() {
     roleApi
       .getMenuTree()
       .then(res => {
@@ -58,6 +59,7 @@
 
     done()
   }
+
   function permission(key) {
     if ((key === 'addBtn' || key === 'copyBtn') && notHasAnyAuthority('admin:system:roles:save')) {
       return false
@@ -82,6 +84,7 @@
     }
     return true
   }
+
   function save(row, done, loading) {
     loading()
     data.form.menuIds = data.checkedKeys
@@ -174,7 +177,7 @@
     v-model="data.form"
     :data="data.data"
     :table-loading="data.loading"
-    :option="crudOption"
+    :option="data.option"
     :before-open="beforeOpen"
     :permission="permission"
     @row-save="save"

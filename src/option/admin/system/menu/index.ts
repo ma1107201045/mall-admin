@@ -40,6 +40,26 @@ export default {
       ]
     },
     {
+      label: '父级菜单',
+      prop: 'parentId',
+      hide: true,
+      props: {
+        label: 'name',
+        value: 'id',
+        children: 'children'
+      },
+      dicData: [],
+      rules: [
+        {
+          required: true,
+          message: '请选择父级菜单',
+          trigger: 'blur'
+        }
+      ],
+      type: 'tree',
+      filterable: true
+    },
+    {
       label: '类型',
       prop: 'type',
       dicData: [

@@ -7,6 +7,7 @@
   import { hasAnyAuthority, notHasAnyAuthority } from '@/utils'
 
   let data = reactive({
+    option: crudOption,
     page: {
       currentPage: 1,
       pageSize: 10,
@@ -162,7 +163,7 @@
     v-model="data.form"
     :data="data.data"
     :table-loading="data.loading"
-    :option="crudOption"
+    :option="data.option"
     :before-open="beforeOpen"
     :permission="permission"
     @row-save="save"
