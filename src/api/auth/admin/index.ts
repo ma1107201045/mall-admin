@@ -18,6 +18,14 @@ export default class AdminApi {
     })
   }
 
+  getImageCaptcha(): Promise<AxiosResponse<any, any>> {
+    return HttpClient({
+      url: AdminApi.URL_PREFIX + '/get-image-captcha',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      method: HttpMethod.GET
+    })
+  }
+
   logout(): Promise<AxiosResponse<any, any>> {
     return HttpClient({
       url: AdminApi.URL_PREFIX + '/logout',

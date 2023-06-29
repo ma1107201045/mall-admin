@@ -3,20 +3,25 @@
   import AdminApi from '@/api/auth/admin'
   import router from '@/router'
 
-  let getCaptchaUrl = import.meta.env.VITE_API_BASE_URL + AdminApi.URL_PREFIX + '/get-image-captcha'
-  let captchaUrl = ref(getCaptchaUrl)
   let data = reactive({
     userName: '',
     password: '',
     imageCaptcha: '',
+    imageCaptchaBase64Data: '',
     isRememberMe: '',
     icon: 'ElementPlus',
     loading: false
   })
   let adminApi = AdminApi.getInstance()
-  let getCaptcha: any = (): any => {
-    captchaUrl.value = getCaptchaUrl + `?random=${Math.random()}`
+  let getImageCaptcha: any = (): any => {
+    adminApi
+      .getImageCaptcha()
+      .then(res => {
+        data.imageCaptchaBase64Data = res.data.data
+      })
+      .catch(() => {})
   }
+  getImageCaptcha()
   let login: any = (): any => {
     data.loading = true
     adminApi
@@ -58,7 +63,7 @@
           <el-input v-model="data.imageCaptcha" placeholder="验证码" autocomplete="off"></el-input>
         </el-col>
         <el-col :span="7">
-          <el-image :src="captchaUrl" @click="getCaptcha" />
+          <el-image :src="data.imageCaptchaBase64Data" @click="getImageCaptcha" />
         </el-col>
       </el-form-item>
       <el-form-item>
