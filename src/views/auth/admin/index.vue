@@ -13,15 +13,15 @@
     loading: false
   })
   let adminApi = AdminApi.getInstance()
-  let getImageCaptcha: any = (): any => {
+  let getBinImageCaptcha: any = (): any => {
     adminApi
-      .getImageCaptcha()
+      .getBinImageCaptcha()
       .then(res => {
         data.imageCaptchaBase64Data = res.data.data
       })
       .catch(() => {})
   }
-  getImageCaptcha()
+  getBinImageCaptcha()
   let login: any = (): any => {
     data.loading = true
     adminApi
@@ -63,7 +63,7 @@
           <el-input v-model="data.imageCaptcha" placeholder="验证码" autocomplete="off"></el-input>
         </el-col>
         <el-col :span="7">
-          <el-image :src="data.imageCaptchaBase64Data" @click="getImageCaptcha" />
+          <el-image :src="data.imageCaptchaBase64Data" @click="getBinImageCaptcha" />
         </el-col>
       </el-form-item>
       <el-form-item>
