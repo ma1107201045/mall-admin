@@ -69,7 +69,11 @@ let routes = [
   }
 ]
 
-export default createRouter({
+const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+router.afterEach(to => {
+  document.title = <string>to.name
+})
+export default router
