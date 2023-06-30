@@ -122,7 +122,7 @@
       <el-tag v-if="scope.row.executeResult === Whether.Y" type="success" effect="dark">
         成功
       </el-tag>
-      <el-tag v-else-if="scope.row.operationType === Whether.N" type="danger" effect="dark">
+      <el-tag v-else-if="scope.row.executeResult === Whether.N" type="danger" effect="dark">
         失败
       </el-tag>
       <el-tag v-else type="danger" effect="dark">未知</el-tag>
