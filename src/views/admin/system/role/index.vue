@@ -190,9 +190,9 @@
     @selection-change="selection => (data.selectionData = selection)"
   >
     <template #isEnable="scope">
-      <el-tag v-if="scope.row.isEnable === Whether.Y" type="success" effect="dark">是</el-tag>
-      <el-tag v-else-if="scope.row.isEnable === Whether.N" type="info" effect="dark">否</el-tag>
-      <el-tag v-else type="danger" effect="dark">未知</el-tag>
+      <el-tag v-if="scope.row.isEnable === Whether.Y" type="success" effect="dark" round>是</el-tag>
+      <el-tag v-else-if="scope.row.isEnable === Whether.N" type="info" effect="dark" round>否</el-tag>
+      <el-tag v-else type="danger" effect="dark" round>未知</el-tag>
     </template>
     <template #menu-left="{}">
       <el-button

@@ -31,6 +31,8 @@ export default {
       label: '菜单名称',
       prop: 'name',
       width: 200,
+      overHidden: true,
+      search: true,
       rules: [
         {
           required: true,

@@ -15,13 +15,13 @@ import '@smallwei/avue/lib/index.css'
 import zhLocale from '@smallwei/avue/lib/locale/lang/zh'
 // import enLocale from '@smallwei/avue/lib/locale/lang/en'
 //axios
-import Axios from 'axios'
+import HttpClient from '@/utils/httpClient.ts'
 
 const app = createApp(App)
 app.use(router)
 app.use(elementPlus)
-app.use(avue, { locale: zhLocale, Axios })
+app.use(avue, { HttpClient, locale: zhLocale })
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-app.mount("#app");
+app.mount('#app')
