@@ -20,7 +20,7 @@ import HttpClient from '@/utils/httpClient.ts'
 const app = createApp(App)
 app.use(router)
 app.use(elementPlus)
-app.use(avue, { HttpClient, locale: zhLocale })
+app.use(avue, { axios: HttpClient, locale: zhLocale })
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
