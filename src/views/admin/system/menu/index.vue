@@ -5,6 +5,7 @@
   import { ElMessage, ElMessageBox } from 'element-plus'
   import { MenuType, Whether } from '@/enums'
   import { hasAnyAuthority, notHasAnyAuthority } from '@/utils'
+  import { BaseConstant } from '@/constant'
 
   let data = reactive({
     option: crudOption,
@@ -16,26 +17,70 @@
       total: ''
     },
     search: {},
+    defaults: {},
     form: {},
     data: [],
     loading: false,
     selectionData: []
   })
-  watch(
-    () => data.data,
-    (newVal, oldVal) => {
-      crudOption.column[2].dicData = newVal
-    }
-  )
   //获取api实例
   const menuApi = MenuApi.getInstance()
   //初始化option
   initCrudOption()
+  //监听数据
+  watch(
+    () => [data.data, data.form.type],
+    (newValArr) => {
+      data.option.column[2]['dicData'] = newValArr[0]
+      let type = newValArr[1]
+      if (type === MenuType.DIRECTORY) {
+        data.defaults['routeName'].display = false
+        data.defaults['routePath'].display = false
+        data.defaults['componentPath'].display = false
+        data.defaults['permission'].display = false
+      }
+      if (type === MenuType.MENU) {
+        data.defaults['routeName'].display = true
+        data.defaults['routePath'].display = true
+        data.defaults['componentPath'].display = true
+        data.defaults['permission'].display = false
+      }
+      if (type === MenuType.BUTTON) {
+        data.defaults['routeName'].display = false
+        data.defaults['routePath'].display = false
+        data.defaults['componentPath'].display = false
+        data.defaults['permission'].display = true
+      }
+    }
+  )
 
   function initCrudOption() {
+    data.option.column[2]['change'] = chooseItem
+  }
+
+  function chooseItem(column) {
+    if (column.item) {
+      let type = column.item.type
+      if (type === MenuType.MENU) {
+        data.defaults.type['dicData'][0].disabled = true
+        data.defaults.type['dicData'][1].disabled = true
+        data.defaults.type['dicData'][2].disabled = false
+        return
+      }
+      if (type === MenuType.BUTTON) {
+        data.defaults.type['dicData'][0].disabled = true
+        data.defaults.type['dicData'][1].disabled = true
+        data.defaults.type['dicData'][2].disabled = true
+        return
+      }
+    }
+    data.defaults.type['dicData'][0].disabled = false
+    data.defaults.type['dicData'][1].disabled = false
+    data.defaults.type['dicData'][2].disabled = false
   }
 
   function beforeOpen(done, type) {
+    data.form.parentId = data.form.parentId === BaseConstant.MENU_ROOT_ID ? '' : data.form.parentId
     if ((type === 'add' || type === 'edit') && data.selectionData.length === 1) {
       data.form = data.data.filter(item => data.selectionData[0].id === item.id)[0]
       if (type === 'add') {
@@ -56,8 +101,7 @@
       return false
     }
     if (
-      (key === 'viewBtn' || key === 'refreshBtn') &&
-      notHasAnyAuthority('admin:system:menus:getTree')
+      (key === 'viewBtn' || key === 'refreshBtn') && notHasAnyAuthority('admin:system:menus:getTree')
     ) {
       return false
     }
@@ -72,6 +116,7 @@
 
   function save(row, done, loading) {
     loading()
+    handleData()
     menuApi
       .save(data.form)
       .then(() => {
@@ -115,6 +160,7 @@
 
   function updateById(row, index, done, loading) {
     loading()
+    handleData()
     menuApi
       .updateById(data.form.id, data.form)
       .then(() => {
@@ -143,12 +189,30 @@
       }
     })
   }
+
+  function handleData() {
+    if (data.form.type === MenuType.DIRECTORY) {
+      data.form.routeName = ''
+      data.form.routePath = ''
+      data.form.componentPath = ''
+      data.form.permission = ''
+    }
+    if (data.form.type === MenuType.MENU) {
+      data.form.permission = ''
+    }
+    if (data.form.type === MenuType.BUTTON) {
+      data.form.routeName = ''
+      data.form.routePath = ''
+      data.form.componentPath = ''
+    }
+  }
 </script>
 <template>
   <avue-crud
     ref='crud'
     v-model:page='data.page'
     v-model:search='data.search'
+    v-model:defaults='data.defaults'
     v-model='data.form'
     :data='data.data'
     :table-loading='data.loading'
