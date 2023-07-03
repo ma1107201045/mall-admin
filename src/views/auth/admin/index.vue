@@ -1,41 +1,41 @@
 <script setup lang="ts">
-  import { reactive, ref } from 'vue'
-  import AdminApi from '@/api/auth/admin'
-  import router from '@/router'
+import { reactive } from 'vue'
+import AdminApi from '@/api/auth/admin'
+import router from '@/router'
 
-  let data = reactive({
-    userName: '',
-    password: '',
-    imageCaptcha: '',
-    imageCaptchaBase64Data: '',
-    isRememberMe: '',
-    icon: 'ElementPlus',
-    loading: false
-  })
-  let adminApi = AdminApi.getInstance()
-  let getBinImageCaptcha: any = (): any => {
-    adminApi
-      .getBinImageCaptcha()
-      .then(res => {
-        data.imageCaptchaBase64Data = res.data.data
-      })
-      .catch(() => {})
-  }
-  getBinImageCaptcha()
-  let login: any = (): any => {
-    data.loading = true
-    adminApi
-      .login(data)
-      .then(res => {
-        data.loading = false
-        // 删除菜单权限标识集合本地缓存
-        localStorage.removeItem('menuPermissions')
-        router.push({ name: 'Index' })
-      })
-      .catch(() => {
-        data.loading = false
-      })
-  }
+let data = reactive({
+  userName: '',
+  password: '',
+  imageCaptcha: '',
+  imageCaptchaBase64Data: '',
+  isRememberMe: '',
+  icon: 'ElementPlus',
+  loading: false
+})
+let adminApi = AdminApi.getInstance()
+let getBinImageCaptcha: any = (): any => {
+  adminApi
+    .getBinImageCaptcha()
+    .then(res => {
+      data.imageCaptchaBase64Data = res.data.data
+    })
+    .catch(() => { })
+}
+getBinImageCaptcha()
+let login: any = (): any => {
+  data.loading = true
+  adminApi
+    .login(data)
+    .then(res => {
+      data.loading = false
+      // 删除菜单权限标识集合本地缓存
+      localStorage.removeItem('menuPermissions')
+      router.push({ name: 'Index' })
+    })
+    .catch(() => {
+      data.loading = false
+    })
+}
 </script>
 
 <template>
@@ -43,20 +43,10 @@
     <el-form class="login-container">
       <h1 class="title">商城Admin端系统</h1>
       <el-form-item>
-        <el-input
-          type="text"
-          v-model="data.userName"
-          placeholder="用户账号"
-          autocomplete="off"
-        ></el-input>
+        <el-input type="text" v-model="data.userName" placeholder="用户账号" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-input
-          v-model="data.password"
-          placeholder="用户密码"
-          autocomplete="off"
-          show-password
-        ></el-input>
+        <el-input v-model="data.password" placeholder="用户密码" autocomplete="off" show-password></el-input>
       </el-form-item>
       <el-form-item>
         <el-col :span="17">
@@ -70,13 +60,7 @@
         <el-checkbox v-model="data.isRememberMe">记住密码</el-checkbox>
       </el-form-item>
       <el-form-item>
-        <el-button
-          type="primary"
-          :loading-icon="data.icon"
-          :loading="data.loading"
-          style="width: 100%"
-          @click="login"
-        >
+        <el-button type="primary" :loading-icon="data.icon" :loading="data.loading" style="width: 100%" @click="login">
           登陆
         </el-button>
       </el-form-item>
