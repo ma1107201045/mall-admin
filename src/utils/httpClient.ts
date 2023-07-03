@@ -22,10 +22,10 @@ HttpClient.interceptors.response.use(
   error => {
     try {
       let code = error.code
-      if (code === 'ECONNABORTED') {
-        ElMessage.error('网络连接超时')
-      } else if (code === 'ERR_NETWORK') {
+      if (code === 'ERR_NETWORK') {
         ElMessage.error('网关连接错误')
+      } else if (code === 'ECONNABORTED') {
+        ElMessage.error('网络连接超时')
       } else if (error.response) {
         let data = error.response.data
         let code = data.code
