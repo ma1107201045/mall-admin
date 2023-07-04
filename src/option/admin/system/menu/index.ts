@@ -31,6 +31,8 @@ export default {
       label: '菜单名称',
       prop: 'name',
       width: 200,
+      overHidden: true,
+      search: true,
       rules: [
         {
           required: true,
@@ -57,6 +59,7 @@ export default {
         }
       ],
       type: 'tree',
+      tip: '如果留空，则当前菜单为顶级菜单',
       filterable: true
     },
     {
@@ -89,7 +92,64 @@ export default {
     {
       label: '图标',
       prop: 'icon',
-      slot: true
+      slot: true,
+      type: 'icon',
+      labelTip: 'icon，更多前端Element-Plus,网址：https://element-plus.gitee.io/zh-CN/component/icon.html#icon-collection',
+      iconList: [{
+        label: 'System',
+        list: [{
+          label: 'Plus',
+          value: 'Plus'
+        }]
+      }, {
+        label: 'Arrow',
+        list: [{
+          label: 'ArrowLeft',
+          value: 'ArrowLeft'
+        }]
+      }, {
+        label: 'Document',
+        list: [{
+          label: 'DocumentAdd',
+          value: 'DocumentAdd'
+        }]
+      }, {
+        label: 'Media',
+        list: [{
+          label: 'Microphone',
+          value: 'Microphone'
+        }]
+      }, {
+        label: 'Traffic',
+        list: [{
+          label: 'Location',
+          value: 'Location'
+        }]
+      }, {
+        label: 'Food',
+        list: [{
+          label: 'Watermelon',
+          value: 'Watermelon'
+        }]
+      }, {
+        label: 'Items',
+        list: [{
+          label: 'Printer',
+          value: 'Printer'
+        }, {
+          label: 'Weather',
+          list: [{
+            label: 'Sunrise',
+            value: 'Sunrise'
+          }]
+        }, {
+          label: 'Other',
+          list: [{
+            label: 'ChromeFilled',
+            value: 'ChromeFilled'
+          }]
+        }]
+      }]
     },
     {
       label: '菜单顺序',
@@ -106,6 +166,55 @@ export default {
       min: 0,
       max: 2147483647,
       controlsPosition: 'left'
+    }, {
+      label: '路由名称',
+      prop: 'routeName',
+      hide: true,
+      rules: [
+        {
+          required: true,
+          message: '请输入路由名称',
+          trigger: 'blur'
+        }
+      ]
+    }, {
+      label: '路由路径',
+      prop: 'routePath',
+      hide: true,
+      labelTip: '前端路径',
+      rules: [
+        {
+          required: true,
+          message: '请输入路由路径',
+          trigger: 'blur'
+        }
+      ]
+    },
+    {
+      label: '组件路径',
+      prop: 'componentPath',
+      hide: true,
+      labelTip: '前端组件所在绝对路径',
+      rules: [
+        {
+          required: true,
+          message: '请输入组件路径',
+          trigger: 'blur'
+        }
+      ]
+    },
+    {
+      label: '按钮权限标识',
+      prop: 'permission',
+      hide: true,
+      labelTip: '按钮权限标识，用于控制按钮显示隐藏实现对数据的读写操作。',
+      rules: [
+        {
+          required: true,
+          message: '请输入按钮权限标识',
+          trigger: 'blur'
+        }
+      ]
     },
     {
       label: '是否启用',
@@ -130,6 +239,11 @@ export default {
       ],
       type: 'switch',
       value: 1
+    },
+    {
+      label: '备注',
+      prop: 'remark',
+      hide: true
     },
     {
       label: '创建人',
