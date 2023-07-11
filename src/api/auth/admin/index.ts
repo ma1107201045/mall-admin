@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import HttpClient from '@/utils/httpClient.ts'
+import HttpClient from '@/utils/httpClient'
 import { HttpMethod } from '@/enums'
 
 export default class AdminApi {
