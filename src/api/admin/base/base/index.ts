@@ -15,7 +15,7 @@ export default class BaseApi {
 
   getMenuTree(): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: BaseApi.URL_PREFIX + '/menu-tree',
+      url: BaseApi.URL_PREFIX + '/menu-trees',
       method: HttpMethod.GET
     })
   }
