@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
   import { reactive } from 'vue'
   import UserApi from '@/api/admin/system/user'
   import crudOption from '@/option/admin/system/user'
@@ -37,8 +37,7 @@
       .then(res => {
         data.option.column[12]['dicData'] = res.data.data
       })
-      .catch(() => {
-      })
+      .catch(() => {})
   }
 
   function beforeOpen(done, type) {
@@ -115,8 +114,7 @@
           })
         })
       })
-      .catch(() => {
-      })
+      .catch(() => {})
   }
 
   function updateById(row, index, done, loading) {
@@ -159,88 +157,90 @@
 </script>
 <template>
   <avue-crud
-    ref='crud'
-    v-model:page='data.page'
-    v-model:search='data.search'
-    v-model='data.form'
-    :data='data.data'
-    :table-loading='data.loading'
-    :option='data.option'
-    :before-open='beforeOpen'
-    :permission='permission'
-    @row-save='save'
-    @row-del='deleteByIds'
-    @row-update='updateById'
-    @on-load='getList'
-    @search-change='getList'
-    @search-reset='getList'
-    @refresh-change='getList'
-    @selection-change='selection => (data.selectionData = selection)'
+    ref="crud"
+    v-model:page="data.page"
+    v-model:search="data.search"
+    v-model="data.form"
+    :data="data.data"
+    :table-loading="data.loading"
+    :option="data.option"
+    :before-open="beforeOpen"
+    :permission="permission"
+    @row-save="save"
+    @row-del="deleteByIds"
+    @row-update="updateById"
+    @on-load="getList"
+    @search-change="getList"
+    @search-reset="getList"
+    @refresh-change="getList"
+    @selection-change="selection => (data.selectionData = selection)"
   >
-    <template #sex='scope'>
-      <el-tag v-if='scope.row.sex === Sex.MALE' type='success' effect='dark' round>男</el-tag>
-      <el-tag v-else-if='scope.row.sex === Sex.FEMALE' type='info' effect='dark' round>女</el-tag>
-      <el-tag v-else type='danger' effect='dark' round>未知</el-tag>
+    <template #sex="scope">
+      <el-tag v-if="scope.row.sex === Sex.MALE" type="success" effect="dark" round>男</el-tag>
+      <el-tag v-else-if="scope.row.sex === Sex.FEMALE" type="info" effect="dark" round>女</el-tag>
+      <el-tag v-else type="danger" effect="dark" round>未知</el-tag>
     </template>
-    <template #isEnable='scope'>
-      <el-tag v-if='scope.row.isEnable === Whether.Y' type='success' effect='dark' round>是</el-tag>
-      <el-tag v-else-if='scope.row.isEnable === Whether.N' type='info' effect='dark' round>否</el-tag>
-      <el-tag v-else type='danger' effect='dark'>未知</el-tag>
+    <template #isEnable="scope">
+      <el-tag v-if="scope.row.isEnable === Whether.Y" type="success" effect="dark" round>是</el-tag>
+      <el-tag v-else-if="scope.row.isEnable === Whether.N" type="info" effect="dark" round>
+        否
+      </el-tag>
+      <el-tag v-else type="danger" effect="dark">未知</el-tag>
     </template>
-    <template #menu-left='{}'>
+    <template #menu-left="{}">
       <el-button
         v-if="hasAnyAuthority('admin:system:users:getList')"
-        :disabled='data.selectionData.length !== 1'
-        type='primary'
-        icon='el-icon-view'
-        @click='$refs.crud.rowView()'
+        :disabled="data.selectionData.length !== 1"
+        type="info"
+        icon="el-icon-view"
+        @click="$refs.crud.rowView()"
       >
         查看
       </el-button>
       <el-button
         v-if="hasAnyAuthority('admin:system:users:save')"
-        :disabled='data.selectionData.length !== 1'
-        type='primary'
-        icon='el-icon-copy-document'
-        @click='$refs.crud.rowAdd()'
+        :disabled="data.selectionData.length !== 1"
+        type="success"
+        icon="el-icon-copy-document"
+        @click="$refs.crud.rowAdd()"
       >
         复制
       </el-button>
       <el-button
         v-if="hasAnyAuthority('admin:system:users:update')"
-        :disabled='data.selectionData.length !== 1'
-        type='warning'
-        icon='el-icon-edit'
-        @click='$refs.crud.rowEdit()'
+        :disabled="data.selectionData.length !== 1"
+        type="warning"
+        icon="el-icon-edit"
+        @click="$refs.crud.rowEdit()"
       >
         修改
       </el-button>
       <el-button
         v-if="hasAnyAuthority('admin:system:users:delete')"
-        :disabled='!data.selectionData.length > 0'
-        type='danger'
-        icon='el-icon-delete'
-        @click='$refs.crud.rowDel()'
+        :disabled="!data.selectionData.length > 0"
+        type="danger"
+        icon="el-icon-delete"
+        @click="$refs.crud.rowDel()"
       >
         批量删除
       </el-button>
     </template>
-    <template #menu='{ row, index, size }'>
+    <template #menu="{ row, index, size }">
       <el-button
         v-if="hasAnyAuthority('admin:system:users:update')"
         :disabled="row.userName === 'admin'"
-        type='text'
-        icon='el-icon-edit'
-        @click='$refs.crud.rowEdit(row, index)'
+        type="text"
+        icon="el-icon-edit"
+        @click="$refs.crud.rowEdit(row, index)"
       >
         修改
       </el-button>
       <el-button
         v-if="hasAnyAuthority('admin:system:users:delete')"
         :disabled="row.userName === 'admin'"
-        type='text'
-        icon='el-icon-delete'
-        @click='$refs.crud.rowDel(row, index)'
+        type="text"
+        icon="el-icon-delete"
+        @click="$refs.crud.rowDel(row, index)"
       >
         删除
       </el-button>

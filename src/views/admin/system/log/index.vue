@@ -131,7 +131,7 @@
       <el-button
         v-if="hasAnyAuthority('admin:system:logs:getList')"
         :disabled="data.selectionData.length !== 1"
-        type="primary"
+        type="info"
         icon="el-icon-view"
         @click="$refs.crud.rowView()"
       >
