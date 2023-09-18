@@ -159,6 +159,7 @@
   }
 
   function updateById(row, index, done, loading) {
+    console.log(data.form)
     loading()
     handleData()
     menuApi

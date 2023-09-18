@@ -27,6 +27,11 @@ let routes = [
         component: () => import('@/views/admin/home/index.vue')
       },
       {
+        name: 'AdminProductBrand',
+        path: 'admin/product/brand',
+        component: () => import('@/views/admin/product/brand/index.vue')
+      },
+      {
         name: 'AdminMemberMember',
         path: 'admin/member/member',
         component: () => import('@/views/admin/member/member/index.vue')

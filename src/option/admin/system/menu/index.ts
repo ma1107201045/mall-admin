@@ -51,13 +51,6 @@ export default {
         children: 'children'
       },
       dicData: [],
-      rules: [
-        {
-          required: true,
-          message: '请选择父级菜单',
-          trigger: 'blur'
-        }
-      ],
       type: 'tree',
       tip: '如果留空，则当前菜单为顶级菜单',
       filterable: true
@@ -94,62 +87,91 @@ export default {
       prop: 'icon',
       slot: true,
       type: 'icon',
-      labelTip: 'icon，更多前端Element-Plus,网址：https://element-plus.gitee.io/zh-CN/component/icon.html#icon-collection',
-      iconList: [{
-        label: 'System',
-        list: [{
-          label: 'Plus',
-          value: 'Plus'
-        }]
-      }, {
-        label: 'Arrow',
-        list: [{
-          label: 'ArrowLeft',
-          value: 'ArrowLeft'
-        }]
-      }, {
-        label: 'Document',
-        list: [{
-          label: 'DocumentAdd',
-          value: 'DocumentAdd'
-        }]
-      }, {
-        label: 'Media',
-        list: [{
-          label: 'Microphone',
-          value: 'Microphone'
-        }]
-      }, {
-        label: 'Traffic',
-        list: [{
-          label: 'Location',
-          value: 'Location'
-        }]
-      }, {
-        label: 'Food',
-        list: [{
-          label: 'Watermelon',
-          value: 'Watermelon'
-        }]
-      }, {
-        label: 'Items',
-        list: [{
-          label: 'Printer',
-          value: 'Printer'
-        }, {
-          label: 'Weather',
-          list: [{
-            label: 'Sunrise',
-            value: 'Sunrise'
-          }]
-        }, {
-          label: 'Other',
-          list: [{
-            label: 'ChromeFilled',
-            value: 'ChromeFilled'
-          }]
-        }]
-      }]
+      labelTip:
+        'icon，更多前端Element-Plus,网址：https://element-plus.gitee.io/zh-CN/component/icon.html#icon-collection',
+      iconList: [
+        {
+          label: 'System',
+          list: [
+            {
+              label: 'Plus',
+              value: 'Plus'
+            }
+          ]
+        },
+        {
+          label: 'Arrow',
+          list: [
+            {
+              label: 'ArrowLeft',
+              value: 'ArrowLeft'
+            }
+          ]
+        },
+        {
+          label: 'Document',
+          list: [
+            {
+              label: 'DocumentAdd',
+              value: 'DocumentAdd'
+            }
+          ]
+        },
+        {
+          label: 'Media',
+          list: [
+            {
+              label: 'Microphone',
+              value: 'Microphone'
+            }
+          ]
+        },
+        {
+          label: 'Traffic',
+          list: [
+            {
+              label: 'Location',
+              value: 'Location'
+            }
+          ]
+        },
+        {
+          label: 'Food',
+          list: [
+            {
+              label: 'Watermelon',
+              value: 'Watermelon'
+            }
+          ]
+        },
+        {
+          label: 'Items',
+          list: [
+            {
+              label: 'Printer',
+              value: 'Printer'
+            },
+            {
+              label: 'Weather',
+              list: [
+                {
+                  label: 'Sunrise',
+                  value: 'Sunrise'
+                }
+              ]
+            },
+            {
+              label: 'Other',
+              list: [
+                {
+                  label: 'ChromeFilled',
+                  value: 'ChromeFilled'
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       label: '菜单顺序',
@@ -166,7 +188,8 @@ export default {
       min: 0,
       max: 2147483647,
       controlsPosition: 'left'
-    }, {
+    },
+    {
       label: '路由名称',
       prop: 'routeName',
       hide: true,
@@ -177,7 +200,8 @@ export default {
           trigger: 'blur'
         }
       ]
-    }, {
+    },
+    {
       label: '路由路径',
       prop: 'routePath',
       hide: true,

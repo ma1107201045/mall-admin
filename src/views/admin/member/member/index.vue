@@ -3,6 +3,7 @@
   import crudOption from '@/option/admin/member/member'
   import { notHasAnyAuthority } from '@/utils'
   import MemberApi from '@/api/admin/member/member'
+  import { Sex, Whether } from '@/enums'
 
   let data = reactive({
     option: crudOption,
@@ -51,6 +52,7 @@
     }
     return true
   }
+
   function getList(pageOrParams, done) {
     data.loading = true
     let newPage = {
@@ -86,7 +88,20 @@
     @search-reset="getList"
     @refresh-change="getList"
     @selection-change="selection => (data.selectionData = selection)"
-  ></avue-crud>
+  >
+    <template #sex="scope">
+      <el-tag v-if="scope.row.sex === Sex.MALE" type="success" effect="dark" round>男</el-tag>
+      <el-tag v-else-if="scope.row.sex === Sex.FEMALE" type="info" effect="dark" round>女</el-tag>
+      <el-tag v-else type="danger" effect="dark" round>未知</el-tag>
+    </template>
+    <template #isEnable="scope">
+      <el-tag v-if="scope.row.isEnable === Whether.Y" type="success" effect="dark" round>是</el-tag>
+      <el-tag v-else-if="scope.row.isEnable === Whether.N" type="info" effect="dark" round>
+        否
+      </el-tag>
+      <el-tag v-else type="danger" effect="dark">未知</el-tag>
+    </template>
+  </avue-crud>
 </template>
 
 <style scoped></style>

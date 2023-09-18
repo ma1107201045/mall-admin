@@ -31,7 +31,7 @@ export default class MenuApi implements BaseApiInterface {
 
   updateById(id: number, body: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: MenuApi.URL_PREFIX + +`/${id}`,
+      url: MenuApi.URL_PREFIX + `/${id}`,
       method: HttpMethod.PUT,
       data: body
     })
