@@ -37,6 +37,16 @@ let routes = [
         component: () => import('@/views/admin/member/member/index.vue')
       },
       {
+        name: 'AdminOrderOrder',
+        path: 'admin/order/order',
+        component: () => import('@/views/admin/order/order/index.vue')
+      },
+      {
+        name: 'AdminSmsCaptcha',
+        path: 'admin/sms/captcha',
+        component: () => import('@/views/admin/sms/captcha/index.vue')
+      },
+      {
         name: 'AdminSystemUser',
         path: 'admin/system/user',
         component: () => import('@/views/admin/system/user/index.vue')

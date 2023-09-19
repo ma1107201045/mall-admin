@@ -174,6 +174,7 @@ export default {
     {
       label: '菜单顺序',
       prop: 'sort',
+
       rules: [
         {
           required: true,
