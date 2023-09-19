@@ -176,7 +176,64 @@
     @refresh-change="getList"
     @selection-change="selection => (data.selectionData = selection)"
   >
-    <template #menu-left="{}"></template>
+    <template #menu-left="{}">
+      <el-button
+        v-if="hasAnyAuthority('admin:product:brands:getList')"
+        :disabled="data.selectionData.length !== 1"
+        type="info"
+        icon="el-icon-view"
+        @click="$refs.crud.rowView()"
+      >
+        查看
+      </el-button>
+      <el-button
+        v-if="hasAnyAuthority('admin:product:brands:save')"
+        :disabled="data.selectionData.length !== 1"
+        type="success"
+        icon="el-icon-copy-document"
+        @click="$refs.crud.rowAdd()"
+      >
+        复制
+      </el-button>
+      <el-button
+        v-if="hasAnyAuthority('admin:product:brands:update')"
+        :disabled="data.selectionData.length !== 1"
+        type="warning"
+        icon="el-icon-edit"
+        @click="$refs.crud.rowEdit()"
+      >
+        修改
+      </el-button>
+      <el-button
+        v-if="hasAnyAuthority('admin:product:brands:delete')"
+        :disabled="!data.selectionData.length > 0"
+        type="danger"
+        icon="el-icon-delete"
+        @click="$refs.crud.rowDel()"
+      >
+        批量删除
+      </el-button>
+    </template>
+    <template #menu="{ row, index, size }">
+      <el-button
+        v-if="hasAnyAuthority('admin:product:brands:update')"
+        :disabled="row.userName === 'admin'"
+        type="text"
+        icon="el-icon-edit"
+        @click="$refs.crud.rowEdit(row, index)"
+      >
+        修改
+      </el-button>
+      <el-button
+        v-if="hasAnyAuthority('admin:product:brands:delete')"
+        :disabled="row.userName === 'admin'"
+        type="text"
+        icon="el-icon-delete"
+        @click="$refs.crud.rowDel(row, index)"
+      >
+        删除
+      </el-button>
+    </template>
   </avue-crud>
 </template>
 
