@@ -1,7 +1,183 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { hasAnyAuthority, notHasAnyAuthority } from '@/utils'
+  import { ElMessage, ElMessageBox } from 'element-plus'
+  import { reactive } from 'vue'
+  import crudOption from '@/option/admin/product/brand'
+  import BrandApi from '@/api/admin/product/brand'
+
+  let data = reactive({
+    option: crudOption,
+    page: {
+      currentPage: 1,
+      pageSize: 10,
+      sortField: 'id',
+      sortDirection: 'DESC',
+      total: ''
+    },
+    search: {},
+    form: {},
+    data: [],
+    loading: false,
+    selectionData: []
+  })
+  //获取api实例
+  const brandApi = BrandApi.getInstance()
+  //初始化option
+  initCrudOption()
+
+  function initCrudOption() {}
+
+  function beforeOpen(done, type) {
+    if ((type === 'view' || type === 'add' || type === 'edit') && data.selectionData.length === 1) {
+      data.form = data.data.filter(item => data.selectionData[0].id === item.id)[0]
+      if (type === 'add') {
+        data.form.id = ''
+      }
+    }
+    done()
+  }
+
+  function permission(key) {
+    if (
+      (key === 'addBtn' || key === 'copyBtn') &&
+      notHasAnyAuthority('admin:product:brands:save')
+    ) {
+      return false
+    }
+    if (key === 'delBtn' && notHasAnyAuthority('admin:product:brands:delete')) {
+      return false
+    }
+    if (key === 'editBtn' && notHasAnyAuthority('admin:product:brands:update')) {
+      return false
+    }
+    if (
+      (key === 'viewBtn' || key === 'refreshBtn') &&
+      notHasAnyAuthority('admin:product:brands:getList')
+    ) {
+      return false
+    }
+    if (key === 'excelBtn' && notHasAnyAuthority('admin:product:brands:excel')) {
+      return false
+    }
+    if (key === 'printBtn' && notHasAnyAuthority('admin:product:brands:print')) {
+      return false
+    }
+    return true
+  }
+
+  function save(row, done, loading) {
+    loading()
+    brandApi
+      .save(data.form)
+      .then(() => {
+        done()
+        ElMessage({
+          message: '操作成功',
+          type: 'success',
+          duration: 1000,
+          onClose: () => {
+            getList(null, null)
+          }
+        })
+      })
+      .catch(() => {
+        done()
+        ElMessage.info('保存失败')
+      })
+  }
+
+  function deleteByIds(row, index) {
+    ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+      .then(() => {
+        let ids = row ? [row.id] : data.selectionData.map(item => item.id)
+        brandApi.deleteByIds(ids).then(() => {
+          ElMessage({
+            message: '删除/批量删除成功',
+            type: 'success',
+            duration: 1000,
+            onClose: () => {
+              getList(null, null)
+            }
+          })
+        })
+      })
+      .catch(() => {})
+  }
+
+  function updateById(row, index, done, loading) {
+    loading()
+    brandApi
+      .updateById(data.form.id, data.form)
+      .then(() => {
+        done()
+        ElMessage({
+          message: '修改成功',
+          type: 'success',
+          duration: 1000,
+          onClose: () => {
+            getList(null, null)
+          }
+        })
+      })
+      .catch(() => {
+        done()
+        ElMessage.info('修改失败')
+      })
+  }
+
+  function getList(page, done) {
+    data.loading = true
+    let newPage = {
+      currentPage: data.page.currentPage,
+      pageSize: data.page.pageSize,
+      sortField: data.page.sortField,
+      sortDirection: data.page.sortDirection
+    }
+    brandApi
+      .getListByPageAndParam(Object.assign(newPage, data.search))
+      .then(res => {
+        data.page.total = res.data.total
+        data.data = res.data.data
+        data.loading = false
+        if (done) {
+          done()
+        }
+      })
+      .catch(() => {
+        data.loading = false
+        if (done) {
+          done()
+        }
+      })
+  }
+</script>
 
 <template>
-  <div>111</div>
+  <avue-crud
+    ref="crud"
+    v-model:page="data.page"
+    v-model:search="data.search"
+    v-model="data.form"
+    :data="data.data"
+    :table-loading="data.loading"
+    :option="data.option"
+    :before-open="beforeOpen"
+    :permission="permission"
+    @row-save="save"
+    @row-del="deleteByIds"
+    @row-update="updateById"
+    @on-load="getList"
+    @search-change="getList"
+    @search-reset="getList"
+    @refresh-change="getList"
+    @selection-change="selection => (data.selectionData = selection)"
+  >
+    <template #menu-left="{}"></template>
+  </avue-crud>
 </template>
 
 <style scoped></style>

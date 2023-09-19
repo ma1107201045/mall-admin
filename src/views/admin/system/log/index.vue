@@ -74,7 +74,7 @@
       })
   }
 
-  function getList(pageOrParams, done) {
+  function getList(page, done) {
     data.loading = true
     let newPage = {
       currentPage: data.page.currentPage,

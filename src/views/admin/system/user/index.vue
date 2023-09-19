@@ -137,7 +137,7 @@
       })
   }
 
-  function getList(pageOrParams, done) {
+  function getList(page, done) {
     data.loading = true
     let newPage = {
       currentPage: data.page.currentPage,
@@ -145,14 +145,22 @@
       sortField: data.page.sortField,
       sortDirection: data.page.sortDirection
     }
-    userApi.getListByPageAndParam(Object.assign(newPage, data.search)).then(res => {
-      data.page.total = res.data.total
-      data.data = res.data.data
-      data.loading = false
-      if (done) {
-        done()
-      }
-    })
+    userApi
+      .getListByPageAndParam(Object.assign(newPage, data.search))
+      .then(res => {
+        data.page.total = res.data.total
+        data.data = res.data.data
+        data.loading = false
+        if (done) {
+          done()
+        }
+      })
+      .catch(() => {
+        data.loading = false
+        if (done) {
+          done()
+        }
+      })
   }
 </script>
 <template>

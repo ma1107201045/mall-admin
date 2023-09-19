@@ -132,6 +132,7 @@
         })
       })
       .catch(() => {
+        done()
         ElMessage.info('保存失败')
       })
   }
@@ -159,7 +160,6 @@
   }
 
   function updateById(row, index, done, loading) {
-    console.log(data.form)
     loading()
     handleData()
     menuApi
@@ -176,19 +176,28 @@
         })
       })
       .catch(() => {
+        done()
         ElMessage.info('修改失败')
       })
   }
 
-  function getTree(pageOrParams, done) {
+  function getTree(page, done) {
     data.loading = true
-    menuApi.getTree().then(res => {
-      data.data = res.data.data
-      data.loading = false
-      if (done) {
-        done()
-      }
-    })
+    menuApi
+      .getTree()
+      .then(res => {
+        data.data = res.data.data
+        data.loading = false
+        if (done) {
+          done()
+        }
+      })
+      .catch(() => {
+        data.loading = false
+        if (done) {
+          done()
+        }
+      })
   }
 
   function handleData() {
