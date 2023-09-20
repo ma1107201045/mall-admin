@@ -44,16 +44,15 @@ export default {
     },
     {
       label: '属性值',
-      prop: 'attributeValues',
+      prop: 'attributeValueNames',
+      type: 'array',
       rules: [
         {
           required: true,
           message: '请输入属性值称',
           trigger: 'blur'
         }
-      ],
-      maxlength: 20,
-      showWordLimit: true
+      ]
     },
     {
       label: '创建人',
