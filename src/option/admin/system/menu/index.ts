@@ -37,7 +37,9 @@ export default {
           message: '请输入用户名称',
           trigger: 'blur'
         }
-      ]
+      ],
+      maxlength: 20,
+      showWordLimit: true
     },
     {
       label: '父级菜单',
@@ -174,7 +176,6 @@ export default {
     {
       label: '菜单顺序',
       prop: 'sort',
-
       rules: [
         {
           required: true,
@@ -198,7 +199,9 @@ export default {
           message: '请输入路由名称',
           trigger: 'blur'
         }
-      ]
+      ],
+      maxlength: 50,
+      showWordLimit: true
     },
     {
       label: '路由路径',
@@ -211,7 +214,9 @@ export default {
           message: '请输入路由路径',
           trigger: 'blur'
         }
-      ]
+      ],
+      maxlength: 100,
+      showWordLimit: true
     },
     {
       label: '组件路径',
@@ -224,7 +229,9 @@ export default {
           message: '请输入组件路径',
           trigger: 'blur'
         }
-      ]
+      ],
+      maxlength: 100,
+      showWordLimit: true
     },
     {
       label: '按钮权限标识',
@@ -237,7 +244,9 @@ export default {
           message: '请输入按钮权限标识',
           trigger: 'blur'
         }
-      ]
+      ],
+      maxlength: 100,
+      showWordLimit: true
     },
     {
       label: '是否启用',
@@ -266,7 +275,9 @@ export default {
     {
       label: '备注',
       prop: 'remark',
-      hide: true
+      hide: true,
+      maxlength: 200,
+      showWordLimit: true
     },
     {
       label: '创建人',

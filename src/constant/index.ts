@@ -1,3 +1,3 @@
 export class BaseConstant {
-  static MENU_ROOT_ID = 0
+  static MENU_ROOT_ID = '0'
 }

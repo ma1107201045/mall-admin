@@ -43,7 +43,9 @@ export default {
           message: '请输入用户名称',
           trigger: 'blur'
         }
-      ]
+      ],
+      maxlength: 20,
+      showWordLimit: true
     },
     {
       label: '密码',
@@ -56,17 +58,22 @@ export default {
           message: '请输入密码',
           trigger: 'blur'
         }
-      ]
+      ],
+      maxlength: 20
     },
     {
       label: '真实姓名',
       prop: 'realName',
+      maxlength: 20,
+      showWordLimit: true,
       overHidden: true,
       hide: true
     },
     {
       label: '昵称',
       prop: 'nickname',
+      maxlength: 20,
+      showWordLimit: true,
       overHidden: true,
       hide: true
     },
@@ -109,12 +116,18 @@ export default {
     {
       label: '邮箱',
       prop: 'email',
-      hide: true
+      hide: true,
+      maxlength: 20,
+      showWordLimit: true,
+      prepend: 'email'
     },
     {
       label: '手机号',
       prop: 'phoneNumber',
-      search: true
+      search: true,
+      maxlength: 11,
+      showWordLimit: true,
+      prefixIcon: 'el-icon-phone'
     },
     {
       label: '最后一次登录IP',
@@ -150,7 +163,9 @@ export default {
     {
       label: '备注',
       prop: 'remark',
-      hide: true
+      hide: true,
+      maxlength: 200,
+      showWordLimit: true
     },
     {
       label: '角色',

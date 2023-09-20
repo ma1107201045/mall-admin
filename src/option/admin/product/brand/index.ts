@@ -40,7 +40,9 @@ export default {
           message: '请输入品牌名称',
           trigger: 'blur'
         }
-      ]
+      ],
+      maxlength: 50,
+      showWordLimit: true
     },
     {
       label: 'LOGO',
@@ -82,7 +84,9 @@ export default {
           message: '只能输入一个字符',
           trigger: 'blur'
         }
-      ]
+      ],
+      maxlength: 1,
+      showWordLimit: true
     },
     {
       label: '品牌主图',
@@ -110,7 +114,6 @@ export default {
       fileSize: 10240,
       tip: '只能上传jpeg/png品牌主图，且不超过10M'
     },
-
     {
       label: '创建人',
       prop: 'createBy',

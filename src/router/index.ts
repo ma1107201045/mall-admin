@@ -32,6 +32,11 @@ let routes = [
         component: () => import('@/views/admin/product/brand/index.vue')
       },
       {
+        name: 'AdminProductAttribute',
+        path: 'admin/product/attribute',
+        component: () => import('@/views/admin/product/attribute/index.vue')
+      },
+      {
         name: 'AdminMemberMember',
         path: 'admin/member/member',
         component: () => import('@/views/admin/member/member/index.vue')
@@ -45,6 +50,14 @@ let routes = [
         name: 'AdminSmsCaptcha',
         path: 'admin/sms/captcha',
         component: () => import('@/views/admin/sms/captcha/index.vue')
+      },
+      {
+        name: 'AdminFileFile',
+        path: 'admin/file/file',
+        component: () => import('@/views/admin/sms/captcha/index.vue'),
+        beforeEnter: () => {
+          window.open('http://36.137.103.166:9001')
+        }
       },
       {
         name: 'AdminSystemUser',
