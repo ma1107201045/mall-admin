@@ -45,6 +45,7 @@ export default {
     {
       label: '属性值',
       prop: 'attributeValueNames',
+      slot: true,
       type: 'array',
       rules: [
         {

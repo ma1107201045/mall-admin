@@ -176,6 +176,11 @@
     @refresh-change="getList"
     @selection-change="selection => (data.selectionData = selection)"
   >
+    <template #attributeValueNames="scope">
+      <el-tag v-for="attributeValueName in scope.row.attributeValueNames">
+        {{ attributeValueName }}
+      </el-tag>
+    </template>
     <template #menu-left="{}">
       <el-button
         v-if="hasAnyAuthority('admin:product:brands:getList')"

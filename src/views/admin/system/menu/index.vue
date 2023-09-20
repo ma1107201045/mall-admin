@@ -239,16 +239,10 @@
     @selection-change="selection => (data.selectionData = selection)"
   >
     <template #type="scope">
-      <el-tag v-if="scope.row.type === MenuType.DIRECTORY" type="success" effect="dark" round>
-        目录
-      </el-tag>
-      <el-tag v-else-if="scope.row.type === MenuType.MENU" type="info" effect="dark" round>
-        菜单
-      </el-tag>
-      <el-tag v-else-if="scope.row.type === MenuType.BUTTON" type="warning" effect="dark" round>
-        按钮
-      </el-tag>
-      <el-tag v-else type="danger" effect="dark" round>未知</el-tag>
+      <el-tag v-if="scope.row.type === MenuType.DIRECTORY" type="success">目录</el-tag>
+      <el-tag v-else-if="scope.row.type === MenuType.MENU" type="warning">菜单</el-tag>
+      <el-tag v-else-if="scope.row.type === MenuType.BUTTON" type="danger">按钮</el-tag>
+      <el-tag v-else type="info">未知</el-tag>
     </template>
     <template #icon="scope">
       <el-icon size="20">
@@ -256,11 +250,9 @@
       </el-icon>
     </template>
     <template #isEnable="scope">
-      <el-tag v-if="scope.row.isEnable === Whether.Y" type="success" effect="dark" round>是</el-tag>
-      <el-tag v-else-if="scope.row.isEnable === Whether.N" type="info" effect="dark" round>
-        否
-      </el-tag>
-      <el-tag v-else type="danger" effect="dark" round>未知</el-tag>
+      <el-tag v-if="scope.row.isEnable === Whether.Y" type="success" effect="plain">是</el-tag>
+      <el-tag v-else-if="scope.row.isEnable === Whether.N" type="info" effect="plain">否</el-tag>
+      <el-tag v-else type="danger" effect="plain">未知</el-tag>
     </template>
     <template #menu-left="{}">
       <el-button
