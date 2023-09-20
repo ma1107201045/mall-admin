@@ -239,10 +239,14 @@
     @selection-change="selection => (data.selectionData = selection)"
   >
     <template #type="scope">
-      <el-tag v-if="scope.row.type === MenuType.DIRECTORY" type="success">目录</el-tag>
-      <el-tag v-else-if="scope.row.type === MenuType.MENU" type="warning">菜单</el-tag>
-      <el-tag v-else-if="scope.row.type === MenuType.BUTTON" type="danger">按钮</el-tag>
-      <el-tag v-else type="info">未知</el-tag>
+      <el-tag v-if="scope.row.type === MenuType.DIRECTORY" effect="plain">目录</el-tag>
+      <el-tag v-else-if="scope.row.type === MenuType.MENU" type="success" effect="plain">
+        菜单
+      </el-tag>
+      <el-tag v-else-if="scope.row.type === MenuType.BUTTON" type="warning" effect="plain">
+        按钮
+      </el-tag>
+      <el-tag v-else type="danger">未知</el-tag>
     </template>
     <template #icon="scope">
       <el-icon size="20">

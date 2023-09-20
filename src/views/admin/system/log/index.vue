@@ -111,18 +111,18 @@
     @selection-change="selection => (data.selectionData = selection)"
   >
     <template #operationType="scope">
-      <el-tag v-if="scope.row.operationType === 1" type="success" effect="dark">创建</el-tag>
-      <el-tag v-else-if="scope.row.operationType === 2" type="success" effect="dark">删除</el-tag>
-      <el-tag v-else-if="scope.row.operationType === 3" type="success" effect="dark">更新</el-tag>
-      <el-tag v-else-if="scope.row.operationType === 4" type="success" effect="dark">读取</el-tag>
-      <el-tag v-else-if="scope.row.operationType === 5" type="success" effect="dark">其他</el-tag>
-      <el-tag v-else type="danger" effect="dark">未知</el-tag>
+      <el-tag v-if="scope.row.operationType === 1" effect="plain">创建</el-tag>
+      <el-tag v-else-if="scope.row.operationType === 2" effect="plain">删除</el-tag>
+      <el-tag v-else-if="scope.row.operationType === 3" effect="plain">更新</el-tag>
+      <el-tag v-else-if="scope.row.operationType === 4" effect="plain">读取</el-tag>
+      <el-tag v-else-if="scope.row.operationType === 5" effect="plain">其他</el-tag>
+      <el-tag v-else type="danger" effect="plain">未知</el-tag>
     </template>
     <template #executeResult="scope">
-      <el-tag v-if="scope.row.executeResult === Whether.Y" type="success" effect="dark">
+      <el-tag v-if="scope.row.executeResult === Whether.Y" type="success" effect="plain">
         成功
       </el-tag>
-      <el-tag v-else-if="scope.row.executeResult === Whether.N" type="danger" effect="dark">
+      <el-tag v-else-if="scope.row.executeResult === Whether.N" type="danger" effect="plain">
         失败
       </el-tag>
       <el-tag v-else type="danger" effect="dark">未知</el-tag>
