@@ -282,6 +282,7 @@ export default {
     {
       label: '创建人',
       prop: 'createBy',
+      hide: true,
       overHidden: true,
       addDisplay: false,
       editDisplay: false
@@ -289,21 +290,19 @@ export default {
     {
       label: '创建时间',
       prop: 'createDateTime',
-      width: 155,
+      hide: true,
       addDisplay: false,
       editDisplay: false
     },
     {
       label: '最后修改人',
       prop: 'lastModifyBy',
-      hide: true,
       addDisplay: false,
       editDisplay: false
     },
     {
       label: '最后修改时间',
       prop: 'lastModifyDateTime',
-      hide: true,
       addDisplay: false,
       editDisplay: false
     }

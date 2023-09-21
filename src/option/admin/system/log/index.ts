@@ -25,7 +25,6 @@ export default {
       label: '标题',
       prop: 'title',
       overHidden: true,
-      width: 200,
       search: true
     },
     {
@@ -96,7 +95,6 @@ export default {
           label: '成功',
           value: 1
         }
-
       ],
       slot: true,
       search: true,
@@ -119,22 +117,23 @@ export default {
     },
     {
       label: '创建人',
-      prop: 'createBy'
+      prop: 'createBy',
+      hide: true,
+      overHidden: true
     },
     {
       label: '创建时间',
       prop: 'createDateTime',
-      width: 155
+      hide: true
     },
     {
       label: '最后修改人',
       prop: 'lastModifyBy',
-      hide: true
+      overHidden: true
     },
     {
       label: '最后修改时间',
-      prop: 'lastModifyDateTime',
-      hide: true
+      prop: 'lastModifyDateTime'
     }
   ]
 }
