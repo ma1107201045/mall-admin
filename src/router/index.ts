@@ -37,6 +37,16 @@ let routes = [
         component: () => import('@/views/admin/product/attribute/index.vue')
       },
       {
+        name: 'AdminProductCategory',
+        path: 'admin/product/category',
+        component: () => import('@/views/admin/product/category/index.vue')
+      },
+      {
+        name: 'AdminProductSpu',
+        path: 'admin/product/spu',
+        component: () => import('@/views/admin/product/spu/index.vue')
+      },
+      {
         name: 'AdminMemberMember',
         path: 'admin/member/member',
         component: () => import('@/views/admin/member/member/index.vue')
