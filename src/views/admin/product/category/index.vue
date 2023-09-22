@@ -150,7 +150,7 @@
     categoryApi
       .getTree()
       .then(res => {
-        traverseTree([], res.data.data)
+        handleData(null, res.data.data)
         data.data = res.data.data
         data.loading = false
         if (done) {
@@ -164,7 +164,8 @@
         }
       })
   }
-  function traverseTree(parentIds, children) {
+
+  function handleData(parentIds, children) {
     children.forEach(item => {
       if (item.parentId === '0') {
         item.parentId = ''
@@ -173,7 +174,7 @@
         parentIds.push(item.parentId)
         item.parentId = parentIds.map(item => item)
       }
-      traverseTree(parentIds, item.children)
+      handleData(parentIds, item.children)
     })
   }
 </script>
