@@ -4,7 +4,7 @@
   import { ElMessage, ElMessageBox } from 'element-plus'
   import crudOption from '@/option/admin/product/category'
   import CategoryApi from '@/api/admin/product/category'
-  import { MenuType, Whether } from '@/enums'
+  import { Whether } from '@/enums'
 
   let data = reactive({
     option: crudOption,
