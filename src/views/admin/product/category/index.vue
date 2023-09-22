@@ -78,6 +78,7 @@
 
   function save(row, done, loading) {
     loading()
+    console.log(row)
     data.form.parentId =
       data.form.parentId.length === 0 ? '' : data.form.parentId[data.form.parentId.length - 1]
     categoryApi
@@ -146,10 +147,10 @@
 
   function getTree(page, done) {
     data.loading = true
-    handleData()
     categoryApi
       .getTree()
       .then(res => {
+        traverseTree([], res.data.data)
         data.data = res.data.data
         data.loading = false
         if (done) {
@@ -163,8 +164,18 @@
         }
       })
   }
-
-  function handleData() {}
+  function traverseTree(parentIds, children) {
+    children.forEach(item => {
+      if (item.parentId === '0') {
+        item.parentId = ''
+        parentIds = []
+      } else {
+        parentIds.push(item.parentId)
+        item.parentId = parentIds.map(item => item)
+      }
+      traverseTree(parentIds, item.children)
+    })
+  }
 </script>
 
 <template>
