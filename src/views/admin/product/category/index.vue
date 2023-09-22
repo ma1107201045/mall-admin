@@ -78,7 +78,8 @@
 
   function save(row, done, loading) {
     loading()
-    handleData()
+    data.form.parentId =
+      data.form.parentId.length === 0 ? '' : data.form.parentId[data.form.parentId.length - 1]
     categoryApi
       .save(data.form)
       .then(() => {
@@ -122,7 +123,8 @@
 
   function updateById(row, index, done, loading) {
     loading()
-    handleData()
+    data.form.parentId =
+      data.form.parentId.length === 0 ? '' : data.form.parentId[data.form.parentId.length - 1]
     categoryApi
       .updateById(data.form.id, data.form)
       .then(() => {
@@ -144,7 +146,7 @@
 
   function getTree(page, done) {
     data.loading = true
-    handleData2()
+    handleData()
     categoryApi
       .getTree()
       .then(res => {
@@ -162,12 +164,7 @@
       })
   }
 
-  function handleData() {
-    let parentId = data.form.parentId
-    data.form.parentId = parentId.length === 0 ? '' : data.form.parentId[parentId.length - 1]
-  }
-
-  function handleData2() {}
+  function handleData() {}
 </script>
 
 <template>
