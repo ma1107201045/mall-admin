@@ -3,20 +3,20 @@ import { HttpMethod } from '@/enums'
 import { AxiosResponse } from 'axios'
 import BaseApiInterface from '@/api'
 
-export default class BrandApi implements BaseApiInterface {
+export default class CategoryApi implements BaseApiInterface {
   static URL_PREFIX: string = '/admin/product/categories'
-  static brandApi = null
+  static categoryApi = null
 
-  static getInstance(): BrandApi {
-    if (this.brandApi === null) {
-      return new BrandApi()
+  static getInstance(): CategoryApi {
+    if (this.categoryApi === null) {
+      return new CategoryApi()
     }
-    return this.brandApi
+    return this.categoryApi
   }
 
   save(body: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: BrandApi.URL_PREFIX,
+      url: CategoryApi.URL_PREFIX,
       method: HttpMethod.POST,
       data: body
     })
@@ -24,14 +24,14 @@ export default class BrandApi implements BaseApiInterface {
 
   deleteByIds(ids: number[]): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: BrandApi.URL_PREFIX + `/${ids.join(',')}`,
+      url: CategoryApi.URL_PREFIX + `/${ids.join(',')}`,
       method: HttpMethod.DELETE
     })
   }
 
   updateById(id: number, body: object): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: BrandApi.URL_PREFIX + `/${id}`,
+      url: CategoryApi.URL_PREFIX + `/${id}`,
       method: HttpMethod.PUT,
       data: body
     })
@@ -39,16 +39,23 @@ export default class BrandApi implements BaseApiInterface {
 
   getById(id: number): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: BrandApi.URL_PREFIX + `/${id}`,
+      url: CategoryApi.URL_PREFIX + `/${id}`,
       method: HttpMethod.GET
     })
   }
 
   getListByPageAndParam(params: any): Promise<AxiosResponse<any, any>> {
     return HttpClient({
-      url: BrandApi.URL_PREFIX,
+      url: CategoryApi.URL_PREFIX,
       method: HttpMethod.GET,
       params: params
+    })
+  }
+
+  getTree(): Promise<AxiosResponse<any, any>> {
+    return HttpClient({
+      url: CategoryApi.URL_PREFIX + '/get-tree',
+      method: HttpMethod.GET
     })
   }
 }

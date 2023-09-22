@@ -50,8 +50,8 @@ export default {
         value: 'id',
         children: 'children'
       },
-      dicData: [],
       type: 'tree',
+      dicData: [],
       tip: '如果留空，则当前菜单为顶级菜单',
       filterable: true
     },
@@ -176,13 +176,6 @@ export default {
     {
       label: '菜单顺序',
       prop: 'sort',
-      rules: [
-        {
-          required: true,
-          message: '请输入菜单顺序',
-          trigger: 'blur'
-        }
-      ],
       type: 'number',
       value: 0,
       min: 0,
