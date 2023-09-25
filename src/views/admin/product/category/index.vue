@@ -5,6 +5,7 @@
   import crudOption from '@/option/admin/product/category'
   import CategoryApi from '@/api/admin/product/category'
   import { Whether } from '@/enums'
+  import Attribute from '@/views/admin/product/category/components/attribute.vue'
 
   let data = reactive({
     option: crudOption,
@@ -78,7 +79,6 @@
 
   function save(row, done, loading) {
     loading()
-    console.log(row)
     data.form.parentId =
       data.form.parentId.length === 0 ? '' : data.form.parentId[data.form.parentId.length - 1]
     categoryApi
@@ -271,6 +271,9 @@
       >
         删除
       </el-button>
+    </template>
+    <template #attributeIds-form="{ type, disabled }">
+      <attribute v-model="data.form.attributeIds" />
     </template>
   </avue-crud>
 </template>

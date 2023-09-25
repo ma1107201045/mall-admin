@@ -3,7 +3,7 @@
   import { UnwrapNestedRefs } from '@vue/reactivity'
   import router from '@/router'
   import IndexApi from '@/api/index/index.ts'
-  import asideMenuBarTree from '@/views/index/components/aside-menu-bar-tree.vue'
+  import AsideMenuBarTree from '@/views/index/components/aside-menu-bar-tree.vue'
   import { Path, MenuType } from '@/enums'
 
   let data: UnwrapNestedRefs<object> = reactive({

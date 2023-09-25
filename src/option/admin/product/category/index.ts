@@ -12,7 +12,7 @@ export default {
   selection: true,
   menuWidth: 290,
   indexWidth: 60,
-  labelWidth: 130,
+  labelWidth: 140,
   rowKey: 'id',
   rowParentKey: 'parentId',
   align: 'center',
@@ -229,6 +229,21 @@ export default {
       overHidden: true,
       maxlength: 200,
       showWordLimit: true
+    },
+    {
+      label: '属性集',
+      prop: 'attributeIds',
+      hide: true,
+      span: 24,
+      row: true,
+      size: 'medium',
+      rules: [
+        {
+          required: true,
+          message: '请选择属性集',
+          trigger: 'blur'
+        }
+      ]
     },
     {
       label: '创建人',
