@@ -74,7 +74,7 @@
     }
     if (
       (key === 'viewBtn' || key === 'refreshBtn') &&
-      notHasAnyAuthority('admin:product:categories:getList')
+      notHasAnyAuthority('admin:product:categories:getTree')
     ) {
       return false
     }

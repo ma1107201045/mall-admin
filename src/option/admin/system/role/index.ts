@@ -85,6 +85,7 @@ export default {
     {
       label: '备注',
       prop: 'remark',
+      hide: true,
       maxlength: 200,
       showWordLimit: true
     },

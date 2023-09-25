@@ -8,7 +8,7 @@ export default {
   copyBtn: true,
   printBtn: true,
   excelBtn: true,
-  sortable: true,
+  sortable: false,
   selection: true,
   menuWidth: 290,
   indexWidth: 60,
@@ -172,6 +172,7 @@ export default {
     {
       label: '是否显示在导航栏',
       prop: 'isShowNav',
+      hide: true,
       slot: true,
       type: 'switch',
       rules: [
