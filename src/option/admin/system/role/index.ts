@@ -53,8 +53,8 @@ export default {
         }
       ],
       type: 'number',
-      value: 0,
-      min: 0,
+      value: 1,
+      min: 1,
       max: 2147483647,
       controlsPosition: 'left'
     },
