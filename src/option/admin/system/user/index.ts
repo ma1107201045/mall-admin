@@ -20,6 +20,7 @@ export default {
   headerAlign: 'center',
   indexLabel: '序号',
   updateBtnText: '更新',
+  loadingText: '加载中...',
   selectable: row => {
     return row.userName !== 'admin'
   },

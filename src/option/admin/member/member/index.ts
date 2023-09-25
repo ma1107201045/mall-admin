@@ -12,6 +12,7 @@ export default {
   rowKey: 'id',
   align: 'center',
   headerAlign: 'center',
+  loadingText: '加载中...',
   column: [
     {
       label: '主键id',
