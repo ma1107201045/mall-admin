@@ -233,17 +233,22 @@ export default {
     {
       label: '属性集',
       prop: 'attributeIds',
-      hide: true,
-      span: 24,
-      row: true,
-      size: 'medium',
       rules: [
         {
           required: true,
           message: '请选择属性集',
           trigger: 'blur'
         }
-      ]
+      ],
+      type: 'select',
+      dicData: [],
+      props: {
+        label: 'name',
+        value: 'id'
+      },
+      filterable: true,
+      drag: true,
+      multiple: true
     },
     {
       label: '创建人',

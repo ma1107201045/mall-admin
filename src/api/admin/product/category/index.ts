@@ -58,4 +58,10 @@ export default class CategoryApi implements BaseApiInterface {
       method: HttpMethod.GET
     })
   }
+  getAttributeList(): Promise<AxiosResponse<any, any>> {
+    return HttpClient({
+      url: CategoryApi.URL_PREFIX + '/attributes',
+      method: HttpMethod.GET
+    })
+  }
 }

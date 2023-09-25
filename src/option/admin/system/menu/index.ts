@@ -238,8 +238,10 @@ export default {
           trigger: 'blur'
         }
       ],
-      maxlength: 100,
-      showWordLimit: true
+      maxlength: 200,
+      showWordLimit: true,
+      type: 'textarea',
+      minRows: 3
     },
     {
       label: '是否启用',

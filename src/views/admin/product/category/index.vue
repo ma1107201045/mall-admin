@@ -5,7 +5,6 @@
   import crudOption from '@/option/admin/product/category'
   import CategoryApi from '@/api/admin/product/category'
   import { Whether } from '@/enums'
-  import Attribute from '@/views/admin/product/category/components/attribute.vue'
 
   let data = reactive({
     option: crudOption,
@@ -37,7 +36,18 @@
     }
   )
 
-  function initCrudOption() {}
+  function initCrudOption() {
+    getAttributes()
+  }
+
+  function getAttributes() {
+    categoryApi
+      .getAttributeList()
+      .then(res => {
+        data.option.column[10]['dicData'] = res.data.data
+      })
+      .catch(() => {})
+  }
 
   function beforeOpen(done, type) {
     if ((type === 'view' || type === 'add' || type === 'edit') && data.selectionData.length === 1) {
@@ -271,9 +281,6 @@
       >
         删除
       </el-button>
-    </template>
-    <template #attributeIds-form="{ type, disabled }">
-      <attribute v-model="data.form.attributeIds" />
     </template>
   </avue-crud>
 </template>
