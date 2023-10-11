@@ -9,9 +9,11 @@ export default {
   printBtn: true,
   excelBtn: true,
   sortable: true,
+  indexWidth: 60,
   rowKey: 'id',
   align: 'center',
   headerAlign: 'center',
+  indexLabel: '序号',
   loadingText: '加载中...',
   column: [
     {

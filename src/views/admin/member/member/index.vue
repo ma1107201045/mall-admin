@@ -90,16 +90,14 @@
     @selection-change="selection => (data.selectionData = selection)"
   >
     <template #sex="scope">
-      <el-tag v-if="scope.row.sex === Sex.MALE" type="success" effect="dark" round>男</el-tag>
-      <el-tag v-else-if="scope.row.sex === Sex.FEMALE" type="info" effect="dark" round>女</el-tag>
+      <el-tag v-if="scope.row.sex === Sex.MALE" type="success" effect="plain">男</el-tag>
+      <el-tag v-else-if="scope.row.sex === Sex.FEMALE" type="info" effect="plain">女</el-tag>
       <el-tag v-else type="danger" effect="dark" round>未知</el-tag>
     </template>
     <template #isEnable="scope">
-      <el-tag v-if="scope.row.isEnable === Whether.Y" type="success" effect="dark" round>是</el-tag>
-      <el-tag v-else-if="scope.row.isEnable === Whether.N" type="info" effect="dark" round>
-        否
-      </el-tag>
-      <el-tag v-else type="danger" effect="dark">未知</el-tag>
+      <el-tag v-if="scope.row.isEnable === Whether.Y" type="success" effect="plain">是</el-tag>
+      <el-tag v-else-if="scope.row.isEnable === Whether.N" type="info" effect="plain">否</el-tag>
+      <el-tag v-else type="danger" effect="plain">未知</el-tag>
     </template>
   </avue-crud>
 </template>
