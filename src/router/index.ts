@@ -57,14 +57,14 @@ let routes = [
         component: () => import('@/views/admin/order/order/index.vue')
       },
       {
-        name: 'AdminSmsCaptcha',
-        path: 'admin/sms/captcha',
-        component: () => import('@/views/admin/sms/captcha/index.vue')
+        name: 'AdminSmsLog',
+        path: 'admin/sms/log',
+        component: () => import('@/views/admin/sms/log/index.vue')
       },
       {
         name: 'AdminFileFile',
         path: 'admin/file/file',
-        component: () => import('@/views/admin/sms/captcha/index.vue'),
+        component: () => import('@/views/admin/sms/log/index.vue'),
         beforeEnter: () => {
           window.open('http://36.137.103.166:9001')
         }
