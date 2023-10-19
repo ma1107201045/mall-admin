@@ -25,12 +25,16 @@ export default {
     {
       label: '服务名称',
       prop: 'serviceName',
-      search: true
+      search: true,
+      maxlength: 20,
+      showWordLimit: true
     },
     {
       label: '业务名称',
       prop: 'businessName',
-      search: true
+      search: true,
+      maxlength: 50,
+      showWordLimit: true
     },
     {
       label: '短信类型',
@@ -53,7 +57,9 @@ export default {
     {
       label: '手机号',
       prop: 'phoneNumber',
-      search: true
+      search: true,
+      maxlength: 20,
+      showWordLimit: true
     },
     {
       label: '每天上限',
@@ -63,10 +69,7 @@ export default {
     {
       label: '间隔时间',
       prop: 'intervalTime',
-      hide: true,
-      formatter: row => {
-        return row.intervalTime + 'min'
-      }
+      hide: true
     },
     {
       label: '发送内容',
@@ -86,10 +89,7 @@ export default {
     {
       label: '验证码有效期 （分钟）',
       prop: 'captchaExpiryDate',
-      hide: true,
-      formatter: row => {
-        return row.captchaExpiryDate + 'min'
-      }
+      hide: true
     },
     {
       label: '是否成功',

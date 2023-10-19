@@ -26,7 +26,9 @@ export default {
       label: '标题',
       prop: 'title',
       overHidden: true,
-      search: true
+      search: true,
+      maxlength: 200,
+      showWordLimit: true
     },
     {
       label: '操作类型',
