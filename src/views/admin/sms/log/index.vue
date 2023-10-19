@@ -37,14 +37,14 @@
   function permission(key) {
     if (
       (key === 'viewBtn' || key === 'refreshBtn') &&
-      notHasAnyAuthority('admin:sms:users:getList')
+      notHasAnyAuthority('admin:sms:logs:getList')
     ) {
       return false
     }
-    if (key === 'excelBtn' && notHasAnyAuthority('admin:sms:users:excel')) {
+    if (key === 'excelBtn' && notHasAnyAuthority('admin:sms:logs:excel')) {
       return false
     }
-    if (key === 'printBtn' && notHasAnyAuthority('admin:sms:users:print')) {
+    if (key === 'printBtn' && notHasAnyAuthority('admin:sms:logs:print')) {
       return false
     }
     return true
@@ -110,6 +110,18 @@
     @search-reset="getList"
     @selection-change="selection => (data.selectionData = selection)"
   >
+    <template #type="scope">
+      <el-tag v-if="scope.row.type === 1" effect="plain">短信</el-tag>
+      <el-tag v-else-if="scope.row.type === 2" effect="plain">验证码</el-tag>
+      <el-tag v-else type="danger" effect="plain">未知</el-tag>
+    </template>
+    <template #isSuccess="scope">
+      <el-tag v-if="scope.row.isSuccess === Whether.Y" type="success" effect="plain">成功</el-tag>
+      <el-tag v-else-if="scope.row.isSuccess === Whether.N" type="danger" effect="plain">
+        失败
+      </el-tag>
+      <el-tag v-else type="danger" effect="dark">未知</el-tag>
+    </template>
     <template #menu-left="{}">
       <el-button
         v-if="hasAnyAuthority('admin:sms:logs:getList')"

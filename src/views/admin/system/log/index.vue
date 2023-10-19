@@ -37,14 +37,14 @@
   function permission(key) {
     if (
       (key === 'viewBtn' || key === 'refreshBtn') &&
-      notHasAnyAuthority('admin:system:users:getList')
+      notHasAnyAuthority('admin:system:logs:getList')
     ) {
       return false
     }
-    if (key === 'excelBtn' && notHasAnyAuthority('admin:system:users:excel')) {
+    if (key === 'excelBtn' && notHasAnyAuthority('admin:system:logs:excel')) {
       return false
     }
-    if (key === 'printBtn' && notHasAnyAuthority('admin:system:users:print')) {
+    if (key === 'printBtn' && notHasAnyAuthority('admin:system:logs:print')) {
       return false
     }
     return true
