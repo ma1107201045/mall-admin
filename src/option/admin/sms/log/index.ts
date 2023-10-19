@@ -59,7 +59,8 @@ export default {
       prop: 'phoneNumber',
       search: true,
       maxlength: 20,
-      showWordLimit: true
+      showWordLimit: true,
+      prefixIcon: 'el-icon-phone'
     },
     {
       label: '每天上限',
