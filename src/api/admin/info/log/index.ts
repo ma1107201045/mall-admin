@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios'
 import { HttpMethod } from '@/enums'
 
 export class LogApi {
-  static URL_PREFIX: string = '/admin/sms/sms-logs'
+  static URL_PREFIX: string = '/admin/info/info-logs'
   static logApi = null
 
   static getInstance(): LogApi {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { LogApi } from '@/api/admin/sms/log'
+  import { LogApi } from '@/api/admin/info/log'
   import { reactive } from 'vue'
-  import crudOption from '@/option/admin/sms/log'
+  import crudOption from '@/option/admin/info/log'
   import { ElMessageBox, ElMessage } from 'element-plus'
   import { Whether } from '@/enums'
   import { hasAnyAuthority, notHasAnyAuthority } from '@/utils'
