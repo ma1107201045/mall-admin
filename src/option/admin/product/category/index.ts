@@ -60,7 +60,7 @@ export default {
     },
     {
       label: '顺序',
-      prop: 'sort',
+      prop: 'seq',
       type: 'number',
       value: 1,
       min: 1,
@@ -168,31 +168,6 @@ export default {
       max: 2147483647,
       controlsPosition: 'left',
       disabled: true
-    },
-    {
-      label: '是否显示在导航栏',
-      prop: 'isShowNav',
-      hide: true,
-      slot: true,
-      type: 'switch',
-      rules: [
-        {
-          required: true,
-          message: '请选择是否显示在导航栏',
-          trigger: 'blur'
-        }
-      ],
-      dicData: [
-        {
-          label: '否',
-          value: 0
-        },
-        {
-          label: '是',
-          value: 1
-        }
-      ],
-      value: 0
     },
     {
       label: '关键字',
