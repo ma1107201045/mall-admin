@@ -20,7 +20,6 @@
     let docHeight = document.documentElement.clientHeight
     data.menuBarDynamicStyle.height = docHeight - 60 + 'px'
   }
-  onCreated()
 
   async function getMenuPermissions() {
     let menuPermissions = localStorage.getItem('menuPermissions')
@@ -44,6 +43,7 @@
     }
   }
 
+  onCreated()
   getMenuPermissions()
 </script>
 

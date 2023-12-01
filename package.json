@@ -1,7 +1,7 @@
 {
   "name": "mall-admin",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "serve": "vite --mode development",
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "@smallwei/avue": "^3.2.20",
+    "@smallwei/avue": "^3.2.22",
     "@types/node": "^20.2.6",
     "axios": "^1.4.0",
     "element-plus": "^2.3.6",
