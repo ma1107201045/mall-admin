@@ -2,41 +2,40 @@
   import { reactive } from 'vue'
   import AdminApi from '@/api/auth/admin'
   import router from '@/router'
+  import { ElMessage } from 'element-plus'
 
+  let data = reactive({
+    imageCaptchaBase64Data: '',
+    icon: 'ElementPlus',
+    loading: false
+  })
   let form = reactive({
     userName: '',
     password: '',
     imageCaptcha: '',
     isRememberMe: ''
   })
-  let data = reactive({
-    imageCaptchaBase64Data: '',
-    icon: 'ElementPlus',
-    loading: false
-  })
   let adminApi = AdminApi.getInstance()
-  let getBase64ImageCaptcha: any = (): any => {
-    adminApi
-      .getBase64ImageCaptcha()
-      .then(res => {
-        data.imageCaptchaBase64Data = res.data.data
-      })
-      .catch(() => {})
+
+  async function getBase64ImageCaptcha(): Promise<any> {
+    let res = await adminApi.getBase64ImageCaptcha()
+    data.imageCaptchaBase64Data = res.data.data
   }
+
   getBase64ImageCaptcha()
-  let login: any = (): any => {
-    data.loading = true
-    adminApi
-      .login(form)
-      .then(res => {
-        data.loading = false
-        // 删除菜单权限标识集合本地缓存
-        localStorage.removeItem('menuPermissions')
-        router.push({ name: 'Index' })
-      })
-      .catch(() => {
-        data.loading = false
-      })
+
+  async function login(): Promise<any> {
+    try {
+      data.loading = true
+      let res = await adminApi.login(form)
+      data.loading = false
+      localStorage.setItem('userInfo', JSON.stringify(res.data))
+      localStorage.removeItem('menuPermissions')
+      await router.push({ name: 'Index' })
+    } catch (e) {
+      data.loading = false
+      ElMessage.error('登录失败')
+    }
   }
 </script>
 

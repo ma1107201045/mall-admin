@@ -1,13 +1,17 @@
 <script setup lang="ts">
   import AdminApi from '@/api/auth/admin'
   import router from '@/router'
+  import { ElMessage } from 'element-plus'
 
   let adminApi: AdminApi = AdminApi.getInstance()
-  let logout: any = (): any => {
-    adminApi.logout().then(res => {
-      console.log(res)
-      router.push('/auth/admin')
-    })
+
+  async function logout(): Promise<any> {
+    try {
+      await adminApi.logout()
+      await router.push('/auth/admin')
+    } catch (e) {
+      ElMessage.error('退出登录失败')
+    }
   }
 </script>
 

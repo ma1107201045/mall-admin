@@ -1,12 +1,11 @@
 <script setup lang="ts">
   import { reactive } from 'vue'
-  import { UnwrapNestedRefs } from '@vue/reactivity'
   import router from '@/router'
   import IndexApi from '@/api/index/index.ts'
   import AsideMenuBarTree from '@/views/index/components/aside-menu-bar-tree.vue'
-  import { Path, MenuType } from '@/enums'
+  import { MenuType, Path } from '@/enums'
 
-  let data: UnwrapNestedRefs<object> = reactive({
+  let data = reactive({
     menuBarDynamicStyle: {
       height: ''
     },
@@ -15,37 +14,36 @@
     menus: []
   })
   let indexApi: IndexApi = IndexApi.getInstance()
-  let onCreated = () => {
+
+  function onCreated() {
     //动态调整左侧菜单栏高度
     let docHeight = document.documentElement.clientHeight
     data.menuBarDynamicStyle.height = docHeight - 60 + 'px'
   }
   onCreated()
 
-  let getMenuPermissions: any = (): any => {
+  async function getMenuPermissions() {
     let menuPermissions = localStorage.getItem('menuPermissions')
     if (!menuPermissions) {
-      indexApi.getMenuPermissions().then(res => {
-        // 将菜单权限标识集合存入本地缓存
-        localStorage.setItem('menuPermissions', res.data.data)
-        getMenuTree()
-      })
-    } else {
-      getMenuTree()
+      let res = await indexApi.getMenuPermissions()
+      // 将菜单权限标识集合存入本地缓存
+      localStorage.setItem('menuPermissions', res.data.data)
+    }
+    await getMenuTree()
+  }
+
+  async function getMenuTree() {
+    let res = await indexApi.getMenuTree()
+    let menuTree = res.data.data
+    data.menus = menuTree
+    if (menuTree.length && menuTree[0].type === MenuType.MENU) {
+      //默认选中第一个菜单
+      data.defaultActive = Path.INDEX + menuTree[0].routePath
+      //路由跳转
+      await router.push(data.defaultActive)
     }
   }
-  let getMenuTree: any = (): any => {
-    indexApi.getMenuTree().then(res => {
-      let menuTree = res.data.data
-      data.menus = menuTree
-      if (menuTree.length && menuTree[0].type === MenuType.MENU) {
-        //默认选中第一个菜单
-        data.defaultActive = Path.INDEX + menuTree[0].routePath
-        //路由跳转
-        router.push(data.defaultActive).then(value => console.log(value))
-      }
-    })
-  }
+
   getMenuPermissions()
 </script>
 
