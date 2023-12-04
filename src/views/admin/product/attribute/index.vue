@@ -65,94 +65,92 @@
     return true
   }
 
-  function save(row, done, loading) {
-    loading()
-    attributeApi
-      .save(data.form)
-      .then(() => {
-        done()
-        ElMessage({
-          message: '操作成功',
-          type: 'success',
-          duration: 1000,
-          onClose: () => {
-            getList(null, null)
-          }
-        })
+  async function save(row, done, loading) {
+    try {
+      loading()
+      await attributeApi.save(data.form)
+      done()
+      ElMessage({
+        message: '操作成功',
+        type: 'success',
+        duration: 1000,
+        onClose: () => {
+          getList(null, null)
+        }
       })
-      .catch(() => {
-        done()
-        ElMessage.info('保存失败')
-      })
-  }
-
-  function deleteByIds(row, index) {
-    ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      type: 'warning'
-    })
-      .then(() => {
-        let ids = row ? [row.id] : data.selectionData.map(item => item.id)
-        attributeApi.deleteByIds(ids).then(() => {
-          ElMessage({
-            message: '删除/批量删除成功',
-            type: 'success',
-            duration: 1000,
-            onClose: () => {
-              getList(null, null)
-            }
-          })
-        })
-      })
-      .catch(() => {})
-  }
-
-  function updateById(row, index, done, loading) {
-    loading()
-    attributeApi
-      .updateById(data.form.id, data.form)
-      .then(() => {
-        done()
-        ElMessage({
-          message: '修改成功',
-          type: 'success',
-          duration: 1000,
-          onClose: () => {
-            getList(null, null)
-          }
-        })
-      })
-      .catch(() => {
-        done()
-        ElMessage.info('修改失败')
-      })
-  }
-
-  function getList(page, done) {
-    data.loading = true
-    let newPage = {
-      currentPage: data.page.currentPage,
-      pageSize: data.page.pageSize,
-      sortField: data.page.sortField,
-      sortDirection: data.page.sortDirection
+    } catch (e) {
+      done()
+      ElMessage.error('保存失败')
     }
-    attributeApi
-      .getListByPageAndParam(Object.assign(newPage, data.search))
-      .then(res => {
-        data.page.total = res.data.total
-        data.data = res.data.data
-        data.loading = false
-        if (done) {
-          done()
+  }
+
+  async function deleteByIds(row, index) {
+    try {
+      await ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      try {
+        let ids = row ? [row.id] : data.selectionData.map(item => item.id)
+        await attributeApi.deleteByIds(ids)
+        ElMessage({
+          message: '删除/批量删除成功',
+          type: 'success',
+          duration: 1000,
+          onClose: () => {
+            getList(null, null)
+          }
+        })
+      } catch (e) {
+        ElMessage.error('删除/批量删除失败')
+      }
+    } catch (e) {
+      ElMessage.info('用户取消')
+    }
+  }
+
+  async function updateById(row, index, done, loading) {
+    try {
+      loading()
+      await attributeApi.updateById(data.form.id, data.form)
+      done()
+      ElMessage({
+        message: '修改成功',
+        type: 'success',
+        duration: 1000,
+        onClose: () => {
+          getList(null, null)
         }
       })
-      .catch(() => {
-        data.loading = false
-        if (done) {
-          done()
-        }
-      })
+    } catch (e) {
+      done()
+      ElMessage.error('修改失败')
+    }
+  }
+
+  async function getList(page, done) {
+    try {
+      data.loading = true
+      let newPage = {
+        currentPage: data.page.currentPage,
+        pageSize: data.page.pageSize,
+        sortField: data.page.sortField,
+        sortDirection: data.page.sortDirection
+      }
+      let res = await attributeApi.getListByPageAndParam(Object.assign(newPage, data.search))
+      data.page.total = res.data.total
+      data.data = res.data.data
+      data.loading = false
+      if (done) {
+        done()
+      }
+    } catch (e) {
+      data.loading = false
+      if (done) {
+        done()
+      }
+    }
   }
 </script>
 

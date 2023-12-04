@@ -87,95 +87,93 @@
     return true
   }
 
-  function save(row, done, loading) {
-    loading()
-    data.form.parentId =
-      data.form.parentId.length === 0 ? '' : data.form.parentId[data.form.parentId.length - 1]
-    categoryApi
-      .save(data.form)
-      .then(() => {
-        done()
-        ElMessage({
-          message: '操作成功',
-          type: 'success',
-          duration: 1000,
-          onClose: () => {
-            getTree(null, null)
-          }
-        })
+  async function save(row, done, loading) {
+    try {
+      loading()
+      data.form.parentId =
+        data.form.parentId.length === 0 ? '' : data.form.parentId[data.form.parentId.length - 1]
+      await categoryApi.save(data.form)
+      done()
+      ElMessage({
+        message: '操作成功',
+        type: 'success',
+        duration: 1000,
+        onClose: () => {
+          getTree(null, null)
+        }
       })
-      .catch(() => {
-        done()
-        ElMessage.info('保存失败')
-      })
+    } catch (e) {
+      done()
+      ElMessage.error('保存失败')
+    }
   }
 
-  function deleteByIds(row, index) {
-    ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      type: 'warning'
-    })
-      .then(() => {
+  async function deleteByIds(row, index) {
+    try {
+      await ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      try {
         let ids = row ? [row.id] : data.selectionData.map(item => item.id)
-        categoryApi.deleteByIds(ids).then(() => {
-          ElMessage({
-            message: '删除/批量删除成功',
-            type: 'success',
-            duration: 1000,
-            onClose: () => {
-              getTree(null, null)
-            }
-          })
-        })
-      })
-      .catch(() => {})
-  }
-
-  function updateById(row, index, done, loading) {
-    loading()
-    data.form.parentId =
-      data.form.parentId.length === 0 ? '' : data.form.parentId[data.form.parentId.length - 1]
-    categoryApi
-      .updateById(data.form.id, data.form)
-      .then(() => {
-        done()
+        await categoryApi.deleteByIds(ids)
         ElMessage({
-          message: '修改成功',
+          message: '删除/批量删除成功',
           type: 'success',
           duration: 1000,
           onClose: () => {
             getTree(null, null)
           }
         })
+      } catch (e) {
+        ElMessage.error('删除/批量删除失败')
+      }
+    } catch (e) {
+      ElMessage.info('用户取消')
+    }
+  }
+
+  async function updateById(row, index, done, loading) {
+    try {
+      loading()
+      data.form.parentId =
+        data.form.parentId.length === 0 ? '' : data.form.parentId[data.form.parentId.length - 1]
+      await categoryApi.updateById(data.form.id, data.form)
+      done()
+      ElMessage({
+        message: '修改成功',
+        type: 'success',
+        duration: 1000,
+        onClose: () => {
+          getTree(null, null)
+        }
       })
-      .catch(() => {
+    } catch (e) {
+      done()
+      ElMessage.error('修改失败')
+    }
+  }
+
+  async function getTree(page, done) {
+    try {
+      data.loading = true
+      let res = await categoryApi.getTree()
+      handleParentId(null, res.data.data)
+      data.data = res.data.data
+      data.loading = false
+      if (done) {
         done()
-        ElMessage.info('修改失败')
-      })
+      }
+    } catch (e) {
+      data.loading = false
+      if (done) {
+        done()
+      }
+    }
   }
 
-  function getTree(page, done) {
-    data.loading = true
-    categoryApi
-      .getTree()
-      .then(res => {
-        handleData(null, res.data.data)
-        data.data = res.data.data
-        data.loading = false
-        if (done) {
-          done()
-        }
-      })
-      .catch(() => {
-        data.loading = false
-        if (done) {
-          done()
-        }
-      })
-  }
-
-  function handleData(parentIds, children) {
+  function handleParentId(parentIds, children) {
     children.forEach(item => {
       if (item.parentId === '0') {
         item.parentId = ''
@@ -184,7 +182,7 @@
         parentIds.push(item.parentId)
         item.parentId = parentIds.map(item => item)
       }
-      handleData(parentIds, item.children)
+      handleParentId(parentIds, item.children)
     })
   }
 </script>
