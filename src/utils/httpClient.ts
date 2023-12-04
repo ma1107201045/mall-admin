@@ -12,33 +12,33 @@ const HttpClient: AxiosInstance = Axios.create({
 
 // 添加请求拦截器
 HttpClient.interceptors.request.use(
-  config => config,
-  error => Promise.reject(error)
+  value => value,
+  reason => Promise.reject(reason)
 )
 
 // 添加响应拦截器
 HttpClient.interceptors.response.use(
-  successRes => {
+  value => {
     try {
-      if (successRes.data.code !== 200) {
-        ElMessage.error(successRes.data.message)
-        return Promise.reject(successRes)
+      if (value.data.code !== 200) {
+        ElMessage.error(value.data.message)
+        return Promise.reject(value)
       }
     } catch (error) {
       ElMessage.error('未知异常')
       return Promise.reject(error)
     }
-    return successRes
+    return value
   },
-  errorRes => {
+  reason => {
     try {
-      let code = errorRes.code
+      let code = reason.code
       if (code === 'ERR_NETWORK') {
         ElMessage.error('网关连接错误')
       } else if (code === 'ECONNABORTED') {
         ElMessage.error('网络连接超时')
-      } else if (errorRes.response) {
-        let data = errorRes.response.data
+      } else if (reason.response) {
+        let data = reason.response.data
         let code = data.code
         let message = data.message
         ElMessage.error(`状态码【${code}】，${message}`)
@@ -52,10 +52,10 @@ HttpClient.interceptors.response.use(
       } else {
         ElMessage.error('未知异常')
       }
-      return Promise.reject(errorRes)
-    } catch (error) {
+      return Promise.reject(reason)
+    } catch (e) {
       ElMessage.error('未知异常')
-      return Promise.reject(error)
+      return Promise.reject(e)
     }
   }
 )
