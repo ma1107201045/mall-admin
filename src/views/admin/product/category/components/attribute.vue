@@ -20,30 +20,28 @@
   })
   const attributeApi = AttributeApi.getInstance()
 
-  function getList(page, done) {
-    data.loading = true
-    let newPage = {
-      currentPage: data.page.currentPage,
-      pageSize: data.page.pageSize,
-      sortField: data.page.sortField,
-      sortDirection: data.page.sortDirection
+  async function getList(page, done) {
+    try {
+      data.loading = true
+      let newPage = {
+        currentPage: data.page.currentPage,
+        pageSize: data.page.pageSize,
+        sortField: data.page.sortField,
+        sortDirection: data.page.sortDirection
+      }
+      let res = await attributeApi.getListByPageAndParam(Object.assign(newPage, data.search))
+      data.page.total = res.data.total
+      data.data = res.data.data
+      data.loading = false
+      if (done) {
+        done()
+      }
+    } catch (e) {
+      data.loading = false
+      if (done) {
+        done()
+      }
     }
-    attributeApi
-      .getListByPageAndParam(Object.assign(newPage, data.search))
-      .then(res => {
-        data.page.total = res.data.total
-        data.data = res.data.data
-        data.loading = false
-        if (done) {
-          done()
-        }
-      })
-      .catch(() => {
-        data.loading = false
-        if (done) {
-          done()
-        }
-      })
   }
 </script>
 
