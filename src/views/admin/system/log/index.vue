@@ -50,46 +50,54 @@
     return true
   }
 
-  function deleteByIds(row, index) {
-    ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      type: 'warning'
-    })
-      .then(() => {
+  async function deleteByIds(row, index) {
+    try {
+      await ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      try {
         let ids = row ? [row.id] : data.selectionData.map(item => item.id)
-        logApi.deleteByIds(ids).then(() => {
-          getList(null, null)
-          ElMessage({
-            type: 'success',
-            message: '删除/批量删除成功'
-          })
-        })
-      })
-      .catch(() => {
+        await logApi.deleteByIds(ids)
         ElMessage({
-          type: 'info',
-          message: '删除/批量删除取消'
+          message: '删除/批量删除成功',
+          type: 'success',
+          duration: 1000,
+          onClose: () => {
+            getList(null, null)
+          }
         })
-      })
+      } catch (e) {
+        ElMessage.error('删除/批量删除失败')
+      }
+    } catch (e) {
+      ElMessage.info('用户取消')
+    }
   }
 
-  function getList(page, done) {
-    data.loading = true
-    let newPage = {
-      currentPage: data.page.currentPage,
-      pageSize: data.page.pageSize,
-      sortField: data.page.sortField,
-      sortDirection: data.page.sortDirection
-    }
-    logApi.getListByPageAndParam(Object.assign(newPage, data.search)).then(res => {
+  async function getList(page, done) {
+    try {
+      data.loading = true
+      let newPage = {
+        currentPage: data.page.currentPage,
+        pageSize: data.page.pageSize,
+        sortField: data.page.sortField,
+        sortDirection: data.page.sortDirection
+      }
+      let res = await logApi.getListByPageAndParam(Object.assign(newPage, data.search))
       data.page.total = res.data.total
       data.data = res.data.data
       data.loading = false
       if (done) {
         done()
       }
-    })
+    } catch (e) {
+      data.loading = false
+      if (done) {
+        done()
+      }
+    }
   }
 </script>
 <template>

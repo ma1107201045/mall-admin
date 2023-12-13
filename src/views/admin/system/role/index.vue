@@ -34,21 +34,6 @@
     setChecked()
   }
 
-  function getMenuTree() {
-    roleApi
-      .getMenuTree()
-      .then(res => {
-        data.option.column[5]['dicData'] = res.data.data
-      })
-      .catch(() => {})
-  }
-
-  function setChecked() {
-    data.option.column[5]['checked'] = function (a, b) {
-      data.checkedKeys = [...b.halfCheckedKeys, ...b.checkedKeys]
-    }
-  }
-
   function beforeOpen(done, type) {
     if ((type === 'add' || type === 'edit') && data.selectionData.length === 1) {
       data.form = data.data.filter(item => data.selectionData[0].id === item.id)[0]
@@ -84,96 +69,107 @@
     return true
   }
 
-  function save(row, done, loading) {
-    loading()
-    data.form.menuIds = data.checkedKeys
-    roleApi
-      .save(data.form)
-      .then(() => {
-        done()
-        ElMessage({
-          message: '操作成功',
-          type: 'success',
-          duration: 1000,
-          onClose: () => {
-            getList(null, null)
-          }
-        })
-      })
-      .catch(() => {
-        done()
-        ElMessage.info('保存失败')
-      })
+  async function getMenuTree() {
+    try {
+      let res = await roleApi.getMenuTree()
+      data.option.column[5]['dicData'] = res.data.data
+    } catch (e) {}
   }
 
-  function deleteByIds(row, index) {
-    ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      type: 'warning'
-    })
-      .then(() => {
-        let ids = row ? [row.id] : data.selectionData.map(item => item.id)
-        roleApi.deleteByIds(ids).then(() => {
-          ElMessage({
-            message: '删除/批量删除成功',
-            type: 'success',
-            duration: 1000,
-            onClose: () => {
-              getList(null, null)
-            }
-          })
-        })
-      })
-      .catch(() => {})
-  }
-
-  function updateById(row, index, done, loading) {
-    loading()
-    data.form.menuIds = data.checkedKeys
-    roleApi
-      .updateById(data.form.id, data.form)
-      .then(() => {
-        done()
-        ElMessage({
-          message: '修改成功',
-          type: 'success',
-          duration: 1000,
-          onClose: () => {
-            getList(null, null)
-          }
-        })
-      })
-      .catch(() => {
-        done()
-        ElMessage.info('修改失败')
-      })
-  }
-
-  function getList(page, done) {
-    data.loading = true
-    let newPage = {
-      currentPage: data.page.currentPage,
-      pageSize: data.page.pageSize,
-      sortField: data.page.sortField,
-      sortDirection: data.page.sortDirection
+  function setChecked() {
+    data.option.column[5]['checked'] = function (a, b) {
+      data.checkedKeys = [...b.halfCheckedKeys, ...b.checkedKeys]
     }
-    roleApi
-      .getListByPageAndParam(Object.assign(newPage, data.search))
-      .then(res => {
-        data.page.total = res.data.total
-        data.data = res.data.data
-        data.loading = false
-        if (done) {
-          done()
+  }
+
+  async function save(row, done, loading) {
+    try {
+      loading()
+      data.form.menuIds = data.checkedKeys
+      await roleApi.save(data.form)
+      done()
+      ElMessage({
+        message: '操作成功',
+        type: 'success',
+        duration: 1000,
+        onClose: () => {
+          getList(null, null)
         }
       })
-      .catch(() => {
-        data.loading = false
-        if (done) {
-          done()
+    } catch (e) {
+      done()
+      ElMessage.info('保存失败')
+    }
+  }
+
+  async function deleteByIds(row, index) {
+    try {
+      await ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      try {
+        let ids = row ? [row.id] : data.selectionData.map(item => item.id)
+        await roleApi.deleteByIds(ids)
+        ElMessage({
+          message: '删除/批量删除成功',
+          type: 'success',
+          duration: 1000,
+          onClose: () => {
+            getList(null, null)
+          }
+        })
+      } catch (e) {
+        ElMessage.error('删除/批量删除失败')
+      }
+    } catch (e) {
+      ElMessage.info('用户取消')
+    }
+  }
+
+  async function updateById(row, index, done, loading) {
+    try {
+      loading()
+      data.form.menuIds = data.checkedKeys
+      await roleApi.updateById(data.form.id, data.form)
+      done()
+      ElMessage({
+        message: '修改成功',
+        type: 'success',
+        duration: 1000,
+        onClose: () => {
+          getList(null, null)
         }
       })
+    } catch (e) {
+      done()
+      ElMessage.error('修改失败')
+    }
+  }
+
+  async function getList(page, done) {
+    try {
+      data.loading = true
+      let newPage = {
+        currentPage: data.page.currentPage,
+        pageSize: data.page.pageSize,
+        sortField: data.page.sortField,
+        sortDirection: data.page.sortDirection
+      }
+      let res = await roleApi.getListByPageAndParam(Object.assign(newPage, data.search))
+      data.page.total = res.data.total
+      data.data = res.data.data
+      data.loading = false
+      if (done) {
+        done()
+      }
+    } catch (e) {
+      data.loading = false
+      if (done) {
+        done()
+      }
+    }
   }
 </script>
 <template>
