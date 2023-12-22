@@ -3,6 +3,8 @@ export default {
   border: true,
   stripe: true,
   addBtn: false,
+  delBtn: false,
+  editBtn: false,
   sortable: false,
   selection: true,
   menuWidth: 290,

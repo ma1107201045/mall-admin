@@ -115,89 +115,87 @@
     return true
   }
 
-  function save(row, done, loading) {
-    loading()
-    handleData()
-    menuApi
-      .save(data.form)
-      .then(() => {
-        done()
-        ElMessage({
-          message: '操作成功',
-          type: 'success',
-          duration: 1000,
-          onClose: () => {
-            getTree(null, null)
-          }
-        })
+  async function save(row, done, loading) {
+    try {
+      loading()
+      handleData()
+      await menuApi.save(data.form)
+      done()
+      ElMessage({
+        message: '操作成功',
+        type: 'success',
+        duration: 1000,
+        onClose: () => {
+          getTree(null, null)
+        }
       })
-      .catch(() => {
-        done()
-        ElMessage.info('保存失败')
-      })
+    } catch (e) {
+      done()
+      ElMessage.info('保存失败')
+    }
   }
 
-  function deleteByIds(row, index) {
-    ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      type: 'warning'
-    })
-      .then(() => {
+  async function deleteByIds(row, index) {
+    try {
+      await ElMessageBox.confirm('确认删除/批量删除吗？', '警告', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      try {
         let ids = row ? [row.id] : data.selectionData.map(item => item.id)
-        menuApi.deleteByIds(ids).then(() => {
-          ElMessage({
-            message: '删除/批量删除成功',
-            type: 'success',
-            duration: 1000,
-            onClose: () => {
-              getTree(null, null)
-            }
-          })
-        })
-      })
-      .catch(() => {})
-  }
-
-  function updateById(row, index, done, loading) {
-    loading()
-    handleData()
-    menuApi
-      .updateById(data.form.id, data.form)
-      .then(() => {
-        done()
+        await menuApi.deleteByIds(ids)
         ElMessage({
-          message: '修改成功',
+          message: '删除/批量删除成功',
           type: 'success',
           duration: 1000,
           onClose: () => {
             getTree(null, null)
           }
         })
-      })
-      .catch(() => {
-        done()
-        ElMessage.info('修改失败')
-      })
+      } catch (e) {
+        ElMessage.error('删除/批量删除失败')
+      }
+    } catch (e) {
+      ElMessage.info('用户取消')
+    }
   }
 
-  function getTree(page, done) {
-    data.loading = true
-    menuApi
-      .getTree()
-      .then(res => {
-        data.data = res.data.data
-        data.loading = false
-        if (done) {
-          done()
+  async function updateById(row, index, done, loading) {
+    try {
+      loading()
+      handleData()
+      await menuApi.updateById(data.form.id, data.form)
+      done()
+      ElMessage({
+        message: '修改成功',
+        type: 'success',
+        duration: 1000,
+        onClose: () => {
+          getTree(null, null)
         }
       })
-      .catch(() => {
-        data.loading = false
-        if (done) {
-          done()
-        }
-      })
+    } catch (e) {
+      done()
+      ElMessage.error('修改失败')
+    }
+  }
+
+  async function getTree(page, done) {
+    try {
+      data.loading = true
+      let res = await menuApi.getTree()
+      data.data = res.data.data
+      data.loading = false
+      if (done) {
+        done()
+      }
+    } catch (e) {
+      data.loading = false
+      if (done) {
+        done()
+      }
+    }
   }
 
   function handleData() {

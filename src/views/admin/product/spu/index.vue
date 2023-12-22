@@ -4,6 +4,7 @@
   import { ElMessage, ElMessageBox } from 'element-plus'
   import rOption from '@/option/admin/product/spu'
   import SpuApi from '@/api/admin/product/spu'
+  import SaveOrUpdate from '@/views/admin/product/spu/components/saveOrUpdate.vue'
 
   let data = reactive({
     option: rOption,
@@ -15,10 +16,10 @@
       total: ''
     },
     search: {},
-    form: {},
     data: [],
     loading: false,
-    selectionData: []
+    selectionData: [],
+    iShowDialog: false
   })
   //获取api实例
   const spuApi = SpuApi.getInstance()
@@ -50,6 +51,14 @@
       return false
     }
     return true
+  }
+
+  function openDialog() {
+    data.iShowDialog = true
+  }
+
+  function closeDialog() {
+    data.iShowDialog = false
   }
 
   async function deleteByIds(row, index) {
@@ -113,7 +122,6 @@
     :table-loading="data.loading"
     :option="data.option"
     :permission="permission"
-    @row-del="deleteByIds"
     @on-load="getList"
     @search-change="getList"
     @search-reset="getList"
@@ -125,12 +133,31 @@
         v-if="hasAnyAuthority('admin:product:spus:save')"
         type="primary"
         icon="el-icon-plus"
-        @click="$refs.crud.rowAdd()"
+        @click="openDialog"
       >
         添加
       </el-button>
     </template>
+    <template #menu="{ row, index, size }">
+      <el-button
+        v-if="hasAnyAuthority('admin:product:spus:update')"
+        type="text"
+        icon="el-icon-edit"
+        @click=""
+      >
+        修改
+      </el-button>
+      <el-button
+        v-if="hasAnyAuthority('admin:product:spus:delete')"
+        type="text"
+        icon="el-icon-delete"
+        @click=""
+      >
+        删除
+      </el-button>
+    </template>
   </avue-crud>
+  <save-or-update v-if="data.iShowDialog" @close="closeDialog" />
 </template>
 
 <style scoped></style>
