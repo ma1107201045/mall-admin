@@ -1,10 +1,13 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  let dialogVisible = ref(true)
+  defineExpose({
+    initData
+  })
+  let dialogVisible = ref(false)
 
-  function mount() {
-    console.log('1111')
+  async function initData() {
+    dialogVisible.value = true
   }
 
   function closeDialog() {

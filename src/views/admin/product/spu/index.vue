@@ -1,11 +1,12 @@
 <script setup lang="ts">
-  import { reactive } from 'vue'
+  import { reactive, ref } from 'vue'
   import { hasAnyAuthority, notHasAnyAuthority } from '@/utils'
   import { ElMessage, ElMessageBox } from 'element-plus'
   import rOption from '@/option/admin/product/spu'
   import SpuApi from '@/api/admin/product/spu'
   import SaveOrUpdate from '@/views/admin/product/spu/components/saveOrUpdate.vue'
 
+  let saveOrUploadRef = ref()
   let data = reactive({
     option: rOption,
     page: {
@@ -55,6 +56,8 @@
 
   function openDialog() {
     data.iShowDialog = true
+    console.log(saveOrUploadRef)
+    saveOrUploadRef.value.initData()
   }
 
   function closeDialog() {
@@ -117,7 +120,6 @@
     ref="crud"
     v-model:page="data.page"
     v-model:search="data.search"
-    v-model="data.form"
     :data="data.data"
     :table-loading="data.loading"
     :option="data.option"
@@ -157,7 +159,7 @@
       </el-button>
     </template>
   </avue-crud>
-  <save-or-update v-if="data.iShowDialog" @close="closeDialog" />
+  <save-or-update ref="saveOrUploadRef" v-if="data.iShowDialog" @close="closeDialog" />
 </template>
 
 <style scoped></style>
