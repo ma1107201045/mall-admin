@@ -1,7 +1,8 @@
 <script setup lang="ts">
+  import { defineProps } from 'vue'
   import { Path, MenuType } from '@/enums'
 
-  defineProps({
+  let props = defineProps({
     menuBarTreeData: {
       type: Array,
       default: []
@@ -9,7 +10,7 @@
   })
 </script>
 <template>
-  <template v-for="menu in menuBarTreeData">
+  <template v-for="menu in props.menuBarTreeData">
     <el-sub-menu v-if="menu.children.length" :key="menu.id" :index="menu.id">
       <template #title>
         <el-icon>

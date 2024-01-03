@@ -56,10 +56,13 @@
 
   function openDialog() {
     data.iShowDialog = true
+    console.log('openDialog success')
   }
 
   function closeDialog() {
     data.iShowDialog = false
+    console.log('closeDialog success')
+    //刷新页面
   }
 
   async function deleteByIds(row, index) {
@@ -157,7 +160,7 @@
       </el-button>
     </template>
   </avue-crud>
-  <save-or-update v-if="data.iShowDialog" @close="closeDialog" />
+  <save-or-update v-if="data.iShowDialog" title="操作商品" @closeDialog="closeDialog" />
 </template>
 
 <style scoped></style>
