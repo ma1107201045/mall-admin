@@ -56,8 +56,6 @@
 
   function openDialog() {
     data.iShowDialog = true
-    console.log(saveOrUploadRef)
-    saveOrUploadRef.value.initData()
   }
 
   function closeDialog() {
@@ -159,7 +157,7 @@
       </el-button>
     </template>
   </avue-crud>
-  <save-or-update ref="saveOrUploadRef" v-if="data.iShowDialog" @close="closeDialog" />
+  <save-or-update v-if="data.iShowDialog" @close="closeDialog" />
 </template>
 
 <style scoped></style>

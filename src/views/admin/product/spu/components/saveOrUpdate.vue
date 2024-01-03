@@ -1,22 +1,15 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-
-  defineExpose({
-    initData
-  })
   let dialogVisible = ref(false)
-
-  async function initData() {
+  function initData() {
     dialogVisible.value = true
   }
 
   function closeDialog() {
     dialogVisible.value = false
-    //子组件Operate接收updateList事件 使用驼峰方式书写
-    const emits = defineEmits(['close'])
-    //子组件中调用方法
-    emits('close')
   }
+
+  initData()
 </script>
 
 <template>
